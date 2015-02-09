@@ -1,0 +1,21 @@
+<head>
+  <title>my_cool_app</title>
+</head>
+
+<body>
+  <h1>Welcome to Meteor!</h1>
+
+  {{> hello}}
+</body>
+
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+
+  <form action="my_cool_app.js">
+  Input1: <input type="text" name="Input1" value="00"><br>
+  Input2: <input type="text" name="Inputs" value="00"><br>
+  <input type="submit" value="Submit">
+  </form>
+
+</template>
