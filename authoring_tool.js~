@@ -6,9 +6,6 @@ if (Meteor.isClient) {
   Template.hello.helpers({
     unitOpts: function () {
       return Session.get('unitOpts');
-    },
-    instructions: function () {
-      return false;
     }
   });
 
