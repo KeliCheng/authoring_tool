@@ -1,20 +1,29 @@
 if (Meteor.isClient) {
-  // counter starts at 0
-  //Session.setDefault('counter', 0);
-  Session.setDefault('instructions', true);
-
   Template.hello.helpers({
-    unitOpts: function () {
-      return Session.get('unitOpts');
-    },
+
+  });
+
+  Template.Units.helpers({
     unitVal: function () {
       return Session.get('unitVal');
     },
-    instructions: function(event, tamplate) {
-	//var v = Session.get('unitOps').val();
-	//var v = $(template.find('unitOps')).val();
+    instructions: function() {
 	var v = Session.get('unitVal');	
-	if (v == true)
+	if (v == 'instruction')
+	    return true;
+	else
+	    return false;
+    },
+    assessment: function() {
+	var v = Session.get('unitVal');	
+	if (v == 'assessment')
+	    return true;
+	else
+	    return false;
+    },
+    learningsession: function() {
+	var v = Session.get('unitVal');	
+	if (v == 'learningsession')
 	    return true;
 	else
 	    return false;
@@ -22,30 +31,22 @@ if (Meteor.isClient) {
   });
 
   Template.hello.events({
-    'click': function () {
-      // increment the counter when button is clicked
-      console.log("You clicked something");
-    },
     'change .unitType': function (event) {
       var v = $(event.target).val();
       console.log("unit type running");
       if (v == "instruction") {
-	//Session.set('instructions', true)
-      	//Session.set('unitOpts', v);
-      	Session.set('unitVal', true);
+      	Session.set('unitVal', 'instruction');
       } else if (v == "learningsession") {
-      	//Session.set('unitOpts', v);
-      	Session.set('unitVal', false);
-	//Session.set('instructions', false)
+      	Session.set('unitVal', 'learningsession');
       } else if (v == "assessment") {
-      	//Session.set('unitOpts', v);
-      	Session.set('unitVal', false);
-	//Session.set('instructions', false)
+      	Session.set('unitVal', 'assessment');
       } else {
-      	Session.set('unitOpts', "invalid");
+      	Session.set('unitVal', 'invalid');
       }
+    },
+    'change numberofunits': function(event) {
+	var v = $(event.target).val();
     }
-
   });
 }
 

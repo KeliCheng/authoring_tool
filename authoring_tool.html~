@@ -41,33 +41,44 @@
 	<p>Number of Units: <input type="text" name="numberofunits"></p>
 	<p>TODO: make plus button to add form blocks</p>
 	
+	<p>{{> Units}}</p>
+	<br>
+
+</template>
+
+
+<!--BEGIN UNITS TEMPLATES-->
+<template name="Units">
 	<select id="unitOps" class="unitType">
+		<option>Select One</option>
   		<option value="instruction">Instruction</option>
   		<option value="learningsession">Learning Session</option>
   		<option value="assessment">Assessment</option>
 	</select>
 	{{#if instructions}}
-		{{> unitOpsInstruction}}
+		<p>{{> unitOpsInstruction}}</p>
 	{{/if}}
-	<p>{{unitOpts}}</p>
-	<br>
-<!--jquery, helpers/reactivity-->
-
+	{{#if assessment}}
+		<p>{{> unitOpsAssessment}}</p>
+	{{/if}}
+	{{#if learningsession}}
+		<p>{{> unitOpsLearningSession}}</p>
+	{{/if}}
 </template>
-
 
 <template name="unitOpsInstruction">
 	<textarea rows="4" cols="50"></textarea>
 </template>
 
-<template name="form1">
-	form1
+<template name="unitOpsAssessment">
+	<p>Card range: <input type="text" name="cardrange"></p>
+	<p>Shuffle blocks: <input type="text" name="shuffleblocks"></p>
+	<p>Number of templates: <input type="text" name="numbertemplates"></p>
 </template>
 
-<template name="form2">
-	form2
+<template name="unitOpsLearningSession">
+	learning session
 </template>
+<!--END UNITS TEMPLATES-->
 
-<template name="form3">
-	form3
-</template>
+
