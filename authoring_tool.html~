@@ -47,7 +47,7 @@
   		<option value="assessment">Assessment</option>
 	</select>
 	{{#if instructions}}
-		{{> unitOpsInstructions}}
+		{{> unitOpsInstruction}}
 	{{/if}}
 	<p>{{unitOpts}}</p>
 	<br>
