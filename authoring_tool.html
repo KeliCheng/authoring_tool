@@ -1,34 +1,125 @@
+
 <head>
   <title>MoFaCTS | Content Builder</title>
 </head>
 
+
 <body>
-  <h1>MoFaCTS | Content Builder</h1>
+  <center><h1>MoFaCTS | Content Builder</h1></center>
+  <br>
+  <ul class="breadcrumb">
+  <li><a href="#">MoFaCTS</a></li>
+  <li class="active">Content Builder</li>
+</ul>
 
   {{> hello}}
   
 </body>
 
+
 <template name="hello">
-  <a href="#" class="btn btn-primary">Save</a>
-  <a href="#" class="btn btn-primary">Refresh</a>
+	 <div class="jumbotron">
+  <center><p>
+  	<a href="#" class="btn btn-primary">Create</a>
+  	<a href="#" class="btn btn-primary">Refresh</a>
   <a href="#" class="btn btn-primary">Test</a>
   <a href="#" class="btn btn-primary">Load</a>
   <a href="#" class="btn btn-primary">Publish</a>
+  </p></center>
+</div>
 
 	<br>
 	<p>Name your FaCT Module: <input type="text" name="modulename"></p>
 	<br>
-	<h2>Cards</h2>
-	<p>TODO: add actual card area for expansion</p>
-	<p>Number of cards: <input type="text" name="numberofcards"></p>
+
+
+
+	<!-- <center>
+		<p>Number of cards: <input type="text" name="numberofcards"></p>
 	<p>Number of versions: <input type="text" name="numberofversions"></p>
 	<p>Levenshtien proportion: <input type="text" name="numberofcards"></p>
 	<p>Shuffle instruction: <input type="text" name="numberofcards"></p>
 	<p>Swap instruction: <input type="text" name="numberofcards"></p>
 	<input type="radio" name="format" value="mms">Multimedia
 	<input type="radio" name="format" value="txt">Text
-	<br>
+	</center>
+	<br> -->
+	<form class="form-horizontal">
+  <fieldset>
+    <legend>Cards</legend>
+    <p>TODO: add actual card area for expansion</p>
+    <div class="jumbotron">
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Name of cards</label>
+      <div class="col-lg-10">
+        <input type="text" name="numberofcards" class="form-control" id="cardname">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Name of versions</label>
+      <div class="col-lg-10">
+        <input type="text" name="numberofversions" class="form-control" id="cardvr">
+      </div>
+    </div>
+
+     <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Levenshtien proportion:</label>
+      <div class="col-lg-10">
+        <input type="text" name="proportion" class="form-control">
+      </div>
+    </div>
+
+     <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Shuffle instruction</label>
+      <div class="col-lg-10">
+        <input type="text" name="shuffle" class="form-control">
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Swap instruction</label>
+      <div class="col-lg-10">
+        <input type="text" name="swap" class="form-control">
+      </div>
+    </div>
+
+   <div class="form-group">
+      <label class="col-lg-2 control-label">Radios</label>
+      <div class="col-lg-10">
+        <div class="radio">
+          <label>
+            <input type="radio" name="format" value="mms" checked="">
+            Multimedia
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="format" value="txt">
+            Text
+          </label>
+        </div>
+      </div>
+    </div>
+     <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+
+        <button type="reset"  class="btn btn-primary btn-xs">Reset</button>
+        <button type="submit"  class="btn btn-primary btn-xs">Save</button>
+      </div>
+    </div>
+</div>
+
+  </fieldset>
+</form>
+
+
+
+
+
+
+
+
+
 	<h2>Card Timing</h2>
 	<p>TODO: specify units and maybe restrict input, use selectors instead of text fields</p>
 	<p>Study alone interval: <input type="text" name="studyaloneinterval"></p>
@@ -82,5 +173,4 @@
 	learning session
 </template>
 <!--END UNITS TEMPLATES-->
-
 
