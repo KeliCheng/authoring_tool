@@ -21,9 +21,10 @@
 	 <div class="jumbotron">
   <center><p>
   	<a href="#" class="btn btn-primary">Create</a>
-  	<a href="#" class="btn btn-primary">Refresh</a>
+    <a href="#" class="btn btn-primary">Load</a>
+  	<!-- <a href="#" class="btn btn-primary">Refresh</a> -->
   <a href="#" class="btn btn-primary">Test</a>
-  <a href="#" class="btn btn-primary">Load</a>
+  <a href="#" class="btn btn-primary">Save</a>
   <a href="#" class="btn btn-primary">Publish</a>
   </p></center>
 </div>
@@ -34,7 +35,7 @@
 
 
 
-	<!-- <center>
+<!-- 	<div class="btn-toolbar">
 		<p>Number of cards: <input type="text" name="numberofcards"></p>
 	<p>Number of versions: <input type="text" name="numberofversions"></p>
 	<p>Levenshtien proportion: <input type="text" name="numberofcards"></p>
@@ -42,8 +43,11 @@
 	<p>Swap instruction: <input type="text" name="numberofcards"></p>
 	<input type="radio" name="format" value="mms">Multimedia
 	<input type="radio" name="format" value="txt">Text
-	</center>
-	<br> -->
+	</div> -->
+
+
+
+	<br>
 	<form class="form-horizontal">
   <fieldset>
     <legend>Cards</legend>
@@ -102,9 +106,8 @@
     </div>
      <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
-
+        <br>
         <button type="reset"  class="btn btn-primary btn-xs">Reset</button>
-        <button type="submit"  class="btn btn-primary btn-xs">Save</button>
       </div>
     </div>
 </div>
@@ -114,26 +117,133 @@
 
 
 
+<br>
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Card</th>
+      <th>Version 1 Prompt</th>
+      <th>Version 1 Response</th>
+      <th>Version 2 Prompt</th>
+      <th>Version 2 Response</th>
+      <th>Version 3 Prompt</th>
+      <th>Version 3 Response</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+  </tbody>
+</table> 
 
 
+    <form class="form-horizontal">
+  <fieldset>
+    <legend>Card Timing</legend>
+    <p>TODO: specify units and maybe restrict input, use selectors instead of text fields</p>
+    <div class="jumbotron">
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Study alone interval:</label>
+      <select class="form-control" name="studyaloneinterval">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Inter-card interval:</label>
+      <!-- <div class="col-lg-10">
+        <input type="text" name="intercardinterval" class="form-control">
+      </div> -->
+       <select class="form-control" name="intercardinterval">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Drill timeout interval:</label>
+      <!-- <div class="col-lg-10">
+        <input type="text" name="drilltimeoutinterval" class="form-control">
+      </div> -->
+       <select class="form-control" name="drilltimeoutinterval">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Correct feedback interval:</label>
+      <!-- <div class="col-lg-10">
+        <input type="text" name="correctfeedbackinterval" class="form-control">
+      </div> -->
+       <select class="form-control" name="correctfeedbackinterval">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Incorrect feedback interval:</label>
+      <!-- <div class="col-lg-10">
+        <input type="text" name="incorrectfeedbackinterval" class="form-control">
+      </div> -->
+      <select class="form-control" name="incorrectfeedbackinterval">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+    </div>
 
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <br>
+        <button type="reset"  class="btn btn-primary btn-xs">Reset</button>
+      </div>
+    </div>
 
+</div>
 
+  </fieldset>
+</form>
 
-	<h2>Card Timing</h2>
-	<p>TODO: specify units and maybe restrict input, use selectors instead of text fields</p>
-	<p>Study alone interval: <input type="text" name="studyaloneinterval"></p>
-	<p>Inter-card interval: <input type="text" name="intercardinterval"></p>
-	<p>Drill timeout interval: <input type="text" name="drilltimeoutinterval"></p>
-	<p>Correct feedback interval: <input type="text" name="correctfeedbackinterval"></p>
-	<p>Incorrect feedback interval: <input type="text" name="incorrectfeedbackinterval"></p>
-	<br>
-	<h2>Units</h2>
-	<p>Number of Units: <input type="text" name="numberofunits"></p>
-	<p>TODO: make plus button to add form blocks</p>
-	
-	<p>{{> Units}}</p>
-	<br>
+<h2>Units</h2>
+  <p>Number of Units: <input type="text" name="numberofunits"></p>
+  <p>TODO: make plus button to add form blocks</p>
+  
+  <p>{{> Units}}</p>
+  <br>
 
 </template>
 
@@ -160,7 +270,13 @@
 </template>
 
 <template name="unitOpsInstruction">
-	<textarea rows="4" cols="50"></textarea>
+
+  <div class="form-group">
+      <label for="textArea" class="col-lg-2 control-label">Instruction</label>
+      <div class="col-lg-10">
+        <textarea class="form-control" rows="4" id="textArea"></textarea>
+      </div>
+    </div>
 </template>
 
 <template name="unitOpsAssessment">
