@@ -153,90 +153,103 @@
 </table> 
 
 
-    <form class="form-horizontal">
+
   <fieldset>
     <legend>Card Timing</legend>
-    <p>TODO: specify units and maybe restrict input, use selectors instead of text fields</p>
-    <div class="jumbotron">
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Study alone interval:</label>
-      <select class="form-control" name="studyaloneinterval">
-          <option>100</option>
-          <option>200</option>
-          <option>300</option>
-          <option>400</option>
-          <option>500</option>
-          <option>600</option>
-        </select>
-    </div>
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Inter-card interval:</label>
-      <!-- <div class="col-lg-10">
-        <input type="text" name="intercardinterval" class="form-control">
-      </div> -->
-       <select class="form-control" name="intercardinterval">
-          <option>100</option>
-          <option>200</option>
-          <option>300</option>
-          <option>400</option>
-          <option>500</option>
-          <option>600</option>
-        </select>
-    </div>
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Drill timeout interval:</label>
-      <!-- <div class="col-lg-10">
-        <input type="text" name="drilltimeoutinterval" class="form-control">
-      </div> -->
-       <select class="form-control" name="drilltimeoutinterval">
-          <option>100</option>
-          <option>200</option>
-          <option>300</option>
-          <option>400</option>
-          <option>500</option>
-          <option>600</option>
-        </select>
-    </div>
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Correct feedback interval:</label>
-      <!-- <div class="col-lg-10">
-        <input type="text" name="correctfeedbackinterval" class="form-control">
-      </div> -->
-       <select class="form-control" name="correctfeedbackinterval">
-          <option>100</option>
-          <option>200</option>
-          <option>300</option>
-          <option>400</option>
-          <option>500</option>
-          <option>600</option>
-        </select>
-    </div>
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Incorrect feedback interval:</label>
-      <!-- <div class="col-lg-10">
-        <input type="text" name="incorrectfeedbackinterval" class="form-control">
-      </div> -->
-      <select class="form-control" name="incorrectfeedbackinterval">
-          <option>100</option>
-          <option>200</option>
-          <option>300</option>
-          <option>400</option>
-          <option>500</option>
-          <option>600</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-        <br>
-        <button type="reset"  class="btn btn-primary btn-xs">Reset</button>
-      </div>
-    </div>
-
-</div>
-
   </fieldset>
-</form>
+<nav class="jumbotron">
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse">
+
+      <form class="navbar-form navbar-left">
+         <div class="form-group">
+      <label class="col-lg-2 control-label">Study alone interval:</label>
+      <select class="form-control" name="studyalone">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+  
+      <label class="col-lg-2 control-label">Inter-card interval:</label>
+
+       <select class="form-control" name="intercard">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+   
+      <label class="col-lg-2 control-label">Drill timeout interval:</label>
+    
+       <select class="form-control" name="timeout">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+    </div>
+      </form>
+
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+      <label class="col-lg-2 control-label">Correct feedback interval:</label>
+
+       <select class="form-control" name="correct_interval">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+
+      <label class="col-lg-2 control-label">Incorrect feedback interval:</label>
+
+      <select class="form-control" name="incorrect_interval">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+        
+    </div>
+ 
+
+      </form>
+
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+           <div class="checkbox">
+      <label>
+        <input type="checkbox" name="skip">   Skip Study Interval Allowed
+        </label>
+    </div>
+  </div>
+
+      </form>
+
+       <form class="navbar-form navbar-right">
+        <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset"  class="btn btn-primary btn-xs">Reset</button>
+    </div>
+      </form>
+
+    </div>
+  </div>
+</nav>
+
+
+
 
 <h2>Units</h2>
   <p>Number of Units: <input type="text" name="numberofunits"></p>
