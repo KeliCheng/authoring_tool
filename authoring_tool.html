@@ -54,7 +54,7 @@
     <p>TODO: add actual card area for expansion</p>
     <div class="jumbotron">
     <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Name of cards</label>
+      <label class="col-lg-2 control-label">Name of cards</label>
       <div class="col-lg-10">
         <input type="text" name="numberofcards" class="form-control" id="cardname">
       </div>
@@ -240,7 +240,7 @@
 
        <form class="navbar-form navbar-right">
         <div class="col-lg-10 col-lg-offset-2">
-        <button type="reset"  class="btn btn-primary btn-xs">Reset</button>
+        <button type="reset"  class="btn btn-primary">Reset</button>
     </div>
       </form>
 
@@ -283,19 +283,92 @@
 </template>
 
 <template name="unitOpsInstruction">
-
+<p> This part should allow image upload as Intro </p>
+  <fieldset>
+    <legend>Introduction</legend>
+  </fieldset>
+<nav class="jumbotron">
+   <div class="form-group">
+      <label class="col-lg-2 control-label">Unit Name</label>
+      <div class="col-lg-10">
+        <input type="text" name="numberofcards" id="unitname" value="Introduction">
+      </div>
+    </div>
   <div class="form-group">
-      <label for="textArea" class="col-lg-2 control-label">Instruction</label>
+      <label for="textArea" class="col-lg-2 control-label">Introduction</label>
       <div class="col-lg-10">
         <textarea class="form-control" rows="4" id="textArea"></textarea>
       </div>
+  </div>
+  <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <br>
+        <button type="reset"  class="btn btn-primary btn-xs">Reset</button>
+      </div>
     </div>
+</nav>
+
 </template>
 
 <template name="unitOpsAssessment">
-	<p>Card range: <input type="text" name="cardrange"></p>
-	<p>Shuffle blocks: <input type="text" name="shuffleblocks"></p>
-	<p>Number of templates: <input type="text" name="numbertemplates"></p>
+   <fieldset>
+    <legend>Assessment</legend>
+  </fieldset>
+<nav class="jumbotron">
+  <div class="form-group">
+      <label class="col-lg-2 control-label">Unit Name</label>
+      <div class="col-lg-10">
+        <input type="text" name="numberofcards" id="unitname">
+      </div>
+    </div>
+  <div class="form-group">
+      <label class="col-lg-2 control-label">Unit Instruction</label>
+      <div class="col-lg-10">
+        <textarea class="form-control" rows="2" value="Click the OK button to hear one example as a harmony and as a melody (not necessarily in that order)."></textarea>
+      </div>
+  </div>
+
+  <nav class="jumbotron">
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse">
+
+      <form class="navbar-form navbar-left">
+        <p>Card range: <input type="text" name="cardrange"></p>
+        <p>Shuffle blocks: <input type="text" name="shuffleblocks"></p>
+      </form>
+    </div>
+  </div>
+</nav>
+
+  <div class="form-group">
+    <label class="col-lg-2 control-label">Number of Templates:</label>
+      <div class="col-lg-10">
+        <select name="numbertemplates">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+      </div>
+  </div>
+  <br>
+  <p> **work on groups** </p>
+  <div class="form-group">
+      <label class="col-lg-2 control-label">Card Sequence</label>
+      <p> Card sequence for 26 cards</p>
+      <p> card sequence lay down template in order </p>
+  </div>
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <br>
+        <button type="reset"  class="btn btn-primary">Reset</button>
+      </div>
+    </div>
+
+</nav>
 </template>
 
 <template name="unitOpsLearningSession">

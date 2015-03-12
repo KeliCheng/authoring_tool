@@ -121,7 +121,8 @@ select,
 textarea {
   color: inherit;
   font: inherit;
-  margin: 0;
+  margin:0;
+
 }
 button {
   overflow: visible;
@@ -2530,7 +2531,7 @@ output {
 }
 .form-control {
   display: block;
-  width: 35%;
+  width: 88%;
   height: 39px;
   padding: 8px 12px;
   font-size: 15px;
@@ -2570,6 +2571,7 @@ fieldset[disabled] .form-control {
   opacity: 1;
 }
 textarea.form-control {
+  width: 600;
   height: auto;
 }
 input[type="search"] {
