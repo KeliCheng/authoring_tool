@@ -260,10 +260,10 @@
 	{{#if instruction instructions }}
 		{{> unitOpsInstruction}}
 	{{/if}}
-	{{#if assessment assessments}}
+	{{#if assessment assessments }}
 		{{> unitOpsAssessment}}
 	{{/if}}
-	{{#if learningsession learningsessions}}
+	{{#if learningsession learningsessions }}
 		{{> unitOpsLearningSession}}
 	{{/if}}
 	{{/each}}
