@@ -249,14 +249,26 @@
 
 <!--BEGIN UNITS TEMPLATES-->
 <template name="Units">
-	<select id="unitOps" class="unitType">
-		<option>Select One</option>
+	
+	{{#each unitList}}
+	<select id="unitOps" class="unitType num{{num}}">
+		<option>Select for {{num}}</option>
   		<option value="instruction">Instruction</option>
-      <option value="assessment">Assessment</option>
+      		<option value="assessment">Assessment</option>
   		<option value="learningsession">Learning Session</option>
 	</select>
-	<p>
-	{{#if instructions}}
+	{{#if instruction instructions }}
+		{{> unitOpsInstruction}}
+	{{/if}}
+	{{#if assessment assessments }}
+		{{> unitOpsAssessment}}
+	{{/if}}
+	{{#if learningsession learningsessions }}
+		{{> unitOpsLearningSession}}
+	{{/if}}
+	{{/each}}
+	   
+	<!--{{#if instructions}}
 		{{> unitOpsInstruction}}
 	{{/if}}
 	{{#if assessment}}
@@ -265,7 +277,9 @@
 	{{#if learningsession}}
 		{{> unitOpsLearningSession}}
 	{{/if}}
-	</p>
+	-->
+	
+	<button type="button" class='addUnit'>Add Unit</button>
   <br>
 </template>
 

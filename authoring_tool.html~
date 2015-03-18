@@ -1,84 +1,444 @@
+
 <head>
   <title>MoFaCTS | Content Builder</title>
 </head>
 
+
 <body>
-  <h1>MoFaCTS | Content Builder</h1>
+  <center><h1>MoFaCTS | Content Builder</h1></center>
+  <br>
+  <ul class="breadcrumb">
+  <li><a href="#">MoFaCTS</a></li>
+  <li class="active">Content Builder</li>
+</ul>
 
   {{> hello}}
   
 </body>
 
+
 <template name="hello">
-  <a href="#" class="btn btn-primary">Save</a>
-  <a href="#" class="btn btn-primary">Refresh</a>
+	 <div class="jumbotron">
+  <center><p>
+  	<a href="#" class="btn btn-primary">Create</a>
+    <a href="#" class="btn btn-primary">Load</a>
+  	<!-- <a href="#" class="btn btn-primary">Refresh</a> -->
   <a href="#" class="btn btn-primary">Test</a>
-  <a href="#" class="btn btn-primary">Load</a>
+  <a href="#" class="btn btn-primary">Save</a>
   <a href="#" class="btn btn-primary">Publish</a>
+  </p></center>
+</div>
 
 	<br>
 	<p>Name your FaCT Module: <input type="text" name="modulename"></p>
 	<br>
-	<h2>Cards</h2>
-	<p>TODO: add actual card area for expansion</p>
-	<p>Number of cards: <input type="text" name="numberofcards"></p>
-	<p>Number of versions: <input type="text" name="numberofversions"></p>
-	<p>Levenshtien proportion: <input type="text" name="numberofcards"></p>
-	<p>Shuffle instruction: <input type="text" name="numberofcards"></p>
-	<p>Swap instruction: <input type="text" name="numberofcards"></p>
-	<input type="radio" name="format" value="mms">Multimedia
-	<input type="radio" name="format" value="txt">Text
+
+
 	<br>
-	<h2>Card Timing</h2>
-	<p>TODO: specify units and maybe restrict input, use selectors instead of text fields</p>
-	<p>Study alone interval: <input type="text" name="studyaloneinterval"></p>
-	<p>Inter-card interval: <input type="text" name="intercardinterval"></p>
-	<p>Drill timeout interval: <input type="text" name="drilltimeoutinterval"></p>
-	<p>Correct feedback interval: <input type="text" name="correctfeedbackinterval"></p>
-	<p>Incorrect feedback interval: <input type="text" name="incorrectfeedbackinterval"></p>
-	<br>
-	<h2>Units</h2>
-	<p>Number of Units: <input type="text" name="numberofunits"></p>
-	<p>TODO: make plus button to add form blocks</p>
-	
-	<p>{{> Units}}</p>
-	<br>
+	<form class="form-horizontal">
+  <fieldset>
+    <legend>Cards</legend>
+    <p>TODO: add actual card area for expansion</p>
+    <div class="jumbotron">
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Name of cards</label>
+      <div class="col-lg-10">
+        <input type="text" name="numberofcards" class="form-control" id="cardname">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Name of versions</label>
+      <div class="col-lg-10">
+        <input type="text" name="numberofversions" class="form-control" id="cardvr">
+      </div>
+    </div>
+
+     <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Levenshtien proportion:</label>
+      <div class="col-lg-10">
+        <input type="text" name="proportion" class="form-control">
+      </div>
+    </div>
+
+     <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Shuffle instruction</label>
+      <div class="col-lg-10">
+        <input type="text" name="shuffle" class="form-control">
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Swap instruction</label>
+      <div class="col-lg-10">
+        <input type="text" name="swap" class="form-control">
+      </div>
+    </div>
+
+   <div class="form-group">
+      <label class="col-lg-2 control-label">Radios</label>
+      <div class="col-lg-10">
+        <div class="radio">
+          <label>
+            <input type="radio" name="format" value="mms" checked="">
+            Multimedia
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="format" value="txt">
+            Text
+          </label>
+        </div>
+      </div>
+    </div>
+     <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <br>
+        <button type="reset"  class="btn btn-primary btn-xs">Reset</button>
+      </div>
+    </div>
+</div>
+
+  </fieldset>
+</form>
+
+
+
+<br>
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Card</th>
+      <th>Version 1 Prompt</th>
+      <th>Version 1 Response</th>
+      <th>Version 2 Prompt</th>
+      <th>Version 2 Response</th>
+      <th>Version 3 Prompt</th>
+      <th>Version 3 Response</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+  </tbody>
+</table> 
+
+
+
+  <fieldset>
+    <legend>Card Timing</legend>
+  </fieldset>
+<nav class="jumbotron">
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse">
+
+      <form class="navbar-form navbar-left">
+         <div class="form-group">
+      <label class="col-lg-2 control-label">Study alone interval:</label>
+      <select class="form-control" name="studyalone">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+  
+      <label class="col-lg-2 control-label">Inter-card interval:</label>
+
+       <select class="form-control" name="intercard">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+   
+      <label class="col-lg-2 control-label">Drill timeout interval:</label>
+    
+       <select class="form-control" name="timeout">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+    </div>
+      </form>
+
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+      <label class="col-lg-2 control-label">Correct feedback interval:</label>
+
+       <select class="form-control" name="correct_interval">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+
+      <label class="col-lg-2 control-label">Incorrect feedback interval:</label>
+
+      <select class="form-control" name="incorrect_interval">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+        
+    </div>
+ 
+
+      </form>
+
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+           <div class="checkbox">
+      <label>
+        <input type="checkbox" name="skip">   Skip Study Interval Allowed
+        </label>
+    </div>
+  </div>
+      </form>
+
+       <form class="navbar-form navbar-right">
+        <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset"  class="btn btn-primary">Reset</button>
+    </div>
+      </form>
+
+    </div>
+  </div>
+</nav>
+
+
+
+
+<h2>Units</h2>
+  <p>Number of Units: <input type="text" name="numberofunits"></p>
+  <p>TODO: make plus button to add form blocks</p>
+  
+  <p>{{> Units}}</p>
+  <br>
 
 </template>
 
 
 <!--BEGIN UNITS TEMPLATES-->
 <template name="Units">
-	<select id="unitOps" class="unitType">
-		<option>Select One</option>
+	
+	{{#each unitList}}
+	<select id="unitOps" class="unitType num{{num}}">
+		<option>Select for {{num}}</option>
   		<option value="instruction">Instruction</option>
+      		<option value="assessment">Assessment</option>
   		<option value="learningsession">Learning Session</option>
-  		<option value="assessment">Assessment</option>
 	</select>
-	{{#if instructions}}
-		<p>{{> unitOpsInstruction}}</p>
+	{{#if instruction instructions }}
+		{{> unitOpsInstruction}}
+	{{/if}}
+	{{#if assessment assessments}}
+		{{> unitOpsAssessment}}
+	{{/if}}
+	{{#if learningsession learningsessions}}
+		{{> unitOpsLearningSession}}
+	{{/if}}
+	{{/each}}
+	   
+	<!--{{#if instructions}}
+		{{> unitOpsInstruction}}
 	{{/if}}
 	{{#if assessment}}
-		<p>{{> unitOpsAssessment}}</p>
+		{{> unitOpsAssessment}}
 	{{/if}}
 	{{#if learningsession}}
-		<p>{{> unitOpsLearningSession}}</p>
+		{{> unitOpsLearningSession}}
 	{{/if}}
+	-->
+	
+	<button type="button" class='addUnit'>Add Unit</button>
+  <br>
 </template>
 
+
 <template name="unitOpsInstruction">
-	<textarea rows="4" cols="50"></textarea>
+  <br>
+<p> This part should allow image upload as Intro </p>
+  <fieldset>
+    <legend>Introduction</legend>
+  </fieldset>
+<nav class="jumbotron">
+   <div class="form-group">
+      <label class="col-lg-2 control-label">Unit Name</label>
+      <div class="col-lg-10">
+        <input type="text" name="numberofcards" id="unitname" value="Introduction">
+      </div>
+    </div>
+  <div class="form-group">
+      <label for="textArea" class="col-lg-2 control-label">Introduction</label>
+      <div class="col-lg-10">
+        <textarea class="form-control" rows="4" id="textArea"></textarea>
+      </div>
+  </div>
+  <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <br>
+        <button type="reset"  class="btn btn-primary btn-xs">Reset</button>
+      </div>
+    </div>
+</nav>
+
 </template>
 
 <template name="unitOpsAssessment">
-	<p>Card range: <input type="text" name="cardrange"></p>
-	<p>Shuffle blocks: <input type="text" name="shuffleblocks"></p>
-	<p>Number of templates: <input type="text" name="numbertemplates"></p>
+  <br>
+   <fieldset>
+    <legend>Assessment</legend>
+  </fieldset>
+<nav class="jumbotron">
+  <div class="form-group">
+      <label class="col-lg-2 control-label">Unit Name</label>
+      <div class="col-lg-10">
+        <input type="text" name="unitname">
+      </div>
+    </div>
+  <div class="form-group">
+      <label class="col-lg-2 control-label">Unit Introduction</label>
+      <div class="col-lg-10">
+        <textarea class="form-control" rows="2" value="Click the OK button to hear one example as a harmony and as a melody (not necessarily in that order)."></textarea>
+      </div>
+  </div>
+
+  <nav class="jumbotron">
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse">
+
+      <form class="navbar-form navbar-left">
+        <p>Card range: <input type="text" name="cardrange"></p>
+        <p>Shuffle blocks: <input type="text" name="shuffleblocks"></p>
+      </form>
+    </div>
+  </div>
+</nav>
+
+  <div class="form-group">
+    <label class="col-lg-2 control-label">Number of Templates:</label>
+      <div class="col-lg-10">
+        <select name="numbertemplates">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+      </div>
+  </div>
+  <br>
+  <p> **work on groups** </p>
+  <div class="form-group">
+      <label class="col-lg-2 control-label">Card Sequence</label>
+      <p> Card sequence for 26 cards</p>
+      <p> card sequence lay down template in order </p>
+  </div>
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <br>
+        <button type="reset"  class="btn btn-primary">Reset</button>
+      </div>
+    </div>
+
+</nav>
 </template>
 
 <template name="unitOpsLearningSession">
-	learning session
+	<br>
+   <fieldset>
+    <legend>Learning Session</legend>
+  </fieldset>
+<nav class="jumbotron">
+  <div class="form-group">
+      <label class="col-lg-2 control-label">Unit Name</label>
+      <div class="col-lg-10">
+        <input type="text" name="unitname">
+      </div>
+    </div>
+  <div class="form-group">
+      <label class="col-lg-2 control-label">Unit Introduction</label>
+      <div class="col-lg-10">
+        <textarea class="form-control" rows="2" value="Enter answer in the prompt box below each question.  Please attempt to answer all questions presented. "></textarea>
+      </div>
+  </div>
+
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+
+      <label class="col-lg-2 control-label">Min-duration time:</label>
+
+      <select class="form-control" name="mindurationtime">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option>500</option>
+          <option>600</option>
+        </select>
+        
+    </div>
+
+      </form>
+
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+           <div class="checkbox">
+      <label>
+        <input type="checkbox" name="allowquit">   Allow Quit
+        </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="allowpause"> Allow Pause
+        </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="unending">  Unending
+        </label>
+    </div>
+  </div>
+      </form>
+
+       <form class="navbar-form navbar-right">
+        <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset"  class="btn btn-primary">Reset</button>
+    </div>
+      </form>
+  <br>
+</nav>
 </template>
 <!--END UNITS TEMPLATES-->
-
 
