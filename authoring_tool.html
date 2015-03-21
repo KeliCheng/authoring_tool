@@ -59,26 +59,20 @@
         </select>
       </div>
 
-        <div class="form-group">
-      <label>Shuffle instruction</label>
-        <input type="text" name="shuffle1" class="form-control">
-        <p>--</P>
-        <input type="text" name="shuffle2" class="form-control">
-
- 
+      <div class="form-group">
+      <label>Shuffle Instruction</label>
+      <input type="text" name="shuffleclusters">
+      <label>Swap Instrcutions</label>
+      <input type="text" name="shuffleclusters">
     </div>
-     <div class="form-group">
-      <label class="col-lg-2 control-label">Swap instruction</label>
-      <div class="col-lg-10">
-        <input type="text" name="swap" class="form-control">
-      </div>
-    </div>
-
-
-     
-
+<!--         <div class="form-group">
+      <label>Shuffle instruction>
+        <input type="text" name="shuffle1" class="form-control"> 
+      </label>
+    </div> -->
+  
    <div class="form-group">
-      <label class="col-lg-2 control-label">Radios</label>
+      <!-- <label class="col-lg-2 control-label">Radios</label> -->
       <div class="col-lg-10">
         <div class="radio" name="media">
           <label>
@@ -103,13 +97,10 @@
         </div>
         </div>
         <script>
-
         </script>
-     <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-        <br>
+
+     <div class="form-group" align="right">
         <button type="reset"  class="btn btn-primary btn -sm" align="right">Reset</button>
-      </div>
     </div>
 
 </div>
@@ -163,10 +154,9 @@
   <div class="container-fluid">
 
     <div class="collapse navbar-collapse">
-      <form class="form-horizontal">
       <form class="navbar-form navbar-left">
          <div class="form-group">
-      <label class="col-lg-2 control-label">Study alone interval:</label>
+      <label>Study alone interval:</label>
       <select class="form-control" name="studyalone">
           <option>100</option>
           <option>200</option>
@@ -176,8 +166,7 @@
           <option>600</option>
         </select>
   
-      <label class="col-lg-2 control-label">Inter-card interval:</label>
-
+      <label>Inter-card interval:</label>
        <select class="form-control" name="intercard">
           <option>100</option>
           <option>200</option>
@@ -187,8 +176,7 @@
           <option>600</option>
         </select>
    
-      <label class="col-lg-2 control-label">Drill timeout interval:</label>
-    
+      <label class="col-lg-2 control-label">Drill timeout:</label>
        <select class="form-control" name="timeout">
           <option>100</option>
           <option>200</option>
@@ -202,8 +190,7 @@
 
       <form class="navbar-form navbar-left">
         <div class="form-group">
-      <label class="col-lg-2 control-label">Correct feedback interval:</label>
-
+      <label class="col-lg-2 control-label">Correct feedback:</label>
        <select class="form-control" name="correct_interval">
           <option>100</option>
           <option>200</option>
@@ -213,7 +200,7 @@
           <option>600</option>
         </select>
 
-      <label class="col-lg-2 control-label">Incorrect feedback interval:</label>
+      <label class="col-lg-2 control-label">Incorrect feedback:</label>
 
       <select class="form-control" name="incorrect_interval">
           <option>100</option>
@@ -225,26 +212,19 @@
         </select>
         
     </div>
- 
-
       </form>
-
-
         <div class="form-group">
            <div class="checkbox">
       <label>
-        <input type="checkbox" name="skip">   Skip Study Interval Allowed
+        <input type="checkbox" name="skip">  Skip Study Interval Allowed
         </label>
     </div>
   </div>
-
-
-       <form class="navbar-form navbar-right">
-        <div class="col-lg-10 col-lg-offset-2">
-        <button type="reset"  class="btn btn-primary">Reset</button>
+   <div class="form-group" align="right">
+        <button type="reset"  class="btn btn-primary btn -sm" align="right">Reset</button>
     </div>
-      </form>
-</form>
+
+
     </div>
   </div>
 </nav>
@@ -294,7 +274,7 @@
 	{{/if}}
 	-->
 	<br>
-	<button type="button" class='addUnit'>Add Unit</button>
+	<button type="button" class="addUnit btn btn-primary btn -lg"> + </button>
   <br>
 </template>
 
