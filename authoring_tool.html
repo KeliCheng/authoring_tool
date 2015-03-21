@@ -5,7 +5,7 @@
 
 
 <body>
-  <center><h1>MoFaCTS | Content Builder</h1></center>
+  <center><h3>MoFaCTS | Content Builder</h3></center>
   <br>
   <ul class="breadcrumb">
   <li><a href="#">MoFaCTS</a></li>
@@ -19,84 +19,99 @@
 
 <template name="hello">
 	 <div class="jumbotron">
-  <center><p>
-  	<a href="#" class="btn btn-primary">Create</a>
-    <a href="#" class="btn btn-primary">Load</a>
-  	<!-- <a href="#" class="btn btn-primary">Refresh</a> -->
-  <a href="#" class="btn btn-primary">Test</a>
-  <a href="#" class="btn btn-primary">Save</a>
-  <a href="#" class="btn btn-primary">Publish</a>
-  </p></center>
+
+  <center>
+  <a href="#" class="btn btn-primary">   C R E A T E   </a>
+  <a href="#" class="btn btn-primary">   L O A D   </a>
+  <a href="#" class="btn btn-primary">   T E S T   </a>
+  <a href="#" class="btn btn-primary">   S A V E   </a>
+  <a href="#" class="btn btn-primary">   P U B L I S H   </a>
+  </center>
+  <br><center>
+  <label>Name your FaCT Module:</label>
+  <input type="text" name="modulename"></center><br>
 </div>
-
-	<br>
-	<p>Name your FaCT Module: <input type="text" name="modulename"></p>
-	<br>
-
-
 	<br>
 	<form class="form-horizontal">
   <fieldset>
     <legend>Cards</legend>
-    <p>TODO: add actual card area for expansion</p>
     <div class="jumbotron">
     <div class="form-group">
-      <label class="col-lg-2 control-label">Name of cards</label>
-      <div class="col-lg-10">
-        <input type="text" name="numberofcards" class="form-control" id="cardname">
-      </div>
+      <label>Name of Cards</label>
+      <input type="text" name="lessonname">
+      <label>Name of Versions</label>
+      <input type="text" name="nameofversion">
     </div>
-
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Name of versions</label>
-      <div class="col-lg-10">
-        <input type="text" name="numberofversions" class="form-control" id="cardvr">
-      </div>
-    </div>
-
+ 
      <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Levenshtien proportion:</label>
-      <div class="col-lg-10">
-        <input type="text" name="proportion" class="form-control">
+      <label>Levenshtien Proportion:</label>
+      <select class="form-control" name="ifparameter">
+          <option>0.1</option>
+          <option>0.2</option>
+          <option>0.3</option>
+          <option>0.4</option>
+          <option>0.5</option>
+          <option>0.6</option>
+          <option>0.7</option>
+          <option>0.8</option>
+          <option>0.9</option>
+          <option>1.0</option>
+        </select>
       </div>
-    </div>
 
-     <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Shuffle instruction</label>
-      <div class="col-lg-10">
-        <input type="text" name="shuffle" class="form-control">
-      </div>
+        <div class="form-group">
+      <label>Shuffle instruction</label>
+        <input type="text" name="shuffle1" class="form-control">
+        <p>--</P>
+        <input type="text" name="shuffle2" class="form-control">
+
+ 
     </div>
      <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Swap instruction</label>
+      <label class="col-lg-2 control-label">Swap instruction</label>
       <div class="col-lg-10">
         <input type="text" name="swap" class="form-control">
       </div>
     </div>
 
+
+     
+
    <div class="form-group">
       <label class="col-lg-2 control-label">Radios</label>
       <div class="col-lg-10">
-        <div class="radio">
+        <div class="radio" name="media">
           <label>
-            <input type="radio" name="format" value="mms" checked="">
+            <input type="radio" value="mms" checked="">
             Multimedia
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" name="format" value="txt">
+            <input type="radio" value="txt">
             Text
           </label>
         </div>
-      </div>
-    </div>
+      
+    
+    <div class="radio">
+          <label>
+            <input type="radio" value="mms">
+            ButtonTrial (add button order here)
+          </label>
+        </div>
+        </div>
+        </div>
+        <script>
+
+        </script>
      <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
         <br>
-        <button type="reset"  class="btn btn-primary btn-xs">Reset</button>
+        <button type="reset"  class="btn btn-primary btn -sm" align="right">Reset</button>
       </div>
     </div>
+
 </div>
 
   </fieldset>
@@ -148,7 +163,7 @@
   <div class="container-fluid">
 
     <div class="collapse navbar-collapse">
-
+      <form class="form-horizontal">
       <form class="navbar-form navbar-left">
          <div class="form-group">
       <label class="col-lg-2 control-label">Study alone interval:</label>
@@ -214,7 +229,7 @@
 
       </form>
 
-      <form class="navbar-form navbar-left">
+
         <div class="form-group">
            <div class="checkbox">
       <label>
@@ -222,14 +237,14 @@
         </label>
     </div>
   </div>
-      </form>
+
 
        <form class="navbar-form navbar-right">
         <div class="col-lg-10 col-lg-offset-2">
         <button type="reset"  class="btn btn-primary">Reset</button>
     </div>
       </form>
-
+</form>
     </div>
   </div>
 </nav>
