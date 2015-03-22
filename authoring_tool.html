@@ -238,19 +238,41 @@
   
   <p>{{> Units}}</p>
   <br>
-
 </template>
-
-
 <!--BEGIN UNITS TEMPLATES-->
+
 <template name="Units">
-	
+<!--   <ul class="nav nav-tabs">
+  <li class="dropdown active">
+    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown">
+      Select Unit Type <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li class=""><a aria-expanded="false" href="#dropdown1" data-toggle="tab">Instruction</a></li>
+      <li class="divider"></li>
+      <li class="active"><a aria-expanded="true" href="#dropdown2" data-toggle="tab">Assessment</a></li>
+    </ul>
+  </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade" id="dropdown1">
+    <p>{{> unitOpsInstruction}}</p>
+  </div>
+  <div class="tab-pane fade active in" id="dropdown2">
+    <p>{{> unitOpsAssessment}}</p>
+  </div>
+</div> -->
+
+
+	<form class="form-horizontal">
+  <div class="jumbotron">
+  <div class="form-group">
 	{{#each unitList}}
 	<select id="unitOps" class="unitType num{{num}}">
 		<option>Select for {{num}}</option>
-  		<option value="instruction">Instruction</option>
-      		<option value="assessment">Assessment</option>
-  		<option value="learningsession">Learning Session</option>
+  	<option value="instruction">Instruction</option>
+    <option value="assessment">Assessment</option>
+  	<option value="learningsession">Learning Session</option>
 	</select>
 	{{#if instruction instructions }}
 		{{> unitOpsInstruction}}
@@ -262,7 +284,7 @@
 		{{> unitOpsLearningSession}}
 	{{/if}}
 	{{/each}}
-	   
+	   </div>
 	<!--{{#if instructions}}
 		{{> unitOpsInstruction}}
 	{{/if}}
@@ -274,75 +296,52 @@
 	{{/if}}
 	-->
 	<br>
-	<button type="button" class="addUnit btn btn-primary btn -lg"> + </button>
+  <div class="form-group">
+	<button type="button" class="addUnit btn btn-primary btn -lg"> + A D D </button></div>
   <br>
+</div>
+</form>
 </template>
 
 
 <template name="unitOpsInstruction">
-  <br>
-<p> This part should allow image upload as Intro </p>
+<br>
+<form class="form-horizontal">
   <fieldset>
     <legend>Introduction</legend>
+    <div class="jumbotron">
+    <div class="form-group">
+      <label>Unit Name</label>
+        <input type="text" name="unitname" value="Intro">
+    </div>
+    <div class="form-group">
+      <label>Introduction</label>
+      <textarea class="form-control" rows="4" name="unitinstructions" value="This is a lesson for..."></textarea>
+    </div>
+     <div class="form-group" align="right">
+        <button type="reset"  class="btn btn-primary btn -sm" align="right">Reset</button>
+    </div>
+</div>
   </fieldset>
-<nav class="jumbotron">
-   <div class="form-group">
-      <label class="col-lg-2 control-label">Unit Name</label>
-      <div class="col-lg-10">
-        <input type="text" name="numberofcards" id="unitname" value="Introduction">
-      </div>
-    </div>
-  <div class="form-group">
-      <label for="textArea" class="col-lg-2 control-label">Introduction</label>
-      <div class="col-lg-10">
-        <textarea class="form-control" rows="4" id="textArea"></textarea>
-      </div>
-  </div>
-  <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-        <br>
-        <button type="reset"  class="btn btn-primary btn-xs">Reset</button>
-      </div>
-    </div>
-</nav>
-
+</form>
 </template>
 
 <template name="unitOpsAssessment">
   <br>
-   <fieldset>
-    <legend>Assessment</legend>
-  </fieldset>
-<nav class="jumbotron">
-  <div class="form-group">
-      <label class="col-lg-2 control-label">Unit Name</label>
-      <div class="col-lg-10">
+    <form class="form-horizontal">
+    <fieldset>
+      <legend>Assessment</legend>
+      <div class="jumbotron">
+      <div class="form-group">
+        <label>Unit Name</label>
         <input type="text" name="unitname">
       </div>
-    </div>
-  <div class="form-group">
-      <label class="col-lg-2 control-label">Unit Introduction</label>
-      <div class="col-lg-10">
-        <textarea class="form-control" rows="2" value="Click the OK button to hear one example as a harmony and as a melody (not necessarily in that order)."></textarea>
+      <div class="form-group">
+        <label>Unit Instruction</label>
+        <textarea class="form-control" rows="2" value="..." name="unitinstructions"></textarea>
       </div>
-  </div>
-
-  <nav class="jumbotron">
-  <div class="container-fluid">
-
-    <div class="collapse navbar-collapse">
-
-      <form class="navbar-form navbar-left">
-        <p>Card range: <input type="text" name="cardrange"></p>
-        <p>Shuffle blocks: <input type="text" name="shuffleblocks"></p>
-      </form>
-    </div>
-  </div>
-</nav>
-
-  <div class="form-group">
-    <label class="col-lg-2 control-label">Number of Templates:</label>
-      <div class="col-lg-10">
+      <div class="form-group">
+      <label>Number of Templates:</label>
         <select name="numbertemplates">
         <option>0</option>
         <option>1</option>
@@ -351,89 +350,59 @@
         <option>4</option>
         <option>5</option>
       </select>
-      </div>
-  </div>
-  <br>
-  <p> **work on groups** </p>
-  <div class="form-group">
-      <label class="col-lg-2 control-label">Card Sequence</label>
-      <p> Card sequence for 26 cards</p>
-      <p> card sequence lay down template in order </p>
-  </div>
-    <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-        <br>
-        <button type="reset"  class="btn btn-primary">Reset</button>
-      </div>
     </div>
+     <div class="form-group" align="right">
+        <button type="reset"  class="btn btn-primary btn -sm" align="right">Reset</button>
+    </div>
+  </div>
+  </fieldset>
+</form>
 
-</nav>
 </template>
 
 <template name="unitOpsLearningSession">
-	<br>
-   <fieldset>
+<br>
+<form class="form-horizontal">
+  <fieldset>
     <legend>Learning Session</legend>
-  </fieldset>
-<nav class="jumbotron">
-  <div class="form-group">
-      <label class="col-lg-2 control-label">Unit Name</label>
-      <div class="col-lg-10">
-        <input type="text" name="unitname">
-      </div>
+    <div class="jumbotron">
+    <div class="form-group">
+      <label>Unit Name</label>
+      <input type="text" name="unitname">
     </div>
-  <div class="form-group">
-      <label class="col-lg-2 control-label">Unit Introduction</label>
-      <div class="col-lg-10">
-        <textarea class="form-control" rows="2" value="Enter answer in the prompt box below each question.  Please attempt to answer all questions presented. "></textarea>
-      </div>
-  </div>
-
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-
-      <label class="col-lg-2 control-label">Min-duration time:</label>
-
-      <select class="form-control" name="mindurationtime">
-          <option>100</option>
-          <option>200</option>
-          <option>300</option>
-          <option>400</option>
-          <option>500</option>
-          <option>600</option>
-        </select>
-        
+    <div class="form-group">
+      <label>Unit Instruction</label>
+      <textarea class="form-control" rows="4" value="..." name="unitinstructions"></textarea>
     </div>
-
-      </form>
-
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-           <div class="checkbox">
-      <label>
-        <input type="checkbox" name="allowquit">   Allow Quit
-        </label>
+    <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="allowquit">Allow Quit
+          </label>
+           <label>
+            <input type="checkbox" name="allowpause">Allow Pause
+          </label>
+          <label>
+            <input type="checkbox" name="unending">Unending
+          </label>
+           <label>Min-duration time:
+            <select name="mindurationtime">
+              <option>100</option>
+              <option>200</option>
+              <option>300</option>
+              <option>400</option>
+              <option>500</option>
+              <option>600</option>
+            </select>
+            </label>
+        </div>
+        </div>
+    <div class="form-group" align="right">
+      <button type="reset"  class="btn btn-primary btn -sm" align="right">Reset</button>
     </div>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" name="allowpause"> Allow Pause
-        </label>
-    </div>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" name="unending">  Unending
-        </label>
-    </div>
-  </div>
-      </form>
-
-       <form class="navbar-form navbar-right">
-        <div class="col-lg-10 col-lg-offset-2">
-        <button type="reset"  class="btn btn-primary">Reset</button>
-    </div>
-      </form>
-  <br>
-</nav>
+</div>
+</fieldset>
+</form>
 </template>
 <!--END UNITS TEMPLATES-->
 

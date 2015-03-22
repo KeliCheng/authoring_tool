@@ -2,13 +2,19 @@ if (Meteor.isClient) {
 	unitList = new Mongo.Collection('unitList');
 	Session.setDefault('numUnitsInt', 0);
 	
-
-	
   Template.hello.helpers({
 
   });
 
+  Template.Units.events({
+'click .dropdown-toggle': function (e) {
+    e.preventDefault();
+    $(e.target).find('.dropdown-menu').toggle();
+    }
+});
+
   Template.Units.helpers({
+
     unitList: function () {
       return unitList.find({});
     },
