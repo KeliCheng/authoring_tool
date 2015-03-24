@@ -3,7 +3,7 @@
   <title>MoFaCTS | Content Builder</title>
 </head>
 
-
+<!--BEGIN BODY-->
 <body>
   <center><h3>MoFaCTS | Content Builder</h3></center>
   <br>
@@ -24,6 +24,7 @@
   <a href="#" class="btn btn-primary">G E N E R A T E   X M L</a>
 </form>
 </body>
+<!--END BODY-->
 
 
 <template name="hello">
@@ -110,18 +111,13 @@
   </fieldset>
 </form>
 
-<!--
-<script>
-function fun(){
-var x = confirm("You are about to reset the form");
-if(x){
-  document.getElementById("form1").reset();
-}
-}
-</script>
--->
 <br>
+
+
+
+<!--BEGIN CARDS-->
 <table class="table table-striped table-hover ">
+
   <thead>
     <tr>
       <th>Card</th>
@@ -153,7 +149,39 @@ if(x){
       <td>Column content</td>
     </tr>
   </tbody>
+
 </table> 
+
+<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th>Card</th>
+			{{#each versionList}}
+      				<th>Version {{num}} Prompt</th>
+     				<th>Version {{num}} Response</th>
+			{{/each}}
+		</tr>
+	</thead>
+	<tbody>
+		{{#each cardList}}
+			<tr>
+				<td>{{num}}</td>
+				{{#each numVersions}}	
+      					<td>Column content</td>
+      					<td>Column content</td>
+				{{/each}}
+			</tr>
+		{{/each}}
+	</tbody>
+</table>
+
+
+<button type="button" class="addCard btn btn-primary btn -lg"> + C A R D</button>
+<button type="button" class="addVersion btn btn-primary btn -lg"> + V E R S I O N </button>
+<!--END CARDS-->
+
+
+
 <form id="cardTimingForm" class="form-horizontal">
   <fieldset>
     <legend>Card Timing</legend>
@@ -191,14 +219,12 @@ if(x){
 
 
 <h3>Units</h3>
-  <p>Number of Units: <input type="text" name="numberofunits"></p>
-  <p>TODO: make plus button to add form blocks</p>
-  
   <p>{{> Units}}</p>
   <br>
 </template>
-<!--BEGIN UNITS TEMPLATES-->
 
+
+<!--BEGIN UNITS TEMPLATES-->
 <template name="Units">
   <ul class="nav nav-tabs">
   <li class="dropdown active">

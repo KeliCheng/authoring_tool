@@ -1,9 +1,18 @@
 if (Meteor.isClient) {
 	unitList = new Mongo.Collection('unitList');
+  	cardList = new Mongo.Collection('cardList');
+  	versionList = new Mongo.Collection('versionList');
 	Session.setDefault('numUnitsInt', 0);
+	Session.setDefault('numCards', 0);
+	Session.setDefault('numVersions', 0);
 	
   Template.hello.helpers({
-
+    cardList: function () {
+      return cardList.find({});
+    },
+    versionList: function () {
+      return versionList.find({});
+    }
   });
 
   Template.Units.events({
@@ -97,6 +106,16 @@ if (Meteor.isClient) {
       //do nothing
       }
       return false;
+    },
+    'click .addCard': function(event) {
+      console.log("add card button clicked, num cards: " + Session.get('numCards'));
+	Session.set('numCards', Session.get('numCards') + 1);
+	cardList.insert({num:Session.get('numCards')});
+    },
+    'click .addVersion': function(event) {
+      console.log("add cardVersion button clicked, num versions: " + Session.get('numVersions'));
+	Session.set('numVersions', Session.get('numVersions') + 1);
+	versionList.insert({num:Session.get('numVersions')});
     }
   });
 
@@ -128,10 +147,14 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   unitList = new Mongo.Collection('unitList');
+  cardList = new Mongo.Collection('cardList');
+  versionList = new Mongo.Collection('versionList');
   //Session.setDefault('numUnitsInt', 0);
   Meteor.startup(function() {
     // code to run on server at startup
-	unitList.remove({})
+	unitList.remove({});
+	cardList.remove({});
+	versionList.remove({});
    
 
   });
