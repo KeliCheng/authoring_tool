@@ -8,7 +8,7 @@ if (Meteor.isClient) {
 
   Template.Units.events({
 'click .dropdown-toggle': function (e) {
-    e.preventDefault();
+    e.defaultPrevented();
     $(e.target).find('.dropdown-menu').toggle();
     }
 });
@@ -58,7 +58,7 @@ if (Meteor.isClient) {
     'change .unitType': function (event) {
       var v = $(event.target).val();
 	var attrclass = $(event.target).attr("class").split('m')[1];
-      //console.log(attrclass);
+      console.log(attrclass);
       var x = unitList.findOne({num: parseInt(attrclass)});
 	
       if (v == "instruction") {
@@ -85,6 +85,18 @@ if (Meteor.isClient) {
     },
     'change numberofunits': function(event) {
 	var v = $(event.target).val();
+    },
+    'click .reset1': function (event, template){
+      //event.defaultPrevented();
+      var classString = $(event.target).attr("class").split(" ")[3];
+      console.log(classString);
+      var x = confirm("You are about to reset the form");
+      if(x == true){
+        document.getElementById(classString).reset();
+      }else{
+      //do nothing
+      }
+      return false;
     }
   });
 
