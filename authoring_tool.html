@@ -11,15 +11,6 @@
   <li><a href="#">MoFaCTS</a></li>
   <li class="active">Content Builder</li>
 </ul>
-
-  {{> hello}}
-  
-</body>
-
-
-<template name="hello">
-	 <div class="jumbotron">
-
   <center>
   <a href="#" class="btn btn-primary">   C R E A T E   </a>
   <a href="#" class="btn btn-primary">   L O A D   </a>
@@ -27,6 +18,18 @@
   <a href="#" class="btn btn-primary">   S A V E   </a>
   <a href="#" class="btn btn-primary">   P U B L I S H   </a>
   </center>
+<form id="masterForm">
+  {{> hello}}
+
+  <a href="#" class="btn btn-primary">G E N E R A T E   X M L</a>
+</form>
+</body>
+
+
+<template name="hello">
+	 <div class="jumbotron">
+
+
   <br><center>
   <label>Name your FaCT Module:</label>
   <input type="text" name="modulename"></center><br>
@@ -151,7 +154,7 @@ if(x){
     </tr>
   </tbody>
 </table> 
-<form class="form-horizontal">
+<form id="cardTimingForm" class="form-horizontal">
   <fieldset>
     <legend>Card Timing</legend>
     <div class="jumbotron">
@@ -179,7 +182,7 @@ if(x){
     </div>
   </div>
      <div class="form-group" align="right">
-        <button type="reset"  class="btn btn-primary btn -sm" align="right">Reset</button>
+        <button class="btn btn-primary btn -sm reset1 cardTimingForm" align="right">Reset</button>
     </div>
 </div>
   </fieldset>
@@ -233,39 +236,10 @@ if(x){
     <option value="assessment">Assessment</option>
   	<option value="learningsession">Learning Session</option>
 	</select>
-	{{#if instruction instructions }}
-		{{> unitOpsInstruction}}
-	{{/if}}
-	{{#if assessment assessments }}
-		{{> unitOpsAssessment}}
-	{{/if}}
-	{{#if learningsession learningsessions }}
-		{{> unitOpsLearningSession}}
-	{{/if}}
-	{{/each}}
-	   </div>
-	<!--{{#if instructions}}
-		{{> unitOpsInstruction}}
-	{{/if}}
-	{{#if assessment}}
-		{{> unitOpsAssessment}}
-	{{/if}}
-	{{#if learningsession}}
-		{{> unitOpsLearningSession}}
-	{{/if}}
-	-->
 	<br>
-  <div class="form-group">
-	<button type="button" class="addUnit btn btn-primary btn -lg"> + A D D </button></div>
-  <br>
-</div>
-</form>
-</template>
-
-
-<template name="unitOpsInstruction">
-<br>
-<form class="form-horizontal">
+	{{#if instruction instructions }}
+		<!--{{> unitOpsInstruction}}-->
+		<form id="unitForm{{num}}" class="form-horizontal">
   <fieldset>
     <legend>Introduction</legend>
     <div class="jumbotron">
@@ -278,16 +252,15 @@ if(x){
       <textarea class="form-control" rows="4" name="unitinstructions" value="This is a lesson for..."></textarea>
     </div>
      <div class="form-group" align="right">
-        <button type="reset"  class="btn btn-primary btn -sm" align="right">Reset</button>
+        <button class="btn btn-primary btn -sm reset1 unitForm{{num}}" align="right">Reset</button>
     </div>
 </div>
   </fieldset>
 </form>
-</template>
-
-<template name="unitOpsAssessment">
-  <br>
-    <form class="form-horizontal">
+	{{/if}}
+	{{#if assessment assessments }}
+		<!--{{> unitOpsAssessment}}-->
+    <form id="unitForm{{num}}" class="form-horizontal">
     <fieldset>
       <legend>Assessment</legend>
       <div class="jumbotron">
@@ -316,7 +289,114 @@ if(x){
         <input name="numbertemplates" type="number" step="1" class="fbfh-number" min="0">
     </div>
      <div class="form-group" align="right">
-        <button type="reset"  class="btn btn-primary btn -sm" align="right">Reset</button>
+        <button class="btn btn-primary btn -sm reset1 unitForm{{num}}" align="right">Reset</button>
+    </div>
+  </div>
+  </fieldset>
+</form>
+	{{/if}}
+	{{#if learningsession learningsessions }}
+		<!--{{> unitOpsLearningSession}}-->
+<form id="unitForm{{num}}" class="form-horizontal">
+  <fieldset>
+    <legend>Learning Session</legend>
+    <div class="jumbotron">
+    <div class="form-group">
+      <label>Unit Name</label>
+      <input type="text" name="unitname">
+    </div>
+    <div class="form-group">
+      <label>Unit Instruction</label>
+      <textarea class="form-control" rows="4" value="..." name="unitinstructions"></textarea>
+    </div>
+    <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="allowquit">Allow Quit
+          </label>
+           <label>
+            <input type="checkbox" name="allowpause">Allow Pause
+          </label>
+          <label>
+            <input type="checkbox" name="unending">Unending
+          </label>
+        </div>
+        </div>
+         <div class="form-group">
+      <label>Min Durationtime</label>
+        <input name="mindurationtime" type="number" step="0.01" class="fbfh-number" min="0">
+    </div>
+    <div class="form-group" align="right">
+      <button class="btn btn-primary btn -sm reset1 unitForm{{num}}" align="right">Reset</button>
+    </div>
+</div>
+</fieldset>
+</form>
+	{{/if}}
+	{{/each}}
+	   </div>
+	<br>
+  <div class="form-group">
+	<button type="button" class="addUnit btn btn-primary btn -lg"> + A D D </button></div>
+  <br>
+</div>
+</form>
+</template>
+
+
+<template name="unitOpsInstruction">
+<form class="form-horizontal">
+  <fieldset>
+    <legend>Introduction</legend>
+    <div class="jumbotron">
+    <div class="form-group">
+      <label>Unit Name</label>
+        <input type="text" name="unitname" value="Intro">
+    </div>
+    <div class="form-group">
+      <label>Introduction</label>
+      <textarea class="form-control" rows="4" name="unitinstructions" value="This is a lesson for..."></textarea>
+    </div>
+     <div class="form-group" align="right">
+        <button class="btn btn-primary btn -sm reset1" align="right">Reset</button>
+    </div>
+</div>
+  </fieldset>
+</form>
+</template>
+
+<template name="unitOpsAssessment">
+  <br>
+    <form class="form-horizontal">
+    <fieldset>
+      <legend>Assessment</legend>
+      <div class="jumbotron">
+      <div class="form-group">
+        <label>Unit Name</label>
+        <input type="text" name="unitname">
+      </div>
+      <div class="form-group">
+        <label>Unit Instruction</label>
+        <textarea class="form-control" rows="2" value="..." name="unitinstructions"></textarea>
+      </div>
+      <div class="form-group">
+      <label>Number of Templates:</label>
+        <select name="numbertemplates">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div> 
+
+     <div class="form-group">
+      <label>Number of Templates</label>
+        <input name="numbertemplates" type="number" step="1" class="fbfh-number" min="0">
+    </div>
+     <div class="form-group" align="right">
+        <button class="btn btn-primary btn -sm reset1" align="right">Reset</button>
     </div>
   </div>
   </fieldset>
@@ -356,7 +436,7 @@ if(x){
         <input name="mindurationtime" type="number" step="0.01" class="fbfh-number" min="0">
     </div>
     <div class="form-group" align="right">
-      <button type="reset"  class="btn btn-primary btn -sm" align="right">Reset</button>
+      <button class="btn btn-primary btn -sm reset1" align="right">Reset</button>
     </div>
 </div>
 </fieldset>

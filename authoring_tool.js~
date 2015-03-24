@@ -2,13 +2,19 @@ if (Meteor.isClient) {
 	unitList = new Mongo.Collection('unitList');
 	Session.setDefault('numUnitsInt', 0);
 	
-
-	
   Template.hello.helpers({
 
   });
 
+  Template.Units.events({
+'click .dropdown-toggle': function (e) {
+    e.defaultPrevented();
+    $(e.target).find('.dropdown-menu').toggle();
+    }
+});
+
   Template.Units.helpers({
+
     unitList: function () {
       return unitList.find({});
     },
@@ -52,25 +58,25 @@ if (Meteor.isClient) {
     'change .unitType': function (event) {
       var v = $(event.target).val();
 	var attrclass = $(event.target).attr("class").split('m')[1];
-      //console.log(attrclass);
+      console.log(attrclass);
       var x = unitList.findOne({num: parseInt(attrclass)});
 	
       if (v == "instruction") {
-	unitList.update({_id: x._id}, {$set: {instruction: true}});
-	unitList.update({_id: x._id}, {$set: {learningsession: false}});
-	unitList.update({_id: x._id}, {$set: {assessment: false}});
+	unitList.update({_id: x._id}, {$set: {instructions: true}});
+	unitList.update({_id: x._id}, {$set: {learningsessions: false}});
+	unitList.update({_id: x._id}, {$set: {assessments: false}});
 
       	Session.set('unitVal', 'instruction');
       } else if (v == "learningsession") {
-	unitList.update({_id: x._id}, {$set: {instruction: false}});
-	unitList.update({_id: x._id}, {$set: {learningsession: true}});
-	unitList.update({_id: x._id}, {$set: {assessment: false}});
+	unitList.update({_id: x._id}, {$set: {instructions: false}});
+	unitList.update({_id: x._id}, {$set: {learningsessions: true}});
+	unitList.update({_id: x._id}, {$set: {assessments: false}});
 
       	Session.set('unitVal', 'learningsession');
       } else if (v == "assessment") {
-	unitList.update({_id: x._id}, {$set: {instruction: false}});
-	unitList.update({_id: x._id}, {$set: {learningsession: false}});
-	unitList.update({_id: x._id}, {$set: {assessment: true}});
+	unitList.update({_id: x._id}, {$set: {instructions: false}});
+	unitList.update({_id: x._id}, {$set: {learningsessions: false}});
+	unitList.update({_id: x._id}, {$set: {assessments: true}});
 
       	Session.set('unitVal', 'assessment');
       } else {
@@ -79,6 +85,18 @@ if (Meteor.isClient) {
     },
     'change numberofunits': function(event) {
 	var v = $(event.target).val();
+    },
+    'click .reset1': function (event, template){
+      //event.defaultPrevented();
+      var classString = $(event.target).attr("class").split(" ")[3];
+      console.log(classString);
+      var x = confirm("You are about to reset the form");
+      if(x == true){
+        document.getElementById(classString).reset();
+      }else{
+      //do nothing
+      }
+      return false;
     }
   });
 
@@ -90,6 +108,18 @@ if (Meteor.isClient) {
 				instructions:false,
 				learningsessions:false,
 				assessments:false});
+    },
+    'click .reset1': function (event, template){
+      //event.defaultPrevented();
+      var classString = $(event.target).attr("class").split(" ")[5];
+      console.log(classString);
+      var x = confirm("You are about to reset the form");
+      if(x == true){
+        document.getElementById(classString).reset();
+      }else{
+      //do nothing
+      }
+      return false;
     }
 
   });
