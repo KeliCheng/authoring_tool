@@ -110,12 +110,12 @@ if (Meteor.isClient) {
     'click .addCard': function(event) {
       console.log("add card button clicked, num cards: " + Session.get('numCards'));
 	Session.set('numCards', Session.get('numCards') + 1);
-	cardList.insert({num:Session.get('numCards')});
+	cardList.insert({cardNum:Session.get('numCards')});
     },
     'click .addVersion': function(event) {
       console.log("add cardVersion button clicked, num versions: " + Session.get('numVersions'));
 	Session.set('numVersions', Session.get('numVersions') + 1);
-	versionList.insert({num:Session.get('numVersions')});
+	versionList.insert({versionNum:Session.get('numVersions')});
     }
   });
 

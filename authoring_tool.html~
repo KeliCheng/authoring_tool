@@ -191,10 +191,10 @@
 				{{/each}}-->
 
 
-				<!--{{#each versionList}}	
+				{{#each versionList}}	
       					<td><input type="text" name="cardPrompt{{cardNum}}"></td>
       					<td><input type="text" name="cardResponse{{cardNum}}"></td>
-				{{/each}}-->
+				{{/each}}
 			</tr>
 		{{/each}}
 	</tbody>
