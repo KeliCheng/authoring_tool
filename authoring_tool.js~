@@ -7,7 +7,12 @@ if (Meteor.isClient) {
 	Session.setDefault('numVersions', 0);
 	
   Template.hello.helpers({
-
+    cardList: function () {
+      return cardList.find({});
+    },
+    versionList: function () {
+      return versionList.find({});
+    }
   });
 
   Template.Units.events({

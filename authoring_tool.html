@@ -104,7 +104,7 @@
         </script>
 
      <!--<div class="form-group" align="right">-->
-        <button class="btn btn-primary reset1 form1" align="right">Reset</button>
+        <button class="btn btn-primary -sm reset1 form1" align="right">Reset</button>
     <!--</div>-->
 </div>
 
@@ -210,7 +210,7 @@
     </div>
   </div>
      <div class="form-group" align="right">
-        <button class="btn btn-primary btn -sm reset1 cardTimingForm" align="right">Reset</button>
+        <button type="button" class="btn btn-primary -sm reset1 cardTimingForm" align="right">Reset</button>
     </div>
 </div>
   </fieldset>
@@ -278,7 +278,7 @@
       <textarea class="form-control" rows="4" name="unitinstructions" value="This is a lesson for..."></textarea>
     </div>
      <div class="form-group" align="right">
-        <button class="btn btn-primary btn -sm reset1 unitForm{{num}}" align="right">Reset</button>
+        <button type="button" class="btn btn-primary -sm reset1 unitForm{{num}}" align="right">Reset</button>
     </div>
 </div>
   </fieldset>
@@ -315,7 +315,7 @@
         <input name="numbertemplates" type="number" step="1" class="fbfh-number" min="0">
     </div>
      <div class="form-group" align="right">
-        <button class="btn btn-primary btn -sm reset1 unitForm{{num}}" align="right">Reset</button>
+        <button type="button" class="btn btn-primary -sm reset1 unitForm{{num}}" align="right">Reset</button>
     </div>
   </div>
   </fieldset>
@@ -353,7 +353,7 @@
         <input name="mindurationtime" type="number" step="0.01" class="fbfh-number" min="0">
     </div>
     <div class="form-group" align="right">
-      <button class="btn btn-primary btn -sm reset1 unitForm{{num}}" align="right">Reset</button>
+      <button type="button" class="btn btn-primary -sm reset1 unitForm{{num}}" align="right">Reset</button>
     </div>
 </div>
 </fieldset>
@@ -371,7 +371,7 @@
 
 
 <template name="unitOpsInstruction">
-<form class="form-horizontal">
+<form id="instructionsForm1" class="form-horizontal">
   <fieldset>
     <legend>Introduction</legend>
     <div class="jumbotron">
@@ -384,7 +384,7 @@
       <textarea class="form-control" rows="4" name="unitinstructions" value="This is a lesson for..."></textarea>
     </div>
      <div class="form-group" align="right">
-        <button class="btn btn-primary btn -sm reset1" align="right">Reset</button>
+        <button type="button" class="btn btn-primary -sm reset1 instructionsForm1" align="right">Reset</button>
     </div>
 </div>
   </fieldset>
@@ -393,7 +393,7 @@
 
 <template name="unitOpsAssessment">
   <br>
-    <form class="form-horizontal">
+    <form id="assessmentForm1" class="form-horizontal">
     <fieldset>
       <legend>Assessment</legend>
       <div class="jumbotron">
@@ -422,7 +422,7 @@
         <input name="numbertemplates" type="number" step="1" class="fbfh-number" min="0">
     </div>
      <div class="form-group" align="right">
-        <button class="btn btn-primary btn -sm reset1" align="right">Reset</button>
+        <button type="button" class="btn btn-primary -sm reset1 assessmentForm1" align="right">Reset</button>
     </div>
   </div>
   </fieldset>
@@ -432,7 +432,7 @@
 
 <template name="unitOpsLearningSession">
 <br>
-<form class="form-horizontal">
+<form id="learningsessionForm1" class="form-horizontal">
   <fieldset>
     <legend>Learning Session</legend>
     <div class="jumbotron">
@@ -462,7 +462,7 @@
         <input name="mindurationtime" type="number" step="0.01" class="fbfh-number" min="0">
     </div>
     <div class="form-group" align="right">
-      <button class="btn btn-primary btn -sm reset1" align="right">Reset</button>
+      <button type="button" class="btn btn-primary -sm reset1 learningsessionForm1" align="right">Reset</button>
     </div>
 </div>
 </fieldset>

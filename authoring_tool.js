@@ -97,7 +97,7 @@ if (Meteor.isClient) {
     },
     'click .reset1': function (event, template){
       //event.defaultPrevented();
-      var classString = $(event.target).attr("class").split(" ")[3];
+      var classString = $(event.target).attr("class").split(" ")[4];
       console.log(classString);
       var x = confirm("You are about to reset the form");
       if(x == true){
