@@ -157,18 +157,43 @@
 		<tr>
 			<th>Card</th>
 			{{#each versionList}}
-      				<th>Version {{num}} Prompt</th>
-     				<th>Version {{num}} Response</th>
+      				<th>Version {{versionNum}} Prompt</th>
+     				<th>Version {{versionNum}} Response</th>
 			{{/each}}
 		</tr>
 	</thead>
 	<tbody>
 		{{#each cardList}}
 			<tr>
-				<td>{{num}}</td>
+				<td>{{cardNum}}</td>
+				<!--{{#each versionList}}	
+      					<td>
+						<form action="demo_form.asp">
+	  						<input type="file" name="cardPromptPic{{cardNum}}" accept="image/*">
+						</form>
+					</td>
+      					<td>	<form action="">
+						<input type="radio" name="trueVal"><input type="text" name="cardResponse{{cardNum}}">
+						<input type="radio" name="trueVal"><input type="text" name="cardResponse{{cardNum}}">
+						<input type="radio" name="trueVal"><input type="text" name="cardResponse{{cardNum}}">
+						<input type="radio" name="trueVal"><input type="text" name="cardResponse{{cardNum}}">
+						</form>
+					</td>
+				{{/each}}-->
+
+				<!--{{#each versionList}}	
+      					<td>
+						<form action="demo_form.asp">
+	  						<input type="file" name="cardPromptPic{{cardNum}}" accept="image/*">
+						</form>
+					</td>
+      					<td><input type="text" name="cardResponse{{cardNum}}"></td>
+				{{/each}}-->
+
+
 				{{#each versionList}}	
-      					<td>Column content</td>
-      					<td>Column content</td>
+      					<td><input type="text" name="cardPrompt{{cardNum}}"></td>
+      					<td><input type="text" name="cardResponse{{cardNum}}"></td>
 				{{/each}}
 			</tr>
 		{{/each}}

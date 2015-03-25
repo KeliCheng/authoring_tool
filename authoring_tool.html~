@@ -157,19 +157,44 @@
 		<tr>
 			<th>Card</th>
 			{{#each versionList}}
-      				<th>Version {{num}} Prompt</th>
-     				<th>Version {{num}} Response</th>
+      				<th>Version {{versionNum}} Prompt</th>
+     				<th>Version {{versionNum}} Response</th>
 			{{/each}}
 		</tr>
 	</thead>
 	<tbody>
 		{{#each cardList}}
 			<tr>
-				<td>{{num}}</td>
-				{{#each versionList}}	
-      					<td>Column content</td>
-      					<td>Column content</td>
-				{{/each}}
+				<td>{{cardNum}}</td>
+				<!--{{#each versionList}}	
+      					<td>
+						<form action="demo_form.asp">
+	  						<input type="file" name="cardPromptPic{{cardNum}}" accept="image/*">
+						</form>
+					</td>
+      					<td>	<form action="">
+						<input type="radio" name="trueVal"><input type="text" name="cardResponse{{cardNum}}">
+						<input type="radio" name="trueVal"><input type="text" name="cardResponse{{cardNum}}">
+						<input type="radio" name="trueVal"><input type="text" name="cardResponse{{cardNum}}">
+						<input type="radio" name="trueVal"><input type="text" name="cardResponse{{cardNum}}">
+						</form>
+					</td>
+				{{/each}}-->
+
+				<!--{{#each versionList}}	
+      					<td>
+						<form action="demo_form.asp">
+	  						<input type="file" name="cardPromptPic{{cardNum}}" accept="image/*">
+						</form>
+					</td>
+      					<td><input type="text" name="cardResponse{{cardNum}}"></td>
+				{{/each}}-->
+
+
+				<!--{{#each versionList}}	
+      					<td><input type="text" name="cardPrompt{{cardNum}}"></td>
+      					<td><input type="text" name="cardResponse{{cardNum}}"></td>
+				{{/each}}-->
 			</tr>
 		{{/each}}
 	</tbody>
@@ -371,7 +396,7 @@
 
 
 <template name="unitOpsInstruction">
-<form class="form-horizontal">
+<form id="instructionsForm1" class="form-horizontal">
   <fieldset>
     <legend>Introduction</legend>
     <div class="jumbotron">
@@ -384,7 +409,7 @@
       <textarea class="form-control" rows="4" name="unitinstructions" value="This is a lesson for..."></textarea>
     </div>
      <div class="form-group" align="right">
-        <button type="button" class="btn btn-primary -sm reset1" align="right">Reset</button>
+        <button type="button" class="btn btn-primary -sm reset1 instructionsForm1" align="right">Reset</button>
     </div>
 </div>
   </fieldset>
@@ -393,7 +418,7 @@
 
 <template name="unitOpsAssessment">
   <br>
-    <form class="form-horizontal">
+    <form id="assessmentForm1" class="form-horizontal">
     <fieldset>
       <legend>Assessment</legend>
       <div class="jumbotron">
@@ -422,7 +447,7 @@
         <input name="numbertemplates" type="number" step="1" class="fbfh-number" min="0">
     </div>
      <div class="form-group" align="right">
-        <button type="button" class="btn btn-primary -sm reset1" align="right">Reset</button>
+        <button type="button" class="btn btn-primary -sm reset1 assessmentForm1" align="right">Reset</button>
     </div>
   </div>
   </fieldset>
@@ -432,7 +457,7 @@
 
 <template name="unitOpsLearningSession">
 <br>
-<form class="form-horizontal">
+<form id="learningsessionForm1" class="form-horizontal">
   <fieldset>
     <legend>Learning Session</legend>
     <div class="jumbotron">
@@ -462,7 +487,7 @@
         <input name="mindurationtime" type="number" step="0.01" class="fbfh-number" min="0">
     </div>
     <div class="form-group" align="right">
-      <button type="button" class="btn btn-primary -sm reset1" align="right">Reset</button>
+      <button type="button" class="btn btn-primary -sm reset1 learningsessionForm1" align="right">Reset</button>
     </div>
 </div>
 </fieldset>
