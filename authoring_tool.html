@@ -13,8 +13,9 @@
 </ul>
   <center>
   <a href="#" class="btn btn-primary">   C R E A T E   </a>
-  <a href="#" onclick="loadXML()" class="btn btn-primary">   L O A D   </a>
-  <input type="file" accept=".xml" id="realLoad" style="display:none"/>
+  <!--<a href="#" class="btn btn-primary load1">   L O A D   </a>-->
+  {{> load}}
+  <!--<a href="#" onclick="loadXML()" class="btn btn-primary load1">   L O A D   </a>-->
   <a href="#" class="btn btn-primary">   T E S T   </a>
   <a href="#" onclick="saveXML()" class="btn btn-primary">   S A V E   </a>
   <a href="#" class="btn btn-primary">   P U B L I S H   </a>
@@ -27,9 +28,12 @@
 </body>
 <!--END BODY-->
 
+
 <template name="load">
-	 
+  <input type="file" accept=".xml" id="realLoad" style="display:none" class="load2" />
+  <a href="#" class="btn btn-primary load1">   L O A D   </a>
 </template>
+
 
 <template name="hello">
 	 <div class="jumbotron">
@@ -37,7 +41,7 @@
 
   <br><center>
   <label>Name your FaCT Module:</label>
-  <input type="text" name="modulename"></center><br>
+  <input type="text" id="moduleName" name="modulename"></center><br>
 </div>
 	<br>
 	<form id="form1" class="form-horizontal">
@@ -498,4 +502,3 @@
 </form>
 </template>
 <!--END UNITS TEMPLATES-->
-

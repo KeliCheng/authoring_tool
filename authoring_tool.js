@@ -7,99 +7,120 @@ if (Meteor.isClient) {
 	Session.setDefault('numVersions', 0);
 	
 
-  Template.load.events(
+  Template.load.events ({
 	
-   // THE LOAD XML CODE
+	// THE LOAD XML CODE
 
-	function loadXML() { // called by load when load clicked
-	  function readingFiles(evt) {
-	    var file = evt.target.files[0];
+	'click .load1': function(event, template){
+		console.log("clicked load")
+	//function loadXML() { // called by load when load clicked
+	
+		var loadedFile = document.getElementById('realLoad');
+		document.getElementById('realLoad').addEventListener('click', readingFiles);
+		loadedFile.click();
+		document.getElementById('realLoad').removeEventListener('click', readingFiles);
+		//need to end the Listener, it adds 1 more each time i click it seems
+		//also, it runs the listen event before i can pick a file, making me pick it twice
+		
+		//document.getElementById('moduleName').value = "Sample loading text1"; //get here
+		
+		function readingFiles(evt) {
+			var file = evt.target.files[0];
 
-	    if (file) {
-	      	var reader = new FileReader();
-		reader.onload = function(e) {
-		var contents = e.target.results;
-		var ct = reader.result;
-		var sections = ct.split('\n');
+			//document.getElementById('moduleName').value = "Sample loading text2";//gets here
 
-		alert("got the file.\n" + "name: " + file.name + "\n" + "fileType: " + file.type);
+			if (file) {
+				var reader = new FileReader();
+				
+				//document.getElementById('moduleName').value = "Sample loading text3";//gets here
+				console.log("above");
+				reader.onload = function (e) {
+				//reader.onload = function(e) { //not calling this? why? why? please call it. there is nothing wrong, this is how this is supposed to be called
+					console.log("below");
+					document.getElementById('moduleName').value = "Sample loading text4";//not here
+				} //added this to test without the commented code from below, remove when uncommenting
+				// 	var contents = e.target.results;
+				// 	var ct = reader.result;
+				// 	var sections = ct.split('\n');
 
-		for(i = 0; i !== sections.length - 1; i++){ //meteor has problems with < signs or something, need to switch this over to the js file when i finish
-			//loop for sending each line to a specific place
-			// was thinking if we do match the correct part, make a new var that splices the ends off, if needed, and then call var[0]
+				// 	alert("got the file.\n" + "name: " + file.name + "\n" + "fileType: " + file.type);
 
-			sections[i] = sections[i].trim();
-			console.log(sections[i]);
-			if (sections[i].match(<lessonname>) === "<lessonname>") {//go through each line and place it correctly
-				//
-			} else if (sections[i].match(<stimulusfile>) === "<stimulusfile>") {
-				//modulename?
-			} else if (sections[i].match(<clustermodel>) === "<clustermodel>") {
-				//
-			} else if (sections[i].match(<clustersize>) === "<clustersize>") {
-				//
-			} else if (sections[i].match(<shuffleclusters>) === "<shuffleclusters>") {
-				//
-			} else if (sections[i].match(<lfparameter>) === "<lfparameter>") {
-				//
-			} else if (sections[i].match(<isModeled>) === "<isModeled>") {
-				//
-			} else if (sections[i].match(<timeoutInSeconds>) === "<timeoutInSeconds>") {
-				//
-			} else if (sections[i].match(<experimentTarget>) === "<experimentTarget>") {
-				//
-			} else if (sections[i].match(<cluster>) === "<cluster>") {
-				//the cards
-				for(j = i; sections[j].match(</cluster>) !== "</cluster>"; j++) { //continues through the array doing things for this specific card
-					if (sections[i].match(<display>) === "<display>")) {
-						// card question
-						i++;
-					} else if (sections[i].match(<response>) === "<response>")) {
-						// correct response
-						i++;
-								} else if (sections[i].match(<falseResponse>) === "<falseResponse>")) {
-									// incorrect response
-									i++;
-								} else {
-									i++; //in case of a blank/useless line?
-								}
-							}
-						} else if (sections[i].match(<unit>) === "<unit>") {
-							//the different units
-							//click the add unit button at this point then have the following loop work with the added units
-							for(j = i; sections[j].match(</unit>) !== </unit>; j++) {
-								if (sections[i].match(<unitname>) === "<unitname>") {
-									//the name of the unit, not the type, in this i have to figure out the correct type, maybe check sections[i+2] === </unit> for instruction types, but then what for others?
-								} else if (sections[i].match(<unitinstructions>) === "<unitinstructions>") {
-									// a blanket text field? instruction units only have this and previous tag
-								} else if (sections[i].match(<deliveryparams>) === "<deliveryparams>") {
-									//has child nodes in xml so making this loop just in case
-									for (k = j; sections[k].match() !== ; k++) {
-										if (sections[i].match() === "") {
+				// 	document.getElementById('moduleName').value = "Sample loading text5";//not here
+
+				// 	for(i = 0; i < sections.length - 1; i++){
+				// 		//loop for sending each line to a specific place
+				// 		// was thinking if we do match the correct part, make a new var that splices the ends off, if needed, and then call var[0]
+
+				// 		sections[i] = sections[i].trim();
+				// 		console.log(sections[i]);
+				// 		if (sections[i].match(/<lessonname>/) === "<lessonname>") {//go through each line and place it correctly
+				// 			//Name your FaCT Module:
+				// 			document.getElementById('moduleName').value  = sections[i]; //this should be how to set it 
+				// 		} else if (sections[i].match(/<stimulusfile>/) === "<stimulusfile>") {
+				// 			//
+				// 		} else if (sections[i].match(/<clustermodel>/) === "<clustermodel>") {
+				// 			//
+				// 		} else if (sections[i].match(/<clustersize>/) === "<clustersize>") {
+				// 			//
+				// 		} else if (sections[i].match(/<shuffleclusters>/) === "<shuffleclusters>") {
+				// 			//
+				// 		} else if (sections[i].match(/<lfparameter>/) === "<lfparameter>") {
+				// 			//
+				// 		} else if (sections[i].match(/<isModeled>/) === "<isModeled>") {
+				// 			//
+				// 		} else if (sections[i].match(/<timeoutInSeconds>/) === "<timeoutInSeconds>") {
+				// 			//
+				// 		} else if (sections[i].match(/<experimentTarget>/) === "<experimentTarget>") {
+				// 			//
+				// 		} else if (sections[i].match(/<cluster>/) === "<cluster>") {
+				// 			//the cards
+				// 			for(j = i; sections[j].match(/<\/cluster>/) !== "</cluster>"; j++) { //continues through the array doing things for this specific card
+				// 				if (sections[i].match(/<display>/) === "<display>") {
+				// 					// card question
+				// 					i++;
+				// 				} else if (sections[i].match(/<response>/) === "<response>") {
+				// 					// correct response
+				// 					i++;
+				// 				} else if (sections[i].match(/<falseResponse>/) === "<falseResponse>") {
+				// 					// incorrect response
+				// 					i++;
+				// 				} else {
+				// 					i++; //in case of a blank/useless line?
+				// 				}
+				// 			}
+				// 		} else if (sections[i].match(/<unit>/) === "<unit>") {
+				// 				//the different units
+				// 				//click the add unit button at this point then have the following loop work with the added units
+				// 			for(j = i; sections[j].match(/<\/unit>/) !== "</unit>"; j++) {
+				// 				if (sections[i].match(/<unitname>/) === "<unitname>") {
+				// 					//the name of the unit, not the type, in this i have to figure out the correct type, maybe check sections[i+2] === </unit> for instruction types, but then what for others?
+				// 				} else if (sections[i].match(/<unitinstructions>/) === "<unitinstructions>") {
+				// 					// a blanket text field? instruction units only have this and previous tag
+				// 				} else if (sections[i].match(/<deliveryparams>/) === "<deliveryparams>") {
+				// 					//has child nodes in xml so making this loop just in case
+				// 					for (k = j; sections[k].match() !== ""; k++) {
+				// 						if (sections[i].match() === "") {
 											
-										} else if (sections[i].match() === "") {
+				// 						} else if (sections[i].match() === "") {
 											
-										} else {
-											i++;
-											j++;
-										}
-									}
-								} else if (sections[i].match(<buttontrial>) === "<buttontrial>") {
+				// 						} else {
+				// 							i++;
+				// 							j++;
+				// 						}
+				// 					}
+				// 				} else if (sections[i].match(/<buttontrial>/) === "<buttontrial>") {
 									
-								} else if (sections[i].match() === "") {
+				// 				} else {
 									
-								} else {
-									
-								}
-							}
-						} else if (sections[i].match() === "") {
-							//
-						} else if (sections[i].match() === "") {
-							//
-						}
-					}
-				} 
-				reader.readAsText(file);
+				// 				}
+				// 			}
+				// 		} else if (sections[i].match(/hi/) === "hi") {
+				// 			//
+				// 		}
+						
+				// 	}
+				// }
+				//reader.readAsText(file);
 
 
 				/*//start of the xml parsing, may get rid of this since txt parser
@@ -115,52 +136,46 @@ if (Meteor.isClient) {
 			} else {
 				alert("Failed to load file. Reclick it if you did pick a file.");
 			}
-		}
+		} /**/
 
-		var loadedFile = document.getElementById('realLoad');
 		
-		document.getElementById('realLoad').addEventListener('click', readingFiles);
-		loadedFile.click();
-		//need to end the Listener, it adds 1 more each time i click it seems
-		//also, it runs the listen event before i can pick a file, making me pick it twice
-		document.getElementById('realLoad').removeEventListener('click', readingFiles);
 
-		var correctFileType = false;
+		// var correctFileType = false;
 		//correctFileType = checkFileExtension(loadedFile);
 		// verify uploaded file is an xml/txt file in xml format
 
 		//alert(loadedFile);
-		console.log("clicked funcLoad");
-	} /*this is called by load when clicked*/
+		//console.log("clicked funcLoad");
+		//} /*this is called by load when clicked*/
 
-	/*function checkFileExtension(file) {
-		var loadedFile = file;
-		var extension = "";
-		var isValid = false;
+		/*function checkFileExtension(file) {
+			var loadedFile = file;
+			var extension = "";
+			var isValid = false;
 
-		if (loadedFile.value.lastIndexOf(".") > 0) {
-			extension = loadedFile.value.substring(loadedFile.value.lastIndexOf(".") + 1, loadedFile.value.length);
-			alert("extension is " + extension);
-		}
+			if (loadedFile.value.lastIndexOf(".") > 0) {
+				extension = loadedFile.value.substring(loadedFile.value.lastIndexOf(".") + 1, loadedFile.value.length);
+				alert("extension is " + extension);
+			}
 
-		if (extension === "xml" || extension === "txt") {
-			isValid = true;
-		} else {
-			alert("The file you submitted was not an XML");
-			isValid = false;
-		}
+			if (extension === "xml" || extension === "txt") {
+				isValid = true;
+			} else {
+				alert("The file you submitted was not an XML");
+				isValid = false;
+			}
 
-		return isValid;
-	} /* extension checker */
+			return isValid;
+		} /* extension checker */
+	}
 
 
+		// THE SAVE XML CODE
+		// Try to make a single file for this to be loaded by load
 
-	// THE SAVE XML CODE
-	// Try to make a single file for this to be loaded by load
-
-	function saveXML() { // called by save when clicked
-		alert("Save not implemented yet");
-	} /* called by save when clicked */
+		/*function saveXML() { // called by save when clicked
+			alert("Save not implemented yet");
+		} /* called by save when clicked */
   });
 
   Template.hello.helpers({
