@@ -31,7 +31,14 @@
 
 <template name="load">
   <input type="file" accept=".xml" id="realLoad" style="display:none" class="load2" />
-  <a href="#" class="btn btn-primary load1">   L O A D   </a>
+  <!-- for use with the script below to call load2 template <a href="#" onclick="loadXML()" class="btn btn-primary">   L O A D   </a>-->
+  <a href="#" class="btn btn-primary load1">   L O A D   </a>-
+  <!--<script type="text/javascript"> 
+    function loadXML(){
+      var loadedFile = document.getElementById('realLoad');
+      loadedFile.click();
+    }
+  </script>-->
 </template>
 
 

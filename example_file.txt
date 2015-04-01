@@ -1,0 +1,218 @@
+TDF 
+<tutor>
+ <setspec>
+  <lessonname>Learn Swahili!</lessonname>
+  <stimulusfile>Swahilistims.xml</stimulusfile>
+  <clustermodel></clustermodel>
+  <clustersize>1</clustersize>
+  <shuffleclusters>0-16</shuffleclusters>
+  <lfparameter>0.80</lfparameter>
+  <isModeled>false</isModeled>
+  <timeoutInSeconds>15</timeoutInSeconds>
+  <experimentTarget>swa</experimentTarget>
+ </setspec> 
+
+STIM
+<setspec>
+ <clusters>
+  <cluster>
+   <display>Asante</display>
+   <response>Thank You</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>chakula</display>
+   <response>food</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Thank You</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>Habari</display>
+   <response>Hello</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>manjano</display>
+   <response>yellow</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>leo</display>
+   <response>today</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>tano</display>
+   <response>five</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>kuku</display>
+   <response>chicken</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>samaki</display>
+   <response>fish</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>Kwaheri</display>
+   <response>Goodbye</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>mamba</display>
+   <response>alligator</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>tembo</display>
+   <response>elephant</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Bathroom</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>bafu</display>
+   <response>bathroom</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>ukuta</display>
+   <response>wall</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>Mimi</display>
+   <response>I</response>
+   <response>i</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>rafiki</display>
+   <response>friend</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>viatu</display>
+   <response>shoes</response>
+   <response>shoe</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+  <cluster>
+   <display>babu</display>
+   <response>grandfather</response>
+   <falseResponse>Drink</falseResponse>
+   <falseResponse>Elephant</falseResponse>
+   <falseResponse>Food</falseResponse>
+   <falseResponse>Umbrella</falseResponse>
+  </cluster>
+ </clusters>
+</setspec>
+
+back to TDF
+ <unit>
+  <unitname>Instructions</unitname>
+  <unitinstructions>Welcome to a basic lesson on Swahili!</unitinstructions>
+ </unit>
+ <unit>
+  <unitname>Swahili Training</unitname>
+  <unitinstructions><![CDATA[ Enter answer in the prompt box below each question.  Please attempt to answer all questions presented.]]></unitinstructions>
+  <deliveryparams>
+   <purestudy>10000</purestudy>
+   <skipstudy>false</skipstudy>
+   <reviewstudy>10000</reviewstudy>
+   <correctprompt>500</correctprompt>
+  </deliveryparams>
+  <buttontrial>true</buttontrial>
+  <assessmentsession>
+   <conditiontemplatesbygroup>
+    <groupnames>A</groupnames>
+    <clustersrepeated>1</clustersrepeated>
+    <templatesrepeated>17</templatesrepeated>
+    <group>0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0</group>
+   </conditiontemplatesbygroup>
+   <initialpositions>A_1 A_2 A_3 A_4 A_5 A_6 A_7 A_8 A_9 A_10 A_11 A_12 A_13 A_14 A_15 A_16 A_17</initialpositions>
+   <randomizegroups>false</randomizegroups>
+   <clusterlist>0-16</clusterlist>
+   <assignrandomclusters>false</assignrandomclusters>
+   <permutefinalresult>0-16</permutefinalresult>
+  </assessmentsession>
+ </unit>
+ <unit>
+  <unitname>Swahili Post-test</unitname>
+  <unitinstructions>Let's see if you can remember the answers!</unitinstructions>
+   <deliveryparams>
+    <purestudy>10000</purestudy>
+    <skipstudy>false</skipstudy>
+    <reviewstudy>10000</reviewstudy>
+    <correctprompt>500</correctprompt>
+   </deliveryparams>
+   <buttontrial>false</buttontrial> <!-- fill in the blank -->
+   <assessmentsession>
+    <conditiontemplatesbygroup>
+     <groupnames>A</groupnames>
+     <clustersrepeated>1</clustersrepeated>
+     <templatesrepeated>17</templatesrepeated>
+     <group>0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0 0,f,d,0</group>
+    </conditiontemplatesbygroup>
+    <initialpositions>A_1 A_2 A_3 A_4 A_5 A_6 A_7 A_8 A_9 A_10 A_11 A_12 A_13 A_14 A_15 A_16 A_17</initialpositions>
+    <randomizegroups>false</randomizegroups>
+    <clusterlist>0-16</clusterlist>
+    <assignrandomclusters>false</assignrandomclusters>
+    <permutefinalresult>0-16</permutefinalresult>
+   </assessmentsession>
+ </unit>
+ <unit>
+  <unitname>Final</unitname>
+  <unitinstructions>You have completed all the units that are available</unitinstructions>
+ </unit>
+</tutor>
+
+

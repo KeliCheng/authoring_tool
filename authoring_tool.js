@@ -11,6 +11,11 @@ if (Meteor.isClient) {
 	
 	// THE LOAD XML CODE
 
+	// 'click .load2': function(event, template){
+	// 	document.getElementById('moduleName').value = "Sample loading text6";
+	// }
+
+
 	'click .load1': function(event, template){
 		console.log("clicked load")
 	//function loadXML() { // called by load when load clicked
@@ -38,14 +43,12 @@ if (Meteor.isClient) {
 				//reader.onload = function(e) { //not calling this? why? why? please call it. there is nothing wrong, this is how this is supposed to be called
 					console.log("below");
 					document.getElementById('moduleName').value = "Sample loading text4";//not here
-				} //added this to test without the commented code from below, remove when uncommenting
+				} //added this to test reader.onload without the commented code from below, remove when uncommenting
 				// 	var contents = e.target.results;
 				// 	var ct = reader.result;
 				// 	var sections = ct.split('\n');
 
 				// 	alert("got the file.\n" + "name: " + file.name + "\n" + "fileType: " + file.type);
-
-				// 	document.getElementById('moduleName').value = "Sample loading text5";//not here
 
 				// 	for(i = 0; i < sections.length - 1; i++){
 				// 		//loop for sending each line to a specific place
@@ -54,7 +57,9 @@ if (Meteor.isClient) {
 				// 		sections[i] = sections[i].trim();
 				// 		console.log(sections[i]);
 				// 		if (sections[i].match(/<lessonname>/) === "<lessonname>") {//go through each line and place it correctly
-				// 			//Name your FaCT Module:
+				// 			document.getElementById('moduleName').value = "Sample loading text5";//not here
+
+				//			//Name your FaCT Module:
 				// 			document.getElementById('moduleName').value  = sections[i]; //this should be how to set it 
 				// 		} else if (sections[i].match(/<stimulusfile>/) === "<stimulusfile>") {
 				// 			//
@@ -120,6 +125,8 @@ if (Meteor.isClient) {
 						
 				// 	}
 				// }
+
+
 				//reader.readAsText(file);
 
 
