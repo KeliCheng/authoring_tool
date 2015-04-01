@@ -23,8 +23,8 @@
 <form id="masterForm">
   {{> hello}}
 
-  <a href="#" class="btn btn-primary">G E N E R A T E   X M L</a>
-	<input type="submit" value="Submit">
+  <input type="submit" href="#" class="btn btn-primary">G E N E R A T E   X M L</input>
+	<!--<input type="submit" value="Submit">-->
 </form>
 </body>
 <!--END BODY-->
@@ -208,8 +208,8 @@
 
 
 				{{#each versionList}}	
-      					<td><input type="text" name="cardPrompt{{cardNum}}"></td>
-      					<td><input type="text" name="cardResponse{{cardNum}}"></td>
+      					<td><input type="text" name="cardPrompt{{versionNum}}"></td>
+      					<td><input type="text" name="cardResponse{{versionNum}}"></td>
 				{{/each}}
 			</tr>
 		{{/each}}
