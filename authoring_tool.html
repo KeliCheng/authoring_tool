@@ -52,7 +52,7 @@
   <input type="text" id="moduleName" name="modulename"></center><br>
 </div>
 	<br>
-	<form id="form1" class="form-horizontal">
+	<div class="form-horizontal form1">
   <fieldset>
     <legend>Cards</legend>
     <div class="jumbotron">
@@ -66,7 +66,7 @@
      <div class="form-group">
       <label>Levenshtien Proportion:</label>
       <select class="form-control" name="ifparameter">
-          <option>0.1</option>
+          <option value="0">0.1</option>
           <option>0.2</option>
           <option>0.3</option>
           <option>0.4</option>
@@ -96,13 +96,13 @@
       <div class="col-lg-10">
         <div class="radio" name="media">
           <label>
-            <input type="radio" value="mms" checked="">
+            <input type="radio" value="stemType" checked="">
             Multimedia
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" value="txt">
+            <input type="radio" value="stemType">
             Text
           </label>
         </div>
@@ -125,7 +125,7 @@
 </div>
 
   </fieldset>
-</form>
+</div>
 
 <br>
 
@@ -201,7 +201,7 @@
       					<td>
 						<form action="demo_form.asp">
 	  						<input type="file" name="cardPromptPic{{cardNum}}" accept="image/*">
-						</form>
+						</div>
 					</td>
       					<td><input type="text" name="cardResponse{{cardNum}}"></td>
 				{{/each}}-->
@@ -223,7 +223,7 @@
 
 
 
-<form id="cardTimingForm" class="form-horizontal">
+<div class="form-horizontal cardTimingForm">
   <fieldset>
     <legend>Card Timing</legend>
     <div class="jumbotron">
@@ -255,7 +255,7 @@
     </div>
 </div>
   </fieldset>
-</form>
+</div>
 
 
 
@@ -293,7 +293,7 @@
   </div>
 </div>
 
-	<form class="form-horizontal">
+	<div class="form-horizontal">
   <div class="jumbotron">
   <div class="form-group">
 	{{#each unitList}}
@@ -306,7 +306,7 @@
 	<br>
 	{{#if instruction instructions }}
 		<!--{{> unitOpsInstruction}}-->
-		<form id="unitForm{{num}}" class="form-horizontal">
+		<div class="form-horizontal unitForm{{num}}">
   <fieldset>
     <legend>Introduction</legend>
     <div class="jumbotron">
@@ -323,11 +323,11 @@
     </div>
 </div>
   </fieldset>
-</form>
+</div>
 	{{/if}}
 	{{#if assessment assessments }}
 		<!--{{> unitOpsAssessment}}-->
-    <form id="unitForm{{num}}" class="form-horizontal">
+    <div id="unitForm{{num}}" class="form-horizontal">
     <fieldset>
       <legend>Assessment</legend>
       <div class="jumbotron">
@@ -360,11 +360,11 @@
     </div>
   </div>
   </fieldset>
-</form>
+</div>
 	{{/if}}
 	{{#if learningsession learningsessions }}
 		<!--{{> unitOpsLearningSession}}-->
-<form id="unitForm{{num}}" class="form-horizontal">
+<div class="form-horizontal unitForm{{num}}">
   <fieldset>
     <legend>Learning Session</legend>
     <div class="jumbotron">
@@ -398,7 +398,7 @@
     </div>
 </div>
 </fieldset>
-</form>
+</div>
 	{{/if}}
 	{{/each}}
 	   </div>
@@ -407,12 +407,12 @@
 	<button type="button" class="addUnit btn btn-primary btn -lg"> + A D D </button></div>
   <br>
 </div>
-</form>
+</div>
 </template>
 
 
 <template name="unitOpsInstruction">
-<form id="instructionsForm1" class="form-horizontal">
+<div class="form-horizontal instructionsForm1">
   <fieldset>
     <legend>Introduction</legend>
     <div class="jumbotron">
@@ -429,12 +429,12 @@
     </div>
 </div>
   </fieldset>
-</form>
+</div>
 </template>
 
 <template name="unitOpsAssessment">
   <br>
-    <form id="assessmentForm1" class="form-horizontal">
+    <div class="form-horizontal assessmentForm1">
     <fieldset>
       <legend>Assessment</legend>
       <div class="jumbotron">
@@ -449,7 +449,7 @@
       <div class="form-group">
       <label>Number of Templates:</label>
         <select name="numbertemplates">
-        <option>0</option>
+        <option value="0" selected>0</option>
         <option>1</option>
         <option>2</option>
         <option>3</option>
@@ -467,13 +467,13 @@
     </div>
   </div>
   </fieldset>
-</form>
+</div>
 
 </template>
 
 <template name="unitOpsLearningSession">
 <br>
-<form id="learningsessionForm1" class="form-horizontal">
+<div class="form-horizontal learningsessionForm1">
   <fieldset>
     <legend>Learning Session</legend>
     <div class="jumbotron">
@@ -507,6 +507,6 @@
     </div>
 </div>
 </fieldset>
-</form>
+</div>
 </template>
 <!--END UNITS TEMPLATES-->

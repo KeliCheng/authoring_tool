@@ -276,11 +276,17 @@ if (Meteor.isClient) {
     },
     'click .reset1': function (event, template){
       //event.defaultPrevented();
-      var classString = $(event.target).attr("class").split(" ")[4];
+
+      var classString ='.' + $(event.target).attr("class").split(" ")[4];
       console.log(classString);
       var x = confirm("You are about to reset the form");
       if(x == true){
-        document.getElementById(classString).reset();
+        $(classString).find('input[type="text"]').val('');
+        $(classString).find('input[type="textarea"]').val('');
+        $(classString).find('input[type="checkbox"]').prop('checked',false);
+		$(classString).find('input[type="number"]').val('0');
+		$(classString).find('input[type="radio"]').prop('checked',false);
+		//$(classString).find('option[value="0"]').prop('selected',true);
       }else{
       //do nothing
       }
@@ -309,15 +315,24 @@ if (Meteor.isClient) {
     },
     'click .reset1': function (event, template){
       //event.defaultPrevented();
-      var classString = $(event.target).attr("class").split(" ")[4];
+
+      var classString ='.' + $(event.target).attr("class").split(" ")[4];
       console.log(classString);
       var x = confirm("You are about to reset the form");
       if(x == true){
-        document.getElementById(classString).reset();
+        $(classString).find('input[type="text"]').val('');
+        $(classString).find('input[type="textarea"]').val('');
+        $(classString).find('input[type="checkbox"]').prop('checked',false);
+		$(classString).find('input[type="number"]').val('0');
+		$(classString).find('input[type="radio"]').prop('checked',false);
+		
       }else{
       //do nothing
       }
       return false;
+    },
+    'click .radio': function(event, tmplate){
+    	event.prop(checked,!checked)
     }
 
   });
