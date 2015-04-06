@@ -243,6 +243,13 @@ if (Meteor.isClient) {
   });
 
   Template.hello.events({
+	'click .demo': function (event){
+      if (event.which == 1) {
+          $("#message").css({
+            }).show();
+          $("#message").html('<i>This is a tooltip.</i>');
+   }
+    },
     'change .unitType': function (event) {
       var v = $(event.target).val();
 	var attrclass = $(event.target).attr("class").split('m')[1];
