@@ -2,9 +2,9 @@ if (Meteor.isClient) {
 	unitList = new Mongo.Collection('unitList');
   	cardList = new Mongo.Collection('cardList');
   	versionList = new Mongo.Collection('versionList');
-	Session.setDefault('numUnitsInt', 0);
-	Session.setDefault('numCards', 0);
-	Session.setDefault('numVersions', 0);
+	Session.setDefault('numUnitsInt', 1);
+	Session.setDefault('numCards', 1);
+	Session.setDefault('numVersions', 1);
 	
 
   Template.load.events ({
@@ -308,6 +308,16 @@ if (Meteor.isClient) {
       console.log("add cardVersion button clicked, num versions: " + Session.get('numVersions'));
 	Session.set('numVersions', Session.get('numVersions') + 1);
 	versionList.insert({versionNum:Session.get('numVersions')});
+    },
+    'click .subCard': function(event) {
+      console.log("sub card button clicked, num cards: " + Session.get('numCards'));
+	Session.set('numCards', Session.get('numCards') - 1);
+	cardList.remove({cardNum:Session.get('numCards')});
+    },
+    'click .subVersion': function(event) {
+      console.log("sub cardVersion button clicked, num versions: " + Session.get('numVersions'));
+	Session.set('numVersions', Session.get('numVersions') - 1);
+	versionList.remove({versionNum:Session.get('numVersions')});
     }
   });
 
@@ -347,15 +357,23 @@ if (Meteor.isClient) {
 
 
 if (Meteor.isServer) {
-  unitList = new Mongo.Collection('unitList');
-  cardList = new Mongo.Collection('cardList');
-  versionList = new Mongo.Collection('versionList');
+  	unitList = new Mongo.Collection('unitList');
+  	cardList = new Mongo.Collection('cardList');
+  	versionList = new Mongo.Collection('versionList');
   //Session.setDefault('numUnitsInt', 0);
   Meteor.startup(function() {
     // code to run on server at startup
 	unitList.remove({});
+	unitList.insert({num:1,
+				instructions:false,
+				learningsessions:false,
+				assessments:false});
 	cardList.remove({});
+	//Session.set('numCards', Session.get('numCards') + 1);
+	cardList.insert({cardNum:1});
 	versionList.remove({});
+	//Session.set('numVersions', Session.get('numVersions') + 1);
+	versionList.insert({versionNum:1});
    
 
   });
