@@ -312,27 +312,46 @@ if (Meteor.isClient) {
 	versionList.insert({versionNum:Session.get('numVersions')});
     },
     'click .subCard': function(event) {
-      console.log("sub card button clicked, num cards: " + Session.get('numCards'));
-	Session.set('numCards', Session.get('numCards') - 1);
-	var x = cardList.findOne({cardNum:Session.get('numCards')});
-	cardList.remove({_id: x._id});
+	if (Session.get('numCards') > 1) {
+      		console.log("sub card button clicked, num cards: " + Session.get('numCards'));
+	
+		var x = cardList.findOne({cardNum:Session.get('numCards')});
+		cardList.remove({_id: x._id});
+		Session.set('numCards', Session.get('numCards') - 1);
+	}
     },
     'click .subVersion': function(event) {
-      console.log("sub cardVersion button clicked, num versions: " + Session.get('numVersions'));
-	Session.set('numVersions', Session.get('numVersions') - 1);
-	var x = versionList.findOne({versionNum:Session.get('numVersions')});
-	versionList.remove({_id: x._id});
+	if (Session.get('numVersions') > 1) {
+      		console.log("sub cardVersion button clicked, num versions: " + Session.get('numVersions'));
+
+		var x = versionList.findOne({versionNum:Session.get('numVersions')});	
+		versionList.remove({_id: x._id});
+		Session.set('numVersions', Session.get('numVersions') - 1);
+	}
     }
   });
 
   Template.Units.events({
     'click .addUnit': function(event) {
-      console.log("add unit button clicked");
+      	console.log("add unit button clicked");
 	Session.set('numUnitsInt', Session.get('numUnitsInt') + 1);
 	unitList.insert({num:Session.get('numUnitsInt'),
-				instructions:false,
+				instructions:true,
 				learningsessions:false,
 				assessments:false});
+    },
+    'click .deleteUnit': function(event) {
+	if (Session.get('numUnitsInt') > 1) {
+	      	console.log("sub unit button clicked");
+	      	console.log($(event.target).attr("class").split("unitNum")[1] );
+		var x = unitList.findOne({num: Session.get('numUnitsInt')});
+		try {		
+			unitList.remove({_id: x._id});
+		} catch {
+			console.log(e.printStackTrace);
+		}
+		Session.set('numUnitsInt', Session.get('numUnitsInt') - 1);
+	}
     },
     'click .reset1': function (event, template){
       //event.defaultPrevented();
