@@ -2,7 +2,7 @@ if (Meteor.isClient) {
 	unitList = new Mongo.Collection('unitList');
   	cardList = new Mongo.Collection('cardList');
   	versionList = new Mongo.Collection('versionList');
-	Session.setDefault('numUnitsInt', 0);
+	Session.setDefault('numUnitsInt', 1);
 	Session.setDefault('numCards', 1);
 	Session.setDefault('numVersions', 1);
 	
@@ -195,10 +195,10 @@ if (Meteor.isClient) {
   });
 
   Template.Units.events({
-'click .dropdown-toggle': function (e) {
-    e.defaultPrevented();
-    $(e.target).find('.dropdown-menu').toggle();
-    }
+//'click .dropdown-toggle': function (e) {
+  //  e.defaultPrevented();
+  //  $(e.target).find('.dropdown-menu').toggle();
+//    }
 });
 
   Template.Units.helpers({
@@ -250,10 +250,12 @@ if (Meteor.isClient) {
           $("#message").html('<i>This is a tooltip.</i>');
    }
     },
-    'change .unitType': function (event) {
-      var v = $(event.target).val();
+    'click .unitType': function (event) {
+	console.log("unitType changed");
+      var v = $(event.target).id();
+	console.log(v);
+      console.log($(event.target).attr("class"));
 	var attrclass = $(event.target).attr("class").split('m')[1];
-      console.log(attrclass);
       var x = unitList.findOne({num: parseInt(attrclass)});
 	
       if (v == "instruction") {
@@ -365,7 +367,7 @@ if (Meteor.isServer) {
     // code to run on server at startup
 	unitList.remove({});
 	unitList.insert({num:1,
-				instructions:false,
+				instructions:true,
 				learningsessions:false,
 				assessments:false});
 	cardList.remove({});

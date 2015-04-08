@@ -188,6 +188,9 @@
 
 <button type="button" class="addCard btn btn-primary btn -lg"> + C A R D</button>
 <button type="button" class="addVersion btn btn-primary btn -lg"> + V E R S I O N </button>
+
+<button type="button" class="subCard btn btn-primary btn -lg"> - C A R D</button>
+<button type="button" class="subVersion btn btn-primary btn -lg"> - V E R S I O N </button>
 <!--END CARDS-->
 
 
@@ -247,23 +250,23 @@
       Select Unit Type <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-      <li class="active"><a aria-expanded="true" href="#dropdown1" data-toggle="tab">Instruction</a></li>
+      <li class="active"><a class="unitType num{{num}}" id="instruction" aria-expanded="true" href="#dropdown1" data-toggle="tab">Instruction</a></li>
       <li class="divider"></li>
-      <li class=""><a aria-expanded="false" href="#dropdown2" data-toggle="tab">Assessment</a></li>
+      <li class=""><a class="unitType num{{num}}" id="learningsession" aria-expanded="false" href="#dropdown2" data-toggle="tab">Assessment</a></li>
       <li class="divider"></li>
-      <li class=""><a aria-expanded="false" href="#dropdown3" data-toggle="tab">Learning Session</a></li>
+      <li class=""><a  class="unitType num{{num}}" id="assessment" aria-expanded="false" href="#dropdown3" data-toggle="tab">Learning Session</a></li>
     </ul>
   </li>
 </ul>
 <div id="myTabContent" class="tab-content card">
   <div class="tab-pane fade" id="dropdown1">
-    <p>{{> unitOpsInstruction}}</p>
+    <!--<p>{{> unitOpsInstruction}}</p>-->
   </div>
   <div class="tab-pane fade active in" id="dropdown2">
-    <p>{{> unitOpsAssessment}}</p>
+    <!--<p>{{> unitOpsAssessment}}</p>-->
   </div>
   <div class="tab-pane fade" id="dropdown3">
-    <p>{{> unitOpsLearningSession}}</p>
+    <!--<p>{{> unitOpsLearningSession}}</p>-->
   </div>
 </div>
 	{{#if instruction instructions }}
@@ -372,7 +375,7 @@
 </div>
 </template>
 
-
+<!--
 <template name="unitOpsInstruction">
 <div class="form-horizontal instructionsForm1">
   <fieldset>
@@ -470,5 +473,5 @@
 </div>
 </fieldset>
 </div>
-</template>
+</template>-->
 <!--END UNITS TEMPLATES-->
