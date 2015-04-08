@@ -252,9 +252,9 @@
     <ul class="dropdown-menu">
       <li class="active"><a class="unitType num{{num}}" id="instruction" aria-expanded="true" href="#dropdown1" data-toggle="tab">Instruction</a></li>
       <li class="divider"></li>
-      <li class=""><a class="unitType num{{num}}" id="learningsession" aria-expanded="false" href="#dropdown2" data-toggle="tab">Assessment</a></li>
+      <li class=""><a class="unitType num{{num}}" id="assessment" aria-expanded="false" href="#dropdown2" data-toggle="tab">Assessment</a></li>
       <li class="divider"></li>
-      <li class=""><a  class="unitType num{{num}}" id="assessment" aria-expanded="false" href="#dropdown3" data-toggle="tab">Learning Session</a></li>
+      <li class=""><a  class="unitType num{{num}}" id="learningsession" aria-expanded="false" href="#dropdown3" data-toggle="tab">Learning Session</a></li>
     </ul>
   </li>
 </ul>

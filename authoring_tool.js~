@@ -252,7 +252,7 @@ if (Meteor.isClient) {
     },
     'click .unitType': function (event) {
 	console.log("unitType changed");
-      var v = $(event.target).id();
+      var v = $(event.target).attr("id");
 	console.log(v);
       console.log($(event.target).attr("class"));
 	var attrclass = $(event.target).attr("class").split('m')[1];
@@ -314,12 +314,14 @@ if (Meteor.isClient) {
     'click .subCard': function(event) {
       console.log("sub card button clicked, num cards: " + Session.get('numCards'));
 	Session.set('numCards', Session.get('numCards') - 1);
-	cardList.remove({cardNum:Session.get('numCards')});
+	var x = cardList.findOne({cardNum:Session.get('numCards')});
+	cardList.remove({_id: x._id});
     },
     'click .subVersion': function(event) {
       console.log("sub cardVersion button clicked, num versions: " + Session.get('numVersions'));
 	Session.set('numVersions', Session.get('numVersions') - 1);
-	versionList.remove({versionNum:Session.get('numVersions')});
+	var x = versionList.findOne({versionNum:Session.get('numVersions')});
+	versionList.remove({_id: x._id});
     }
   });
 

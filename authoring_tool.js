@@ -313,13 +313,17 @@ if (Meteor.isClient) {
     },
     'click .subCard': function(event) {
       console.log("sub card button clicked, num cards: " + Session.get('numCards'));
+	
+	var x = cardList.findOne({cardNum:Session.get('numCards')});
+	cardList.remove({_id: x._id});
 	Session.set('numCards', Session.get('numCards') - 1);
-	cardList.remove({cardNum:Session.get('numCards')});
     },
     'click .subVersion': function(event) {
       console.log("sub cardVersion button clicked, num versions: " + Session.get('numVersions'));
+
+	var x = versionList.findOne({versionNum:Session.get('numVersions')});
+	versionList.remove({_id: x._id});
 	Session.set('numVersions', Session.get('numVersions') - 1);
-	versionList.remove({versionNum:Session.get('numVersions')});
     }
   });
 
