@@ -230,12 +230,14 @@ if (Meteor.isClient) {
 	});
 
 	Template.hello.events({
-		'click .demo': function (event){
-			if (event.which == 1) {
-				$("#message").css({}).show();
-				$("#message").html('<i>This is a tooltip.</i>');
-			}
-		},
+		// 'click .demo': function (event){
+		// 	// if (document.getElementById("message").style.visibility == "hidden"){
+		// 	// 	document.getElementById("message").style.visibility = "visible";
+		// 	// }else{
+		// 	// 	document.getElementById("message").style.visibility = "hidden";
+		// 	// }
+		// 	return false; //to avoid click on tooltips; 
+		// },
 		'click .unitType': function (event) {
 			//console.log("unitType changed");
 			var v = $(event.target).attr("id");
