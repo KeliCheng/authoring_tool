@@ -1,17 +1,6 @@
 
 <head>
   <title>MoFaCTS | Content Builder</title>
-  <script>
-function validateForm() {
-    var x = document.forms["masterForm"]["modulename"].value;
-    console.log("hurgheoghuerghuro");
-    // if (x == null || x == "") {
-    //     alert("Name of versions is blank.");
-    //     return false;
-    // }
-
-}
-</script>
 </head>
 
 <!--BEGIN BODY-->
@@ -31,8 +20,8 @@ function validateForm() {
   	</center>
 
 
-	<form name="masterForm" id="masterForm" method="post">
-    <button type="submit" class="master btn btn-primary">Submit</button>
+	<form name="masterForm" id="masterForm">
+    <button type="submit" class="master btn btn-primary">Submit for validation test</button>
 		{{> hello}}
 		<input type="submit" value="Submit">
 	</form>
