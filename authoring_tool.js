@@ -8,6 +8,24 @@ if (Meteor.isClient) {
 	Session.setDefault('numCards', 1);
 	Session.setDefault('numVersions', 1);
 
+	Template.body.events({
+  'click .master': function (event) {
+  	// event.preventDefault();
+    // This function is called when the master form is submitted
+	var x = document.forms["masterForm"]["modulename"].value;
+	var y = document.getElementById("lessonname").value;
+	var z = document.getElementsByName("nameofversion")[0].value
+
+    if (x == null || x == "") {
+        confirm("Elements are missing, are you sure to submit?");
+        document.getElementById("moduleName").focus();
+        document.getElementById("lessonname").focus();
+        return false;
+    }
+  }
+});
+
+
 	Template.load.events ({
 		// THE LOAD XML CODE
 		// 'click .load2': function(event, template){
