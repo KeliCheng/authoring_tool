@@ -49,9 +49,11 @@
       <div class="card">
       <ul class="pager">
         <li class="next"><a data-toggle="tooltip" data-placement="bottom" title="
-        *Levenshtien Proportion is the
-        *Shuffle Instruction example:
-        *Swap Instruction example:
+        *Levenshtien Proportion = ifparameter
+        *Shuffle Instruction example: 0-16 
+           shuffles among cards 0 to 16 
+        *Swap Instruction example: 0-5, 6-10
+            swap groups 0-5 and 6-10
         "> ? </a></li>
       </ul>
       <script type="text/javascript">
@@ -87,7 +89,7 @@
 					<label>Shuffle Instruction
 					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="shuffleclusters"></label>
 					<label>Swap Instrcutions
-					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="shuffleclusters"></label>
+					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="shuffleclusters"></label> 
 				</div>
 
 				<div class="form-group">
@@ -158,6 +160,10 @@
     			<ul class="pager">
             <li class="next"><a data-toggle="tooltip" data-placement="bottom" title="
               Card timing intervals in second.
+              Stay Alone Interval = purestudy
+              Intercard Interval = reviewstudy? 
+              Correct Feedback Interval = correctprompt
+
               "> ? </a></li>
           </ul>
     			<div>
@@ -165,7 +171,7 @@
       					<label>Stay Alone Interval
         				<input name="purestudy" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
          				<label>Drill Timeout
-        				<input name="timeout" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
+        				<input name="timeoutInSeconds" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
     				</div>
     				<div class="form-group">
       					<label>Intercard Interval
@@ -273,10 +279,47 @@
         					<label>Unit Instruction</label>
         					<textarea style="width:80%;font-size:14pt;" rows="2" placeholder="....." name="unitinstructions"></textarea>
       					</div>
+              <div class="form-group">
+                  <label>Todo: Group Name</label>
+              </div>
+              <div class="form-group">
+                  <label>Todo: Cluster Repeated</label>
+              </div>
+              <div class="form-group">
+                  <label>Todo: Template Repeated</label>
+              </div>
+              <div class="form-group">
+                  <label>Todo: Group</label>
+              </div>
+              <div class="form-group">
+                  <label>Todo: Initial Positions</label>
+              </div>
      					<div class="form-group">
       						<label>Number of Templates</label>
         					<input style="height:30px;width:250px;font-size:14pt;" name="numbertemplates" type="number" step="1" class="fbfh-number" min="0">
     					</div>
+              <div class="form-group">
+                  <label>Cluster List
+                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="clusterlist1">
+                  ---
+                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="clusterlist2"></label>
+                </div>
+              <div class="form-group">
+                  <div class="checkbox">
+                      <label> <input type="checkbox" name="randomizegroups">Randomize Groups</label>
+                  </div>
+                  <div class="checkbox">
+                      <label> <input type="checkbox" name="assignrandomcluster">Assign Random Clusters</label>
+                  </div>
+                </div>
+              <div class="form-group">
+                  <label>Permute Final Result
+                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="permutefinalresult1">
+                  ---
+                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="permutefinalresult2"></label>
+                </div>
+              
+                <br>
      					<div class="form-group" align="right">
         					<button type="button" class="btn btn-primary -sm reset1 unitForm{{num}}" align="right">Reset</button>
     					</div>
