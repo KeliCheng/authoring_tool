@@ -74,22 +74,22 @@
 
 				<div class="form-group">
 					<label>Name of Cards
-					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="lessonname" id="lessonname" required></label>
+					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="lessonname" id="lessonName" required></label>
       					<label>Name of Versions
       					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="nameofversion" required></label>
     				</div>
 
  				<div class="form-group">
  					<label>Levenshtien Proportion:
-          <input name="ifparameter" style="height:30px;width:250px;font-size:14pt;" value="0" type="number" step="0.01" class="fbfh-number" min="0" required>
+          <input id="lfParameter" name="lfparameter" style="height:30px;width:250px;font-size:14pt;" value="0" type="number" step="0.01" class="fbfh-number" min="0" required>
             </label>
 				</div>
 
 				<div class="form-group">
 					<label>Shuffle Instruction
-					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="shuffleclusters"></label>
+					<input style="height:30px;width:250px;font-size:14pt;" type="text" id="shuffleClusters" name="shuffleclusters"></label>
 					<label>Swap Instrcutions
-					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="shuffleclusters"></label> 
+					<input style="height:30px;width:250px;font-size:14pt;" type="text" id="swapInstructions" name="shuffleclusters"></label> 
 				</div>
 
 				<div class="form-group">
@@ -101,7 +101,7 @@
           						<label> <input type="radio" value="stemType">Text</label>
 						</div>
       						<div class="radio">
-							<label> <input type="radio" value="mms">ButtonTrial (add button order here)</label>
+							<label> <input type="radio" id="buttonTrial" value="mms">ButtonTrial (add button order here)</label>
 						</div>
 					</div>
 				</div>
@@ -140,17 +140,17 @@
 					{{/each}}-->
 
 					{{#each versionList}}	
-      						<td><input type="text" name="cardPrompt{{versionNum}}"></td>
-      						<td><input type="text" name="cardResponse{{versionNum}}"></td>
+      						<td><input type="text" id="cardPrompt{{../cardNum}}-{{versionNum}}" name="cardPrompt{{versionNum}}"></td>
+                  <td><input type="text" id="cardResponse{{../cardNum}}-{{versionNum}}" name="cardResponse{{versionNum}}"></td>
 					{{/each}}
 				</tr>
 			{{/each}}
 		</tbody>
 	</table>
-	<button type="button" class="addCard btn btn-primary btn -lg"> + C A R D </button>
-	<button type="button" class="addVersion btn btn-primary btn -lg"> + V E R S I O N </button>
-	<button type="button" class="subVersion btn btn-primary btn -lg"> - V E R S I O N </button>
-	<button type="button" class="subCard btn btn-primary btn -lg"> - C A R D </button>	
+	<button type="button" id="addCard" class="addCard btn btn-primary btn -lg"> + C A R D </button>
+  <button type="button" id="addCardVersion" class="addVersion btn btn-primary btn -lg"> + V E R S I O N </button>
+  <button type="button" id="subCard" class="subVersion btn btn-primary btn -lg"> - V E R S I O N </button>
+  <button type="button" id="subCardVersion" class="subCard btn btn-primary btn -lg"> - C A R D </button>	
 	<br>
 	<!--END CARDS-->
 
@@ -169,9 +169,9 @@
     			<div>
     				<div class="form-group">
       					<label>Stay Alone Interval
-        				<input name="purestudy" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
+        				<input id="purestudy" name="purestudy" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
          				<label>Drill Timeout
-        				<input name="timeoutInSeconds" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
+        				<input id="drill" name="timeoutInSeconds" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
     				</div>
     				<div class="form-group">
       					<label>Intercard Interval
@@ -209,15 +209,15 @@
 	{{#each unitList}}
     		<ul class="nav nav-tabs">
   			<li class="dropdown active">
-    				<a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown">
+    				<a aria-expanded="false" class="dropdown-toggle" id="unitDrop{{num}}" data-toggle="dropdown">
       					Select Unit Type <span class="caret"></span>
     				</a>
     				<ul class="dropdown-menu">
-      					<li class="active"><a class="unitType num{{num}}" id="instruction" aria-expanded="true" href="#dropdown1" data-toggle="tab">Instruction</a></li>
+      					<li class="active"><a class="unitType num{{num}} instruction" id="instruction{{num}}" aria-expanded="true" href="#dropdown1" data-toggle="tab">Instruction</a></li>
       					<li class="divider"></li>
-      					<li class=""><a class="unitType num{{num}}" id="assessment" aria-expanded="false" href="#dropdown2" data-toggle="tab">Assessment</a></li>
+      					<li class=""><a class="unitType num{{num}} assessment" id="assessment{{num}}" aria-expanded="false" href="#dropdown2" data-toggle="tab">Assessment</a></li>
       					<li class="divider"></li>
-      					<li class=""><a  class="unitType num{{num}}" id="learningsession" aria-expanded="false" href="#dropdown3" data-toggle="tab">Learning Session</a></li>
+      					<li class=""><a  class="unitType num{{num}} learningsession" id="learningsession{{num}}" aria-expanded="false" href="#dropdown3" data-toggle="tab">Learning Session</a></li>
     				</ul>
   			</li>
 		</ul>
@@ -238,7 +238,7 @@
                 </script>
     						<div class="form-group">
       							<label>Unit Name</label>
-        						<input style="height:30px;width:250px;font-size:14pt;" type="text" name="unitname" placeholder="Introduction">
+        						<input style="height:30px;width:250px;font-size:14pt;" type="text" name="unitname" placeholder="Introduction" id="unitname{{num}}">
     						</div>
     						<div class="form-group">
 							<label>Introduction</label>
@@ -273,11 +273,11 @@
 
       					<div class="form-group">
         					<label>Unit Name</label>
-        					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="unitname">
+        					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="unitname" id="unitname{{num}}">
       					</div>
       					<div class="form-group">
         					<label>Unit Instruction</label>
-        					<textarea style="width:80%;font-size:14pt;" rows="2" placeholder="....." name="unitinstructions"></textarea>
+        					<textarea style="width:80%;font-size:14pt;" rows="2" placeholder="....." name="unitinstructions" id="unitinstructions{{num}}"></textarea>
       					</div>
               <div class="form-group">
                   <label>Todo: Group Name</label>
@@ -343,11 +343,11 @@
               </script>
     					<div class="form-group">
       						<label>Unit Name</label>
-      						<input style="height:30px;width:250px;font-size:14pt;" type="text" name="unitname">
+      						<input style="height:30px;width:250px;font-size:14pt;" type="text" name="unitname" id="unitname{{num}}">
     					</div>
     					<div class="form-group">
       						<label>Unit Instruction</label>
-      						<textarea style="width:80%;font-size:14pt;" rows="4" placeholder="..." name="unitinstructions"></textarea>
+      						<textarea style="width:80%;font-size:14pt;" rows="4" placeholder="..." name="unitinstructions" id="unitinstructions{{num}}"></textarea>
     					</div>
     					<div class="form-group">
         					<div class="checkbox">
@@ -372,8 +372,8 @@
 	{{/each}}
   <br> 
   			<div class="form-group">
-				<button type="button" class="addUnit btn btn-primary btn -lg"> + A D D </button>
-      				<button type="button" class="btn btn-primary -sm deleteUnit" align="right"> - R E M O V E </button>
+				<button type="button" id="addUnit" class="addUnit btn btn-primary btn -lg"> + A D D </button>
+      	<button type="button" id="subUnit" class="btn btn-primary -sm deleteUnit" align="right"> - R E M O V E </button>
 			</div>
 	   		</div>
 		</div>

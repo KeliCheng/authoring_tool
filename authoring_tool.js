@@ -27,176 +27,288 @@ if (Meteor.isClient) {
 
 
 	Template.load.events ({
-		// THE LOAD XML CODE
-		// 'click .load2': function(event, template){
-		// 	document.getElementById('moduleName').value = "Sample loading text6";
-		// }
 
 		'click .load1': function(event, template){
-			console.log("clicked load")
-			//function loadXML() { // called by load when load clicked
-	
+
+			event.defaultPrevented; 
+			//console.log("clicked load");
+		
 			var loadedFile = document.getElementById('realLoad');
 			document.getElementById('realLoad').addEventListener('click', readingFiles);
 			loadedFile.click();
 			document.getElementById('realLoad').removeEventListener('click', readingFiles);
-			//need to end the Listener, it adds 1 more each time i click it seems
-			//also, it runs the listen event before i can pick a file, making me pick it twice
-		
-			//document.getElementById('moduleName').value = "Sample loading text1"; //get here
-		
+			//need to end the Listener, it adds 1 more each time load is clicked
+			//also, it runs the listen event before i can pick a file, making me click load twice, clicking it a 3rd time fixes the unit section?
+
 			function readingFiles(evt) {
-				var file = evt.target.files[0];
+				//var file = evt.target.files[0]; //do these 3 lines do the same thing?
+				var file = document.getElementById("realLoad").files[0];
+				//var file = template.find('input type=["file"]').files[0];
 
 				//document.getElementById('moduleName').value = "Sample loading text2";//gets here
 
 				if (file) {
 					var reader = new FileReader();
-				
+					reader.readAsText(file, "UTF-8"); //needed this for the onload below?
+
 					//document.getElementById('moduleName').value = "Sample loading text3";//gets here
-					console.log("above");
-					reader.onload = function (e) {
-					//reader.onload = function(e) { //not calling this? why? why? please call it. there is nothing wrong, this is how this is supposed to be called
-						console.log("below");
-						document.getElementById('moduleName').value = "Sample loading text4";//not here
-					} //added this to test reader.onload without the commented code from below, remove when uncommenting
-					// 	var contents = e.target.results;
-					// 	var ct = reader.result;
-					// 	var sections = ct.split('\n');
-	
-					// 	alert("got the file.\n" + "name: " + file.name + "\n" + "fileType: " + file.type);
-	
-					// 	for(i = 0; i < sections.length - 1; i++){
-					// 		//loop for sending each line to a specific place
-					// 		// was thinking if we do match the correct part, make a new var that splices the ends off, if needed, and then call var[0]
-	
-					// 		sections[i] = sections[i].trim();
-					// 		console.log(sections[i]);
-					// 		if (sections[i].match(/<lessonname>/) === "<lessonname>") {//go through each line and place it correctly
-					// 			document.getElementById('moduleName').value = "Sample loading text5";//not here
-	
-					//			//Name your FaCT Module:
-					// 			document.getElementById('moduleName').value	= sections[i]; //this should be how to set it 
-					// 		} else if (sections[i].match(/<stimulusfile>/) === "<stimulusfile>") {
-					// 			//
-					// 		} else if (sections[i].match(/<clustermodel>/) === "<clustermodel>") {
-					// 			//
-					// 		} else if (sections[i].match(/<clustersize>/) === "<clustersize>") {
-					// 			//
-					// 		} else if (sections[i].match(/<shuffleclusters>/) === "<shuffleclusters>") {
-					// 			//
-					// 		} else if (sections[i].match(/<lfparameter>/) === "<lfparameter>") {
-					// 			//
-					// 		} else if (sections[i].match(/<isModeled>/) === "<isModeled>") {
-					// 			//
-					// 		} else if (sections[i].match(/<timeoutInSeconds>/) === "<timeoutInSeconds>") {
-					// 			//
-					// 		} else if (sections[i].match(/<experimentTarget>/) === "<experimentTarget>") {
-					// 			//
-					// 		} else if (sections[i].match(/<cluster>/) === "<cluster>") {
-					// 			//the cards
-					// 			for(j = i; sections[j].match(/<\/cluster>/) !== "</cluster>"; j++) { //continues through the array doing things for this specific card
-					// 				if (sections[i].match(/<display>/) === "<display>") {
-					// 					// card question
-					// 					i++;
-					// 				} else if (sections[i].match(/<response>/) === "<response>") {
-					// 					// correct response
-					// 					i++;
-					// 				} else if (sections[i].match(/<falseResponse>/) === "<falseResponse>") {
-					// 					// incorrect response
-					// 					i++;
-					// 				} else {
-					// 					i++; //in case of a blank/useless line?
-					// 				}
-					// 			}
-					// 		} else if (sections[i].match(/<unit>/) === "<unit>") {
-					// 				//the different units
-					// 				//click the add unit button at this point then have the following loop work with the added units
-					// 			for(j = i; sections[j].match(/<\/unit>/) !== "</unit>"; j++) {
-					// 				if (sections[i].match(/<unitname>/) === "<unitname>") {
-					// 					//the name of the unit, not the type, in this i have to figure out the correct type, maybe check sections[i+2] === </unit> for instruction types, but then what for others?
-					// 				} else if (sections[i].match(/<unitinstructions>/) === "<unitinstructions>") {
-					// 					// a blanket text field? instruction units only have this and previous tag
-					// 				} else if (sections[i].match(/<deliveryparams>/) === "<deliveryparams>") {
-					// 					//has child nodes in xml so making this loop just in case
-					// 					for (k = j; sections[k].match() !== ""; k++) {
-					// 						if (sections[i].match() === "") {
-												
-					// 						} else if (sections[i].match() === "") {
-												
-					// 						} else {
-					// 							i++;
-					// 							j++;
-					// 						}
-					// 					}
-					// 				} else if (sections[i].match(/<buttontrial>/) === "<buttontrial>") {
-										
-					// 				} else {
-										
-					// 				}
-					// 			}
-					// 		} else if (sections[i].match(/hi/) === "hi") {
-					// 			//
-					// 		}
+					//console.log("above");
+					reader.onload = function (evt) {
+						//console.log(reader); // puts the file into the log
+						//document.getElementById('loadTestArea').value = "Sample loading text4";//finally gets here
+						var contents = evt.target.results;
+						var ct = reader.result;
+						var sections = ct.split('\n');
+
+						//alert("got the file.\n" + "name: " + file.name + "\n" + "fileType: " + file.type); //gets the file
+						currentCardNum = 1;
+						currentCardVersion = 1;
+						currentUnitNum = 1;
+
+						for(i = 0; i < sections.length - 1; i++){
 							
-					// 	}
-					// }
-	
-	
-					//reader.readAsText(file);
-	
-	
-					/*//start of the xml parsing, may get rid of this since txt parser
-					if (window.XMLHttpRequest) { //IE7+, Firefox, Chrome, Opera, Safari
-						xmlhttp = new XMLHttpRequest();
-					} else { //IE5, IE6
-						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+
+							sections[i] = sections[i].trim();
+							//console.log(sections[i]); //puts the line into the log
+							if (sections[i].indexOf("<lessonname>") !== -1) {//go through each line and place the wanted text correctly
+								//document.getElementById('loadTestArea').value = "Sample loading text5";//got here
+
+								//Name of Cards
+								var temp = sections[i].split("<")[1].split(">")[1]; //gets the value we want from between the brackets
+								document.getElementById('lessonName').value  =  temp;//as to be done by Id, getElementsByName didn't work correctly
+							} else if (sections[i].indexOf("<stimulusfile>") !== -1) {
+								// the Stimulus file, useless to load right now
+								var temp = sections[i].split("<")[1].split(">")[1]; 
+								document.getElementById('moduleName').value  =  temp;
+							} else if (sections[i].indexOf("<clustermodel>") !== -1) {
+								//
+								var temp = sections[i].split("<")[1].split(">")[1]; 
+								//document.getElementById('').value  =  temp;
+							} else if (sections[i].indexOf("<clustersize>") !== -1) {
+								//
+								var temp = sections[i].split("<")[1].split(">")[1]; 
+								//document.getElementById('').value  =  temp;
+							} else if (sections[i].indexOf("<shuffleclusters>") !== -1) {
+								//
+								var temp = sections[i].split("<")[1].split(">")[1]; 
+								document.getElementById('shuffleClusters').value  =  temp;
+							} else if (sections[i].indexOf("<lfparameter>") !== -1) {
+								// Levenshtien Proportion
+								var temp = sections[i].split("<")[1].split(">")[1]; 
+								//document.getElementById('lfParameter').value  =  temp;
+							} else if (sections[i].indexOf("<isModeled>") !== -1) {
+								//
+								var temp = sections[i].split("<")[1].split(">")[1]; 
+								//document.getElementById('').value  =  temp;
+							} else if (sections[i].indexOf("<timeoutInSeconds>") !== -1) {
+								//
+								var temp = sections[i].split("<")[1].split(">")[1]; 
+								//document.getElementById('').value  =  temp;
+							} else if (sections[i].indexOf("<experimentTarget>") !== -1) {
+								//
+								var temp = sections[i].split("<")[1].split(">")[1]; 
+								//document.getElementById('').value  =  temp;
+							} else if (sections[i].indexOf("<cluster>") !== -1) {
+								//the cards
+								//if (document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) === null) {
+									var addCardClick = document.getElementById('addCard');
+									addCardClick.click();
+								//}
+
+								while(sections[i].indexOf("</cluster>") === -1) { //continues through the array doing things for this specific card
+									if (sections[i].indexOf("<displayType>") !== -1) {
+										// seen Sound and Image in example files
+										var temp = sections[i].split("<")[1].split(">")[1]; 
+										//document.getElementById('').value  =  temp;
+										i++;
+
+									} else if (sections[i].indexOf("<display>") !== -1) {
+										if(document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) === null){
+											var addCardVersion = document.getElementById('addCardVersion');
+											addCardVersion.click();
+										}
+										
+										// card question
+										var temp = sections[i].split("<")[1].split(">")[1]; 
+										document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion).value = temp;
+										i++;
+									} else if (sections[i].indexOf("<response>") !== -1) {
+										// card response, first response is correctly
+										var temp = sections[i].split("<")[1].split(">")[1]; 
+										document.getElementById('cardResponse' + currentCardNum + "-" + currentCardVersion).value  +=  temp;
+										//currentCardVersion++;
+										i++;
+									} else {
+										i++; //in case of a blank/useless line?
+									}
+								}
+								
+								currentCardNum++;
+								currentCardVersion = 1;
+
+							} else if (sections[i].indexOf("<unit>") !== -1) {
+									//the different units
+									//click the add unit button at this point then have the following loop work with the added units
+								var addUnitClick = document.getElementById('addUnit');
+								addUnitClick.click();
+
+								var unitType = "instructions";
+								for(j = i; sections[j].indexOf("</unit>") === -1; j++){ //checks which unit section to add
+									if (sections[j].indexOf("<assessmentsession>") !== -1) {
+										unitType = "assessment";
+									} else if (sections[j].indexOf("<learningsession>") !== -1) {
+										unitType = "learning";
+									}
+								}
+
+								if (unitType === "instructions") {
+									//document.getElementById('unitDrop' + currentUnitNum).click();//is this needed?
+									document.getElementById('instruction' + currentUnitNum).click();//if i change it to this, it messes up the code for updating
+									console.log("clicked instructions");
+									console.log(currentUnitNum);
+								} else if (unitType === "assessment") {
+									//document.getElementById('unitDrop' + currentUnitNum).click();//is this needed?
+									document.getElementById('assessment' + currentUnitNum).click();//
+									console.log("clicked assessment");
+									console.log(currentUnitNum);
+								} else if (unitType === "learning") {
+									//document.getElementById('unitDrop' + currentUnitNum).click();//is this needed?
+									document.getElementById('learningsession' + currentUnitNum).click();//
+									console.log("clicked learningsession");
+									console.log(currentUnitNum);
+								}
+
+								while(sections[i].indexOf("</unit>") === -1) {
+									if (sections[i].indexOf("<unitname>") !== -1) {
+										//the name of the unit
+										var temp = sections[i].split("<")[1].split(">")[1];
+										document.getElementById('unitname' + currentUnitNum).value  =  temp;
+										i++;
+									} else if (sections[i].indexOf("<unitinstructions>") !== -1) {
+										// a blanket text field? instruction units only have this and previous tag
+										var temp = "";
+										if(sections[i].indexOf("CDATA") !== -1){
+											temp = sections[i].split("![CDATA[")[1].split("]]>")[0];
+										}else {
+											temp = sections[i].split("<")[1].split(">")[1]; 
+										}
+										console.log(temp);
+										document.getElementById('unitinstructions' + currentUnitNum).value  =  temp;
+										i++;
+									} else if (sections[i].indexOf("<purestudy>") !== -1) {
+										//not in the unit are but before it in timing, but its in all unit tags
+										var temp = sections[i].split("<")[1].split(">")[1]; 
+										document.getElementById('purestudy').value  =  temp;
+										i++;
+									} else if (sections[i].indexOf("<readyprompt>") !== -1) {
+										//not in the unit are but before it in timing, but its in all unit tags
+										var temp = sections[i].split("<")[1].split(">")[1]; 
+										//document.getElementById('').value  =  temp;
+										i++;
+									} else if (sections[i].indexOf("<reviewstudy>") !== -1) {
+										//not in the unit are but before it in timing, but its in all unit tags
+										var temp = sections[i].split("<")[1].split(">")[1]; 
+										//document.getElementById('').value  =  temp;
+										i++;
+									} else if (sections[i].indexOf("<correctprompt>") !== -1) {
+										//not in the unit are but before it in timing, but its in all unit tags
+										var temp = sections[i].split("<")[1].split(">")[1]; 
+										//document.getElementById('').value  =  temp;
+										i++;
+									} else if (sections[i].indexOf("<drill>") !== -1) {
+										//not in the unit are but before it in timing, but its in all unit tags
+										var temp = sections[i].split("<")[1].split(">")[1]; 
+										document.getElementById('drill').value  =  temp;
+										i++;
+									} else if (sections[i].indexOf("<timebeforefeedback>") !== -1) {
+										//not in the unit are but before it in timing, but its in all unit tags
+										var temp = sections[i].split("<")[1].split(">")[1]; 
+										//document.getElementById('').value  =  temp;
+										i++;
+									} else if (sections[i].indexOf("<timeuntilstimulus>") !== -1) {
+										//not in the unit are but before it in timing, but its in all unit tags
+										var temp = sections[i].split("<")[1].split(">")[1]; 
+										//document.getElementById('').value  =  temp;
+										i++;
+									} else if (sections[i].indexOf("<buttontrial>") !== -1) {
+										//either true or false, buttontrial isnt in units but above cards
+										var temp = sections[i].split("<")[1].split(">")[1]; 
+										//document.getElementById('').value  =  temp;
+										i++;
+									} else if (sections[i].indexOf("<assessmentsession>") !== -1) {
+										//assessment unit related tag loop
+										while(sections[i].indexOf("</assessmentsession>") === -1){
+											if (sections[i].indexOf("<conditionaltemplatesbygroup>") !== -1){
+												// another loop?
+												var temp = sections[i].split("<")[1].split(">")[1]; 
+												//document.getElementById('').value  =  temp;
+												i++;
+											} else if (sections[i].indexOf("<initialpostions>") !== -1) {
+												//
+												var temp = sections[i].split("<")[1].split(">")[1]; 
+												//document.getElementById('').value  =  temp;
+												i++;
+											} else if (sections[i].indexOf("<randomchoices>") !== -1) {
+												//
+												var temp = sections[i].split("<")[1].split(">")[1]; 
+												//document.getElementById('').value  =  temp;
+												i++;
+											} else if (sections[i].indexOf("<randomizegrups>") !== -1) {
+												// true or false
+												var temp = sections[i].split("<")[1].split(">")[1]; 
+												//document.getElementById('').value  =  temp;
+												i++;
+											} else if (sections[i].indexOf("<clusterlist>") !== -1) {
+												//
+												var temp = sections[i].split("<")[1].split(">")[1]; 
+												//document.getElementById('').value  =  temp;
+												i++;
+											} else if (sections[i].indexOf("<assignrandomclusters>") !== -1) {
+												// true or flase
+												var temp = sections[i].split("<")[1].split(">")[1]; 
+												//document.getElementById('').value  =  temp;
+												i++;
+											} else if (sections[i].indexOf("<permutefinalresult>") !== -1) {
+												//
+												var temp = sections[i].split("<")[1].split(">")[1]; 
+												//document.getElementById('').value  =  temp;
+												i++;
+											} else {
+												i++;
+											}
+										}
+										i++;
+									} else if (sections[i].indexOf("<learningsession>") !== -1) {
+										//learning unit related tag loop
+										while(sections[i].indexOf("</learningsession>") === -1){
+											if (false){
+												//not sure what goes in a learning session yet
+											} else if (false) {
+
+											} else {
+												i++;
+											}
+										}
+										
+										i++;
+									} else {
+										i++;
+									}
+								}
+
+								currentUnitNum++;
+
+							} else if (sections[i].indexOf("hi") !== -1) {
+								//
+							}
+						}
 					}
-					xmlhttp.open("GET", file, false); //is the second parameter ok or do i have to do something like file.name to get it correct?
-					xmlhttp.send();
-					xmlDoc = xmlhttp.responseXML*/
-	
+
 				} else {
-					alert("Failed to load file. Reclick it if you did pick a file.");
+					alert("Failed to load file. Reclick it if you did/do pick a file.");
 				}
-			}
-	
-			// var correctFileType = false;
-			//correctFileType = checkFileExtension(loadedFile);
-			// verify uploaded file is an xml/txt file in xml format
-	
-			//alert(loadedFile);
-			//console.log("clicked funcLoad");
-			//} /*this is called by load when clicked*/
-	
-			/*function checkFileExtension(file) {
-				var loadedFile = file;
-				var extension = "";
-				var isValid = false;
-	
-				if (loadedFile.value.lastIndexOf(".") > 0) {
-					extension = loadedFile.value.substring(loadedFile.value.lastIndexOf(".") + 1, loadedFile.value.length);
-					alert("extension is " + extension);
-				}
-	
-				if (extension === "xml" || extension === "txt") {
-					isValid = true;
-				} else {
-					alert("The file you submitted was not an XML");
-					isValid = false;
-				}
-	
-				return isValid;
-			} /* extension checker */
+			} 
 		}
-	
-	
-			// THE SAVE XML CODE
-			// Try to make a single file for this to be loaded by load
-	
-			/*function saveXML() { // called by save when clicked
-			alert("Save not implemented yet");
-		} /* called by save when clicked */
 	});
 
 	Template.hello.helpers({
@@ -258,7 +370,7 @@ if (Meteor.isClient) {
 		// },
 		'click .unitType': function (event) {
 			//console.log("unitType changed");
-			var v = $(event.target).attr("id");
+			var v = $(event.target).attr("class").split(" ")[2];
 			//console.log(v);
 			//console.log($(event.target).attr("class"));
 			var attrclass = $(event.target).attr("class").split('m')[1];
