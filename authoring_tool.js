@@ -97,58 +97,58 @@ if (Meteor.isClient) {
 
 							sections[i] = sections[i].trim();
 							//console.log(sections[i]); //puts the line into the log
-							if (sections[i].indexOf("<lessonname>") !== -1) {
+							if (sections[i].indexOf("<lessonname>") != -1) {
 								//Name of Cards
 								var temp = sections[i].split("<")[1].split(">")[1]; //gets the value we want from between the brackets
 								document.getElementById('lessonName').value  =  temp; //has to be done by Id
-							} else if (sections[i].indexOf("<stimulusfile>") !== -1) {
+							} else if (sections[i].indexOf("<stimulusfile>") != -1) {
 								// the Stimulus file, useless to load right now
 								var temp = sections[i].split("<")[1].split(">")[1]; 
 								document.getElementById('numberofcards').value  =  temp;
-							} else if (sections[i].indexOf("<clustermodel>") !== -1) {
+							} else if (sections[i].indexOf("<clustermodel>") != -1) {
 								//
 								var temp = sections[i].split("<")[1].split(">")[1]; 
 								//document.getElementById('').value  =  temp;
-							} else if (sections[i].indexOf("<clustersize>") !== -1) {
+							} else if (sections[i].indexOf("<clustersize>") != -1) {
 								//
 								var temp = sections[i].split("<")[1].split(">")[1]; 
 								//document.getElementById('').value  =  temp;
-							} else if (sections[i].indexOf("<shuffleclusters>") !== -1) {
+							} else if (sections[i].indexOf("<shuffleclusters>") != -1) {
 								//
 								var temp = sections[i].split("<")[1].split(">")[1]; 
 								document.getElementById('shuffleClusters').value  =  temp;
-							} else if (sections[i].indexOf("<lfparameter>") !== -1) {
+							} else if (sections[i].indexOf("<lfparameter>") != -1) {
 								// Levenshtien Proportion
 								var temp = sections[i].split("<")[1].split(">")[1]; 
 								//document.getElementById('lfParameter').value  =  temp;
-							} else if (sections[i].indexOf("<isModeled>") !== -1) {
+							} else if (sections[i].indexOf("<isModeled>") != -1) {
 								//
 								var temp = sections[i].split("<")[1].split(">")[1]; 
 								//document.getElementById('').value  =  temp;
-							} else if (sections[i].indexOf("<timeoutInSeconds>") !== -1) {
+							} else if (sections[i].indexOf("<timeoutInSeconds>") != -1) {
 								//
 								var temp = sections[i].split("<")[1].split(">")[1]; 
 								//document.getElementById('').value  =  temp;
-							} else if (sections[i].indexOf("<experimentTarget>") !== -1) {
+							} else if (sections[i].indexOf("<experimentTarget>") != -1) {
 								//
 								var temp = sections[i].split("<")[1].split(">")[1]; 
 								//document.getElementById('').value  =  temp;
-							} else if (sections[i].indexOf("<cluster>") !== -1) {
+							} else if (sections[i].indexOf("<cluster>") != -1) {
 								//the cards
-								if (document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) === null) {
+								if (document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) == null) {
 									var addCardClick = document.getElementById('addCard');
 									addCardClick.click();
 								} // hopefully this adds cards when needed
 
-								while(sections[i].indexOf("</cluster>") === -1) { //continues through the array doing things for this specific card
-									if (sections[i].indexOf("<displayType>") !== -1) {
+								while(sections[i].indexOf("</cluster>") == -1) { //continues through the array doing things for this specific card
+									if (sections[i].indexOf("<displayType>") != -1) {
 										// seen Sound and Image in example files
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										//document.getElementById('').value  =  temp;
 										i++;
 
-									} else if (sections[i].indexOf("<display>") !== -1) {
-										if(document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) === null){
+									} else if (sections[i].indexOf("<display>") != -1) {
+										if(document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) == null){
 											var addCardVersion = document.getElementById('addCardVersion');
 											addCardVersion.click();
 										} //does this add versions when needed?
@@ -157,7 +157,7 @@ if (Meteor.isClient) {
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion).value = temp;
 										i++;
-									} else if (sections[i].indexOf("<response>") !== -1) {
+									} else if (sections[i].indexOf("<response>") != -1) {
 										// card response, first response is correctly
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										document.getElementById('cardResponse' + currentCardNum + "-" + currentCardVersion).value  +=  temp;
@@ -171,48 +171,49 @@ if (Meteor.isClient) {
 								currentCardNum++;
 								currentCardVersion = 1;
 
-							} else if (sections[i].indexOf("<unit>") !== -1) {
+							} else if (sections[i].indexOf("<unit>") != -1) {
 									//the different units
 									//click the add unit button at this point then have the following loop work with the added units
-								if (document.getElementById('unitDrop' + currentUnitNum) === null) {
+								if (document.getElementById('unitDrop' + currentUnitNum) == null) {
 									var addUnitClick = document.getElementById('addUnit');
 									addUnitClick.click();
 								}
-
+								
 								//to fix the triple click, go through it and add each unit needed then set them then go through each unit
+								//change the below indexOf to </tutor>, to signify end of doc, and have it click add unit for each one, then go through it again and set each unit, then finally set the contents of each units
 								var unitType = "instructions";
-								for(j = i; sections[j].indexOf("</unit>") === -1; j++){ //checks which unit section to add
-									if (sections[j].indexOf("<assessmentsession>") !== -1) {
+								for(j = i; sections[j].indexOf("</unit>") == -1; j++){ //checks which unit section to add
+									if (sections[j].indexOf("<assessmentsession>") != -1) {
 										unitType = "assessment";
-									} else if (sections[j].indexOf("<learningsession>") !== -1) {
+									} else if (sections[j].indexOf("<learningsession>") != -1) {
 										unitType = "learning";
 									}
 								}
 
-								if (unitType === "instructions") {
+								if (unitType == "instructions") {
 									document.getElementById('instruction' + currentUnitNum).click();
 									console.log("clicked instructions");
 									console.log(currentUnitNum);
-								} else if (unitType === "assessment") {
+								} else if (unitType == "assessment") {
 									document.getElementById('assessment' + currentUnitNum).click();
 									console.log("clicked assessment");
 									console.log(currentUnitNum);
-								} else if (unitType === "learning") {
+								} else if (unitType == "learning") {
 									document.getElementById('learningsession' + currentUnitNum).click();
 									console.log("clicked learningsession");
 									console.log(currentUnitNum);
 								}
 
-								while(sections[i].indexOf("</unit>") === -1) {
-									if (sections[i].indexOf("<unitname>") !== -1) {
+								while(sections[i].indexOf("</unit>") == -1) {
+									if (sections[i].indexOf("<unitname>") != -1) {
 										//the name of the unit
 										var temp = sections[i].split("<")[1].split(">")[1];
 										document.getElementById('unitname' + currentUnitNum).value  =  temp;
 										i++;
-									} else if (sections[i].indexOf("<unitinstructions>") !== -1) {
+									} else if (sections[i].indexOf("<unitinstructions>") != -1) {
 										//the instructions of the unit
 										var temp = "";
-										if(sections[i].indexOf("CDATA") !== -1){
+										if(sections[i].indexOf("CDATA") != -1){
 											temp = sections[i].split("![CDATA[")[1].split("]]>")[0];
 										}else {
 											temp = sections[i].split("<")[1].split(">")[1]; 
@@ -220,87 +221,87 @@ if (Meteor.isClient) {
 										console.log(temp);
 										document.getElementById('unitinstructions' + currentUnitNum).value  =  temp;
 										i++;
-									} else if (sections[i].indexOf("<purestudy>") !== -1) {
+									} else if (sections[i].indexOf("<purestudy>") != -1) {
 										//not in the unit itself but before it in the timing section, but its in all unit tags
 										// purestudy is study alone
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										document.getElementById('purestudy').value  =  temp;
 										i++;
-									} else if (sections[i].indexOf("<readyprompt>") !== -1) {
+									} else if (sections[i].indexOf("<readyprompt>") != -1) {
 										//not in the unit itself but before it in the timing section, but its in all unit tags
 										// readyprompt is intercard interval
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										document.getElementById('readyprompt').value  =  temp;
 										i++;
-									} else if (sections[i].indexOf("<reviewstudy>") !== -1) {
+									} else if (sections[i].indexOf("<reviewstudy>") != -1) {
 										//not in the unit itself but before it in the timing section, but its in all unit tags
 										// reviewstudy is incorrect feedback
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										document.getElementById('reviewstudy').value  =  temp;
 										i++;
-									} else if (sections[i].indexOf("<correctprompt>") !== -1) {
+									} else if (sections[i].indexOf("<correctprompt>") != -1) {
 										//not in the unit itself but before it in the timing section, but its in all unit tags
 										// correctprompt is correct feedback
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										document.getElementById('correctprompt').value  =  temp;
 										i++;
-									} else if (sections[i].indexOf("<drill>") !== -1) {
+									} else if (sections[i].indexOf("<drill>") != -1) {
 										//not in the unit itself but before it in the timing section, but its in all unit tags
 										// drill is drill
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										document.getElementById('drill').value  =  temp;
 										i++;
-									} else if (sections[i].indexOf("<timebeforefeedback>") !== -1) {
+									} else if (sections[i].indexOf("<timebeforefeedback>") != -1) {
 										//not in the unit itself but before it in the timing section, but its in all unit tags
 										// we dont have but to be called Time Before Feedback when we make
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										//document.getElementById('').value  =  temp;
 										i++;
-									} else if (sections[i].indexOf("<timeuntilstimulus>") !== -1) {
+									} else if (sections[i].indexOf("<timeuntilstimulus>") != -1) {
 										//not in the unit itself but before it in the timing section, but its in all unit tags
 										// we dont have but to be called Time Until Stimulus when we make
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										//document.getElementById('').value  =  temp;
 										i++;
-									} else if (sections[i].indexOf("<buttontrial>") !== -1) {
+									} else if (sections[i].indexOf("<buttontrial>") != -1) {
 										//either true or false, buttontrial isnt in units but above cards
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										//document.getElementById('').value  =  temp;
 										i++;
-									} else if (sections[i].indexOf("<assessmentsession>") !== -1) {
+									} else if (sections[i].indexOf("<assessmentsession>") != -1) {
 										//assessment unit related tag loop
-										while(sections[i].indexOf("</assessmentsession>") === -1){
-											if (sections[i].indexOf("<conditionaltemplatesbygroup>") !== -1){
+										while(sections[i].indexOf("</assessmentsession>") == -1){
+											if (sections[i].indexOf("<conditionaltemplatesbygroup>") != -1){
 												// another loop?
 												var temp = sections[i].split("<")[1].split(">")[1]; 
 												//document.getElementById('').value  =  temp;
 												i++;
-											} else if (sections[i].indexOf("<initialpostions>") !== -1) {
+											} else if (sections[i].indexOf("<initialpostions>") != -1) {
 												//
 												var temp = sections[i].split("<")[1].split(">")[1]; 
 												//document.getElementById('').value  =  temp;
 												i++;
-											} else if (sections[i].indexOf("<randomchoices>") !== -1) {
+											} else if (sections[i].indexOf("<randomchoices>") != -1) {
 												//
 												var temp = sections[i].split("<")[1].split(">")[1]; 
 												//document.getElementById('').value  =  temp;
 												i++;
-											} else if (sections[i].indexOf("<randomizegrups>") !== -1) {
+											} else if (sections[i].indexOf("<randomizegrups>") != -1) {
 												// true or false
 												var temp = sections[i].split("<")[1].split(">")[1]; 
 												//document.getElementById('').value  =  temp;
 												i++;
-											} else if (sections[i].indexOf("<clusterlist>") !== -1) {
+											} else if (sections[i].indexOf("<clusterlist>") != -1) {
 												//
 												var temp = sections[i].split("<")[1].split(">")[1]; 
 												//document.getElementById('').value  =  temp;
 												i++;
-											} else if (sections[i].indexOf("<assignrandomclusters>") !== -1) {
+											} else if (sections[i].indexOf("<assignrandomclusters>") != -1) {
 												// true or flase
 												var temp = sections[i].split("<")[1].split(">")[1]; 
 												//document.getElementById('').value  =  temp;
 												i++;
-											} else if (sections[i].indexOf("<permutefinalresult>") !== -1) {
+											} else if (sections[i].indexOf("<permutefinalresult>") != -1) {
 												//
 												var temp = sections[i].split("<")[1].split(">")[1]; 
 												//document.getElementById('').value  =  temp;
@@ -310,25 +311,25 @@ if (Meteor.isClient) {
 											}
 										}
 										i++;
-									} else if (sections[i].indexOf("<learningsession>") !== -1) {
+									} else if (sections[i].indexOf("<learningsession>") != -1) {
 										//learning unit related tag loop
-										while(sections[i].indexOf("</learningsession>") === -1){
-											if (sections[i].indexOf("<allowquit>") !== -1){
+										while(sections[i].indexOf("</learningsession>") == -1){
+											if (sections[i].indexOf("<allowquit>") != -1){
 												//true or false
 												var temp = sections[i].split("<")[1].split(">")[1]; 
 												//document.getElementById('').value  =  temp;
 												i++;
-											} else if (sections[i].indexOf("<allowpause>") !== -1) {
+											} else if (sections[i].indexOf("<allowpause>") != -1) {
 												//true or false
 												var temp = sections[i].split("<")[1].split(">")[1]; 
 												//document.getElementById('').value  =  temp;
 												i++;
-											} else if (sections[i].indexOf("<unending>") !== -1) {
+											} else if (sections[i].indexOf("<unending>") != -1) {
 												//true or false
 												var temp = sections[i].split("<")[1].split(">")[1]; 
 												//document.getElementById('').value  =  temp;
 												i++;
-											} else if (sections[i].indexOf("<mindurationtime>") !== -1) {
+											} else if (sections[i].indexOf("<mindurationtime>") != -1) {
 												// 
 												var temp = sections[i].split("<")[1].split(">")[1]; 
 												//document.getElementById('').value  =  temp;
@@ -346,7 +347,7 @@ if (Meteor.isClient) {
 
 								currentUnitNum++;
 
-							} else if (sections[i].indexOf("hi6283") !== -1) {
+							} else if (sections[i].indexOf("hi6283") != -1) {
 								// placeholder for any other line to be added
 							}
 						}
