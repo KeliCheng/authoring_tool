@@ -62,19 +62,19 @@ if (Meteor.isClient) {
 
 	Template.load.events ({
 
-		'click .load1': function(event, template){
+		'change .load1': function(event, template){
 
 			event.defaultPrevented; 
 		
-			var loadedFile = document.getElementById('realLoad');
-			document.getElementById('realLoad').addEventListener('click', readingFiles);
-			loadedFile.click();
-			document.getElementById('realLoad').removeEventListener('click', readingFiles); //need to end the Listener or else it adds 1 more each time load is clicked
+			// var loadedFile = document.getElementById('realLoad');
+			// document.getElementById('realLoad').addEventListener('click', readingFiles);
+			// loadedFile.click();
+			// document.getElementById('realLoad').removeEventListener('click', readingFiles); //need to end the Listener or else it adds 1 more each time load is clicked
 			//also, it runs the listen event before i can pick a file, making me click load twice, clicking it a 3rd time fixes the unit section? what?
 
-			function readingFiles(evt) {
+			//function readingFiles(evt) {
 				//var file = evt.target.files[0]; //do these 3 lines do the same thing?
-				var file = document.getElementById("realLoad").files[0];
+				var file = document.getElementById("load1").files[0];
 				//var file = template.find('input type=["file"]').files[0];
 
 				if (file) {
@@ -179,6 +179,7 @@ if (Meteor.isClient) {
 									addUnitClick.click();
 								}
 
+								//to fix the triple click, go through it and add each unit needed then set them then go through each unit
 								var unitType = "instructions";
 								for(j = i; sections[j].indexOf("</unit>") === -1; j++){ //checks which unit section to add
 									if (sections[j].indexOf("<assessmentsession>") !== -1) {
@@ -354,7 +355,7 @@ if (Meteor.isClient) {
 				} else {
 					alert("Failed to load file. Reclick it if you did/do pick a file.");
 				}
-			} 
+			//} 
 		}
 	});
 
