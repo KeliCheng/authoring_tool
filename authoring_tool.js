@@ -278,10 +278,26 @@ if (Meteor.isClient) {
 									} else if (sections[i].indexOf("<learningsession>") !== -1) {
 										//learning unit related tag loop
 										while(sections[i].indexOf("</learningsession>") === -1){
-											if (false){
-												//not sure what goes in a learning session yet
-											} else if (false) {
-
+											if (sections[i].indexOf("<allowquit>") !== -1){
+												//true or false
+												var temp = sections[i].split("<")[1].split(">")[1]; 
+												//document.getElementById('').value  =  temp;
+												i++;
+											} else if (sections[i].indexOf("<allowpause>") !== -1) {
+												//true or false
+												var temp = sections[i].split("<")[1].split(">")[1]; 
+												//document.getElementById('').value  =  temp;
+												i++;
+											} else if (sections[i].indexOf("<unending>") !== -1) {
+												//true or false
+												var temp = sections[i].split("<")[1].split(">")[1]; 
+												//document.getElementById('').value  =  temp;
+												i++;
+											} else if (sections[i].indexOf("<mindurationtime>") !== -1) {
+												// 
+												var temp = sections[i].split("<")[1].split(">")[1]; 
+												//document.getElementById('').value  =  temp;
+												i++;
 											} else {
 												i++;
 											}
