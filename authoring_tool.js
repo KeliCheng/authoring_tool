@@ -9,21 +9,55 @@ if (Meteor.isClient) {
 	Session.setDefault('numVersions', 1);
 
 	Template.body.events({
-  'click .master': function (event) {
-  	// event.preventDefault();
-    // This function is called when the master form is submitted
-	var x = document.forms["masterForm"]["modulename"].value;
-	var y = document.getElementById("lessonname").value;
-	var z = document.getElementsByName("nameofversion")[0].value
+  		'click .master': function (event) {
+  		// event.preventDefault();
+    	// This function is called when the master form is submitted
+			console.log("bibadi");
 
-    if (x == null || x == "") {
-        confirm("Elements are missing, are you sure to submit?");
-        document.getElementById("moduleName").focus();
-        document.getElementById("lessonname").focus();
-        return false;
-    }
-  }
-});
+			var x = document.forms["masterForm"]["modulename"].value;
+			var y = document.getElementById("numberofcards").value;
+			var z = document.getElementsByName("nameofversion")[0].value
+
+    		if (x == null || x == "") {
+    			console.log("bobadi")
+        		confirm("Elements are missing, are you sure to submit?");
+        		document.getElementById("moduleName").focus();
+        		document.getElementById("numberofcards").focus();
+        		console.log("boo");
+    		}
+
+    		return false;
+  		},
+  		'click .publish':function(event){
+			form = {};
+			$.each($('#masterForm').serializeArray(), function() {
+   				form[this.name] = this.value;
+   			});
+
+			var str = $('#masterForm').serialize();
+    		console.log(form);
+   			//legacy code
+   			//document.getElementById("testing").value = str;//form[this.name];
+   			parserTDF(str);
+   			parserSTIM(str);
+   			//TODO check for correctness 
+	   		//may not need this
+   			/*
+   			MyCollection.insert(form, function(err) {
+    	   		if(!err) {
+    	       		alert("Submitted!");
+       	    		$('#masterform')[0].reset();
+       	    		//
+       			}
+       			else {
+        	   		alert("Something is wrong");
+           			console.log(err);
+       			}
+			})
+			*/
+		//get Parse 
+		}
+	});
 
 
 	Template.load.events ({
@@ -481,6 +515,115 @@ if (Meteor.isClient) {
 		}
 	});
 }
+//FUNCTIONS
+
+function parserSTIM(string){
+	var counter = 0;
+	var s = "";
+	if(true){
+		s = concat();
+	}
+};
+
+function parserTDF(string){
+	var counter = 2;
+	var s = "";
+	var tutor = "";
+	var tags = string.split("&");
+	console.log(tags);
+	var spec ="";
+	spec += concat("lessonname",tags[0].substring(11),false, counter);
+	spec += concat("stimulusfile", tags[0].substring(11)+"stims.xml", false, counter);
+	var cluster;
+	spec += concat("clustermodel", "", false, counter);
+	spec += concat("clustersize", "1", false, counter);
+	spec += concat("shuffleclusters", tags[4].substring(16), false, counter);
+	spec += concat("swapclusters", tags[5].substring(13), false, counter);
+	spec += concat("lfparameter", tags[3].substring(12), false, counter);
+	spec += concat("isModeled", "false", false, counter);
+	spec += concat("timeoutInSeconds", "15", false, counter);
+	spec += concat("experimentTarget", "swa", false, counter);
+	
+	counter--;
+	tutor += concat("setspec",spec, true, counter);
+	console.log(tutor);
+	//TODO grab timing section
+	var j = 0;
+	for (var i = 0; i < tags.length; i++) {
+		if(tags[i].substring(0,9) == "purestudy"){
+			j =i;
+			console.log("ding");
+			break;
+		}
+	};
+	counter ++;
+	var timer = concat("purestudy", tags[j].substring(10)*1000, false, counter);
+	timer += concat("readyprompt", tags[j+2].substring(12)*1000, false, counter);
+	timer += concat("reviewstudy", tags[j+4].substring(12)*1000, false, counter);
+	timer += concat("correctprompt", tags[j+3].substring(14)*1000, false, counter);
+	timer += concat("drill", tags[j+1].substring(6)*1000, false, counter);
+	timer += concat("timebeforefeedback", "500", false, counter);
+	timer += concat("timeuntilstimulus", "500", false, counter);
+	
+	counter --;
+	//units section 
+	//unit content
+	var firstunit = true;
+	var units = "";
+	var unit = "";
+	//for instructions 
+	for (var i = 6; i < tags.length; i++) {
+		
+		//console.log(tags[i].substring(0,8));
+		if(tags[i].substring(0,8) == "unitname"&&firstunit){
+			console.log(tags[i]);
+			//put this in a unit
+			counter++;
+			unit += concat("unitname", tags[i].substring(9), false, counter);			
+			firstunit = false;
+			//do things
+		}else if(tags[i].substring(0,8) == "unitname"){
+			counter--;
+			units += concat("unit", unit, true, counter);
+			counter++;
+			unit = ""; // clear out the units
+			unit += concat("unitname", tags[i].substring(9), false, counter);			
+			//do things
+		}else if(tags[i].substring(0,16) == "unitinstructions"){
+			unit += concat("unitinstructions", tags[i].substring(17), true, counter);
+		}
+		//concat other things as well
+		};
+	counter --;
+	units += concat("unit",unit,true,counter); 
+	//when there is no more unitname encsulate 
+	//encaplsulate and add to units
+	counter--;
+	tutor += units;
+	var finS = concat("tutor", tutor, true, counter);
+	finS += concat("deliveryparams", timer, true, 0);
+	console.log(finS);
+};
+	
+function concat(tag, source, vertical, numSpace){
+	var s = "";
+	for(i = 0; i< numSpace; i++){
+		s += " ";
+	}
+	s+="<"+tag+">";
+	if (vertical){
+		s+= "\n";
+	}
+	s+= source;
+	if (vertical){
+		s+= "\n";
+		for(i = 0; i< numSpace; i++){
+			s += " ";
+		}
+	}
+	s+="</"+tag+">\n";
+	return s;
+};
 
 //Server Side
 if (Meteor.isServer) {

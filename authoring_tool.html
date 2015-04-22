@@ -16,7 +16,7 @@
   		{{> load}}	<!--<a href="#" onclick="loadXML()" class="btn btn-primary load1">   L O A D   </a>-->
   		<a href="#" class="btn btn-primary">   T E S T   </a>
   		<a href="#" onclick="saveXML()" class="btn btn-primary">   S A V E   </a>
-  		<a href="#" class="btn btn-primary">   P U B L I S H   </a>
+  		<a href="#" class="publish btn btn-primary">   P U B L I S H   </a>
   	</center>
 
 
@@ -74,10 +74,12 @@
 
 				<div class="form-group">
 					<label>Number of Cards
-					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="lessonname" id="numberofcards" required></label>
-      					<label>Number of Versions
-      					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="nameofversion" required></label>
-    				</div>
+					 <input style="height:30px;width:250px;font-size:14pt;" type="text" name="lessonname" id="numberofcards" required>
+          </label>
+      		<label>Number of Versions
+      			<input style="height:30px;width:250px;font-size:14pt;" type="text" name="nameofversion" id="numberofversions" required>
+          </label>
+    		</div>
 
  				<div class="form-group">
  					<label>Levenshtien Proportion:
@@ -89,7 +91,7 @@
 					<label>Shuffle Instruction
 					<input style="height:30px;width:250px;font-size:14pt;" type="text" id="shuffleClusters" name="shuffleclusters"></label>
 					<label>Swap Instrcutions
-					<input style="height:30px;width:250px;font-size:14pt;" type="text" id="swapInstructions" name="shuffleclusters"></label> 
+					<input style="height:30px;width:250px;font-size:14pt;" type="text" id="swapInstructions" name="swapclusters"></label> 
 				</div>
 
 				<div class="form-group">
@@ -171,21 +173,21 @@
       					<label>Stay Alone Interval
         				<input id="purestudy" name="purestudy" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
          				<label>Drill Timeout
-        				<input id="drill" name="timeoutInSeconds" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
+        				<input id="drill" name="drill" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
     				</div>
     				<div class="form-group">
       					<label>Intercard Interval
-        				<input id="readyprompt" name="" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
+        				<input id="readyprompt" name="readyprompt" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
     				</div>
     				<div class="form-group">
               <label>Correct Feedback Interval
-                <input id="correctprompt" name="correctfeedback" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
+                <input id="correctprompt" name="correctprompt" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
       					<label>Incorrect Feedback
-        				<input id="reviewstudy" name="incorrectfeedback" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
+        				<input id="reviewstudy" name="reviewstudy" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
     				</div>
     				<div class="form-group">
       					<div class="checkbox">
-      						<label> <input type="checkbox" name="skip">Skip Study Interval Allowed</label>
+      						<label> <input type="checkbox" name="skipstudy">Skip Study Interval Allowed</label>
     					</div>
   				</div>
      				<div class="form-group" align="right">
