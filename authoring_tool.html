@@ -38,7 +38,7 @@
 <template name="hello">
 	<div class="card">
 		<center>
-	  		<label>Name your FaCT Module: <input style="height:30px;width:250px;font-size:14pt;" type="text" id="moduleName" name="modulename" required></label>
+	  		<label>Name your FaCT Module: <input style="height:30px;width:250px;font-size:14pt;" type="text" id="lessonName" name="modulename" required></label>
 		</center>
 	</div>
 	<br>
@@ -73,9 +73,9 @@
         </ul> -->
 
 				<div class="form-group">
-					<label>Name of Cards
-					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="lessonname" id="lessonName" required></label>
-      					<label>Name of Versions
+					<label>Number of Cards
+					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="lessonname" id="numberofcards" required></label>
+      					<label>Number of Versions
       					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="nameofversion" required></label>
     				</div>
 
@@ -175,13 +175,13 @@
     				</div>
     				<div class="form-group">
       					<label>Intercard Interval
-        				<input name="" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
+        				<input id="readyprompt" name="" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
     				</div>
     				<div class="form-group">
               <label>Correct Feedback Interval
-                <input name="correctfeedback" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
+                <input id="correctprompt" name="correctfeedback" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
       					<label>Incorrect Feedback
-        				<input name="incorrectfeedback" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
+        				<input id="reviewstudy" name="incorrectfeedback" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
     				</div>
     				<div class="form-group">
       					<div class="checkbox">

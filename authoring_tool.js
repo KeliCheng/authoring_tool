@@ -31,31 +31,24 @@ if (Meteor.isClient) {
 		'click .load1': function(event, template){
 
 			event.defaultPrevented; 
-			//console.log("clicked load");
 		
 			var loadedFile = document.getElementById('realLoad');
 			document.getElementById('realLoad').addEventListener('click', readingFiles);
 			loadedFile.click();
-			document.getElementById('realLoad').removeEventListener('click', readingFiles);
-			//need to end the Listener, it adds 1 more each time load is clicked
-			//also, it runs the listen event before i can pick a file, making me click load twice, clicking it a 3rd time fixes the unit section?
+			document.getElementById('realLoad').removeEventListener('click', readingFiles); //need to end the Listener or else it adds 1 more each time load is clicked
+			//also, it runs the listen event before i can pick a file, making me click load twice, clicking it a 3rd time fixes the unit section? what?
 
 			function readingFiles(evt) {
 				//var file = evt.target.files[0]; //do these 3 lines do the same thing?
 				var file = document.getElementById("realLoad").files[0];
 				//var file = template.find('input type=["file"]').files[0];
 
-				//document.getElementById('moduleName').value = "Sample loading text2";//gets here
-
 				if (file) {
 					var reader = new FileReader();
-					reader.readAsText(file, "UTF-8"); //needed this for the onload below?
+					reader.readAsText(file, "UTF-8");
 
-					//document.getElementById('moduleName').value = "Sample loading text3";//gets here
-					//console.log("above");
 					reader.onload = function (evt) {
 						//console.log(reader); // puts the file into the log
-						//document.getElementById('loadTestArea').value = "Sample loading text4";//finally gets here
 						var contents = evt.target.results;
 						var ct = reader.result;
 						var sections = ct.split('\n');
@@ -70,16 +63,14 @@ if (Meteor.isClient) {
 
 							sections[i] = sections[i].trim();
 							//console.log(sections[i]); //puts the line into the log
-							if (sections[i].indexOf("<lessonname>") !== -1) {//go through each line and place the wanted text correctly
-								//document.getElementById('loadTestArea').value = "Sample loading text5";//got here
-
+							if (sections[i].indexOf("<lessonname>") !== -1) {
 								//Name of Cards
 								var temp = sections[i].split("<")[1].split(">")[1]; //gets the value we want from between the brackets
-								document.getElementById('lessonName').value  =  temp;//as to be done by Id, getElementsByName didn't work correctly
+								document.getElementById('lessonName').value  =  temp; //has to be done by Id
 							} else if (sections[i].indexOf("<stimulusfile>") !== -1) {
 								// the Stimulus file, useless to load right now
 								var temp = sections[i].split("<")[1].split(">")[1]; 
-								document.getElementById('moduleName').value  =  temp;
+								document.getElementById('numberofcards').value  =  temp;
 							} else if (sections[i].indexOf("<clustermodel>") !== -1) {
 								//
 								var temp = sections[i].split("<")[1].split(">")[1]; 
@@ -110,10 +101,10 @@ if (Meteor.isClient) {
 								//document.getElementById('').value  =  temp;
 							} else if (sections[i].indexOf("<cluster>") !== -1) {
 								//the cards
-								//if (document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) === null) {
+								if (document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) === null) {
 									var addCardClick = document.getElementById('addCard');
 									addCardClick.click();
-								//}
+								} // hopefully this adds cards when needed
 
 								while(sections[i].indexOf("</cluster>") === -1) { //continues through the array doing things for this specific card
 									if (sections[i].indexOf("<displayType>") !== -1) {
@@ -126,7 +117,7 @@ if (Meteor.isClient) {
 										if(document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) === null){
 											var addCardVersion = document.getElementById('addCardVersion');
 											addCardVersion.click();
-										}
+										} //does this add versions when needed?
 										
 										// card question
 										var temp = sections[i].split("<")[1].split(">")[1]; 
@@ -136,10 +127,10 @@ if (Meteor.isClient) {
 										// card response, first response is correctly
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										document.getElementById('cardResponse' + currentCardNum + "-" + currentCardVersion).value  +=  temp;
-										//currentCardVersion++;
+										//currentCardVersion++; //figure out a way to add versions better?
 										i++;
 									} else {
-										i++; //in case of a blank/useless line?
+										i++; //in case of a unused line
 									}
 								}
 								
@@ -149,8 +140,10 @@ if (Meteor.isClient) {
 							} else if (sections[i].indexOf("<unit>") !== -1) {
 									//the different units
 									//click the add unit button at this point then have the following loop work with the added units
-								var addUnitClick = document.getElementById('addUnit');
-								addUnitClick.click();
+								if (document.getElementById('unitDrop' + currentUnitNum) === null) {
+									var addUnitClick = document.getElementById('addUnit');
+									addUnitClick.click();
+								}
 
 								var unitType = "instructions";
 								for(j = i; sections[j].indexOf("</unit>") === -1; j++){ //checks which unit section to add
@@ -162,18 +155,15 @@ if (Meteor.isClient) {
 								}
 
 								if (unitType === "instructions") {
-									//document.getElementById('unitDrop' + currentUnitNum).click();//is this needed?
-									document.getElementById('instruction' + currentUnitNum).click();//if i change it to this, it messes up the code for updating
+									document.getElementById('instruction' + currentUnitNum).click();
 									console.log("clicked instructions");
 									console.log(currentUnitNum);
 								} else if (unitType === "assessment") {
-									//document.getElementById('unitDrop' + currentUnitNum).click();//is this needed?
-									document.getElementById('assessment' + currentUnitNum).click();//
+									document.getElementById('assessment' + currentUnitNum).click();
 									console.log("clicked assessment");
 									console.log(currentUnitNum);
 								} else if (unitType === "learning") {
-									//document.getElementById('unitDrop' + currentUnitNum).click();//is this needed?
-									document.getElementById('learningsession' + currentUnitNum).click();//
+									document.getElementById('learningsession' + currentUnitNum).click();
 									console.log("clicked learningsession");
 									console.log(currentUnitNum);
 								}
@@ -185,7 +175,7 @@ if (Meteor.isClient) {
 										document.getElementById('unitname' + currentUnitNum).value  =  temp;
 										i++;
 									} else if (sections[i].indexOf("<unitinstructions>") !== -1) {
-										// a blanket text field? instruction units only have this and previous tag
+										//the instructions of the unit
 										var temp = "";
 										if(sections[i].indexOf("CDATA") !== -1){
 											temp = sections[i].split("![CDATA[")[1].split("]]>")[0];
@@ -196,37 +186,44 @@ if (Meteor.isClient) {
 										document.getElementById('unitinstructions' + currentUnitNum).value  =  temp;
 										i++;
 									} else if (sections[i].indexOf("<purestudy>") !== -1) {
-										//not in the unit are but before it in timing, but its in all unit tags
+										//not in the unit itself but before it in the timing section, but its in all unit tags
+										// purestudy is study alone
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										document.getElementById('purestudy').value  =  temp;
 										i++;
 									} else if (sections[i].indexOf("<readyprompt>") !== -1) {
-										//not in the unit are but before it in timing, but its in all unit tags
+										//not in the unit itself but before it in the timing section, but its in all unit tags
+										// readyprompt is intercard interval
 										var temp = sections[i].split("<")[1].split(">")[1]; 
-										//document.getElementById('').value  =  temp;
+										document.getElementById('readyprompt').value  =  temp;
 										i++;
 									} else if (sections[i].indexOf("<reviewstudy>") !== -1) {
-										//not in the unit are but before it in timing, but its in all unit tags
+										//not in the unit itself but before it in the timing section, but its in all unit tags
+										// reviewstudy is incorrect feedback
 										var temp = sections[i].split("<")[1].split(">")[1]; 
-										//document.getElementById('').value  =  temp;
+										document.getElementById('reviewstudy').value  =  temp;
 										i++;
 									} else if (sections[i].indexOf("<correctprompt>") !== -1) {
-										//not in the unit are but before it in timing, but its in all unit tags
+										//not in the unit itself but before it in the timing section, but its in all unit tags
+										// correctprompt is correct feedback
 										var temp = sections[i].split("<")[1].split(">")[1]; 
-										//document.getElementById('').value  =  temp;
+										document.getElementById('correctprompt').value  =  temp;
 										i++;
 									} else if (sections[i].indexOf("<drill>") !== -1) {
-										//not in the unit are but before it in timing, but its in all unit tags
+										//not in the unit itself but before it in the timing section, but its in all unit tags
+										// drill is drill
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										document.getElementById('drill').value  =  temp;
 										i++;
 									} else if (sections[i].indexOf("<timebeforefeedback>") !== -1) {
-										//not in the unit are but before it in timing, but its in all unit tags
+										//not in the unit itself but before it in the timing section, but its in all unit tags
+										// we dont have but to be called Time Before Feedback when we make
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										//document.getElementById('').value  =  temp;
 										i++;
 									} else if (sections[i].indexOf("<timeuntilstimulus>") !== -1) {
-										//not in the unit are but before it in timing, but its in all unit tags
+										//not in the unit itself but before it in the timing section, but its in all unit tags
+										// we dont have but to be called Time Until Stimulus when we make
 										var temp = sections[i].split("<")[1].split(">")[1]; 
 										//document.getElementById('').value  =  temp;
 										i++;
@@ -298,8 +295,8 @@ if (Meteor.isClient) {
 
 								currentUnitNum++;
 
-							} else if (sections[i].indexOf("hi") !== -1) {
-								//
+							} else if (sections[i].indexOf("hi6283") !== -1) {
+								// placeholder for any other line to be added
 							}
 						}
 					}
