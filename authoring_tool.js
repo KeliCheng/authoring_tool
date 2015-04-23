@@ -547,19 +547,27 @@ function parserTDF(string){
 	console.log(tutor);
 	//TODO grab timing section
 	var j = 0;
+	var ss = false;
 	for (var i = 0; i < tags.length; i++) {
 		if(tags[i].substring(0,9) == "purestudy"){
 			j =i;
 			console.log("ding");
-			break;
+		}
+		if(tags[i].sustring(0,tags[i].indexOf("=")) == "skipstudy"){
+
 		}
 	};
 	counter ++;
-	var timer = concat("purestudy", tags[j].substring(10)*1000, false, counter);
-	timer += concat("readyprompt", tags[j+2].substring(12)*1000, false, counter);
-	timer += concat("reviewstudy", tags[j+4].substring(12)*1000, false, counter);
-	timer += concat("correctprompt", tags[j+3].substring(14)*1000, false, counter);
-	timer += concat("drill", tags[j+1].substring(6)*1000, false, counter);
+	var timer = concat("purestudy", tags[j].substring(tags[j].indexOf("=")+1)*1000, false, counter);
+	if(ss){
+		timer += concat("skipstudy", "true", false, counter);
+	}
+	else{
+		timer += concat("readyprompt", tags[j+2].substring(tags[j].indexOf("=")+1)*1000, false, counter);
+	}
+	timer += concat("reviewstudy", tags[j+4].substring(tags[j].indexOf("=")+1)*1000, false, counter);
+	timer += concat("correctprompt", tags[j+3].substring(tags[j].indexOf("=")+1)*1000, false, counter);
+	timer += concat("drill", tags[j+1].substring(tags[j].indexOf("=")+1)*1000, false, counter);
 	timer += concat("timebeforefeedback", "500", false, counter);
 	timer += concat("timeuntilstimulus", "500", false, counter);
 	
@@ -573,30 +581,43 @@ function parserTDF(string){
 	for (var i = 6; i < tags.length; i++) {
 		
 		//console.log(tags[i].substring(0,8));
-		if(tags[i].substring(0,8) == "unitname"&&firstunit){
-			console.log(tags[i]);
+		if(tags[i].substring(0,9) == "unitnameA"){
+			//
 			//put this in a unit
 			counter++;
-			unit += concat("unitname", tags[i].substring(9), false, counter);			
-			firstunit = false;
-			//do things
-		}else if(tags[i].substring(0,8) == "unitname"){
+			unit = concat("unitname", tags[i].substring(tags[i].indexOf("=")+1), false, counter);			
+			unit += concat("unitinstructions", tags[i+1].substring(tags[i+1].indexOf("=")+1), false, counter);			
 			counter--;
 			units += concat("unit", unit, true, counter);
-			counter++;
-			unit = ""; // clear out the units
-			unit += concat("unitname", tags[i].substring(9), false, counter);			
 			//do things
-		}else if(tags[i].substring(0,16) == "unitinstructions"){
+		}else if(tags[i].substring(0,tags[i].indexOf("=")) == "unitnameB"){
+			counter++;
+			unit = concat("unitname", tags[i].substring(tags[i].indexOf("=")+1), false, counter);			
+			unit += concat("unitinstructions", tags[i+1].substring(tags[i+1].indexOf("=")+1), false, counter);			
+			unit += concat("deliveryparams", timer, true, counter);
+			unit += concat("deliveryparams", timer, true, counter);
+			unit += concat("assessmentsession", "", true, counter);
+			//assessment session will need to have something in it.
+			counter--;
+			units+= concat("unit", unit, true, counter);
+			//do things
+		}else if(tags[i].substring(0,tags[i].indexOf("=")) == "unitnameC"){
+			counter++;
+			unit = concat("unitname", tags[i].substring(tags[i].indexOf("=")+1), false, counter);			
 			unit += concat("unitinstructions", tags[i].substring(17), true, counter);
+			unit += concat("buttontrial", "false", false, counter);
+			unit += concat("deliveryparams", timer, true, counter);
+			counter++;
+			//get learning session
+			counter--;
+			unit += concat("learningsessions", "", true, counter);
+			counter--;
+			units+= concat("unit", unit, true, counter);
 		}
 		//concat other things as well
 		};
-	counter --;
-	units += concat("unit",unit,true,counter); 
-	//when there is no more unitname encsulate 
-	//encaplsulate and add to units
-	counter--;
+		//error checking
+	}
 	tutor += units;
 	var finS = concat("tutor", tutor, true, counter);
 	finS += concat("deliveryparams", timer, true, 0);
