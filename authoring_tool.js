@@ -536,11 +536,28 @@ if (Meteor.isClient) {
 //FUNCTIONS
 
 function parserSTIM(string){
-	var counter = 0;
-	var s = "";
-	if(true){
-		s = concat();
-	}
+	var counter = 2;
+	var spec = "";
+	var clusters = "";
+	var cluster = "";
+
+	var tags = string.split("&");
+	
+	for (var i = 6; i < tags.length; i++) {
+		if(tags[i].substring(0,10) == "cardPrompt"){
+			counter++;
+			cluster =  concat("display", tags[i].substring(tags[i].indexOf("=")+1), false, counter);
+			cluster += concat("response", tags[i+1].substring(tags[i+1].indexOf("=")+1), false, counter);
+			counter--;
+			clusters += concat("cluster", cluster, true, counter);
+		}
+	};
+	counter--;
+	spec = concat("clusters", clusters, true, counter);
+	counter--;
+	s = concat("setspec", spec, true, counter);
+
+	console.log(s);	
 };
 
 function parserTDF(string){
