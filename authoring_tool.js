@@ -551,7 +551,7 @@ function parserSTIM(string){
 			counter--;
 			clusters += concat("cluster", cluster, true, counter);
 		}
-	};
+	};10
 	counter--;
 	spec = concat("clusters", clusters, true, counter);
 	counter--;
