@@ -61,7 +61,7 @@ if (Meteor.isClient) {
 
 
 	Template.load.events ({
-		'change .load1': function(event, template){
+		'change .load1': function(event, template) {
 			event.defaultPrevented;
 			// var loadedFile = document.getElementById('realLoad');
 			// document.getElementById('realLoad').addEventListener('click', readingFiles);
@@ -299,8 +299,7 @@ if (Meteor.isClient) {
 										//document.getElementById('').value  =  temp;
 									}
 									i++;
-								}
-								
+								}				
 							}
 							i++;
 						}
