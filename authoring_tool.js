@@ -62,7 +62,8 @@ if (Meteor.isClient) {
 
 	Template.load.events ({
 		'change .load1': function(event, template){
-			event.defaultPrevented;
+			//event.defaultPrevented();
+			event.preventDefault();
 			// var loadedFile = document.getElementById('realLoad');
 			// document.getElementById('realLoad').addEventListener('click', readingFiles);
 			// loadedFile.click();
@@ -452,7 +453,8 @@ if (Meteor.isClient) {
 						instructions:true,
 						learningsessions:false,
 						assessments:false});
-		},
+		},	//add second addUnit for use in code
+			//****************************************************************
 		'click .deleteUnit': function(event) {
 			if (Session.get('numUnitsInt') > 1) {
 				console.log("sub unit button clicked");

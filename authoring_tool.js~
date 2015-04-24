@@ -62,7 +62,8 @@ if (Meteor.isClient) {
 
 	Template.load.events ({
 		'change .load1': function(event, template){
-			event.defaultPrevented;
+			//event.defaultPrevented();
+			event.preventDefault();
 			// var loadedFile = document.getElementById('realLoad');
 			// document.getElementById('realLoad').addEventListener('click', readingFiles);
 			// loadedFile.click();
@@ -275,7 +276,6 @@ if (Meteor.isClient) {
 										//
 										temp = sections[i].split("<")[1].split(">")[1]; 
 										//document.getElementById('').value  =  temp;
-									} else {
 									}
 									i++;
 								}
@@ -298,12 +298,9 @@ if (Meteor.isClient) {
 										// 
 										temp = sections[i].split("<")[1].split(">")[1]; 
 										//document.getElementById('').value  =  temp;
-									} else {
 									}
 									i++;
 								}
-								
-							} else {
 								
 							}
 							i++;
@@ -314,10 +311,10 @@ if (Meteor.isClient) {
 					}
 				}
 			}
-		} else {
-			alert("Failed to load file. Reclick it if you did/do pick a file.");
+			} else {
+				alert("Failed to load file. Reclick it if you did/do pick a file.");
+			}
 		}
-	}
 	});
 
 	Template.hello.helpers({
@@ -456,7 +453,7 @@ if (Meteor.isClient) {
 						instructions:true,
 						learningsessions:false,
 						assessments:false});
-		},
+		},	//add second addUnit for use in code
 		'click .deleteUnit': function(event) {
 			if (Session.get('numUnitsInt') > 1) {
 				console.log("sub unit button clicked");
