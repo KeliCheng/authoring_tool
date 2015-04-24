@@ -514,7 +514,7 @@ function parserSTIM(string){
 			counter--;
 			clusters += concat("cluster", cluster, true, counter);
 		}
-	};10
+	};
 	counter--;
 	spec = concat("clusters", clusters, true, counter);
 	counter--;
@@ -549,25 +549,26 @@ function parserTDF(string){
 	var j = 0;
 	var ss = false;
 	for (var i = 0; i < tags.length; i++) {
+		
 		if(tags[i].substring(0,9) == "purestudy"){
 			j =i;
 			console.log("ding");
 		}
-		if(tags[i].sustring(0,tags[i].indexOf("=")) == "skipstudy"){
-
-		}
-	};
+		if(tags[i].substring(0, tags[i].indexOf("=")) == "skipstudy"){
+			ss = true;
+		}tags
+	}
 	counter ++;
 	var timer = concat("purestudy", tags[j].substring(tags[j].indexOf("=")+1)*1000, false, counter);
 	if(ss){
 		timer += concat("skipstudy", "true", false, counter);
 	}
 	else{
-		timer += concat("readyprompt", tags[j+2].substring(tags[j].indexOf("=")+1)*1000, false, counter);
+		timer += concat("readyprompt", tags[j+2].substring(tags[j+2].indexOf("=")+1)*1000, false, counter);
 	}
-	timer += concat("reviewstudy", tags[j+4].substring(tags[j].indexOf("=")+1)*1000, false, counter);
-	timer += concat("correctprompt", tags[j+3].substring(tags[j].indexOf("=")+1)*1000, false, counter);
-	timer += concat("drill", tags[j+1].substring(tags[j].indexOf("=")+1)*1000, false, counter);
+	timer += concat("reviewstudy", tags[j+4].substring(tags[j+4].indexOf("=")+1)*1000, false, counter);
+	timer += concat("correctprompt", tags[j+3].substring(tags[j+3].indexOf("=")+1)*1000, false, counter);
+	timer += concat("drill", tags[j+1].substring(tags[j+1].indexOf("=")+1)*1000, false, counter);
 	timer += concat("timebeforefeedback", "500", false, counter);
 	timer += concat("timeuntilstimulus", "500", false, counter);
 	
@@ -590,37 +591,73 @@ function parserTDF(string){
 			counter--;
 			units += concat("unit", unit, true, counter);
 			//do things
-		}else if(tags[i].substring(0,tags[i].indexOf("=")) == "unitnameB"){
+		};
+		if(tags[i].substring(0,tags[i].indexOf("=")) == "unitnameC"){
 			counter++;
 			unit = concat("unitname", tags[i].substring(tags[i].indexOf("=")+1), false, counter);			
 			unit += concat("unitinstructions", tags[i+1].substring(tags[i+1].indexOf("=")+1), false, counter);			
+			unit += concat("buttontrial", "false", false, counter);
 			unit += concat("deliveryparams", timer, true, counter);
-			unit += concat("deliveryparams", timer, true, counter);
+			counter++;
+			//get assessment session
+			counter--;
 			unit += concat("assessmentsession", "", true, counter);
 			//assessment session will need to have something in it.
 			counter--;
 			units+= concat("unit", unit, true, counter);
 			//do things
-		}else if(tags[i].substring(0,tags[i].indexOf("=")) == "unitnameC"){
+		};
+		if(tags[i].substring(0,tags[i].indexOf("=")) == "unitnameB"){
 			counter++;
 			unit = concat("unitname", tags[i].substring(tags[i].indexOf("=")+1), false, counter);			
-			unit += concat("unitinstructions", tags[i].substring(17), true, counter);
+			unit += concat("unitinstructions", tags[i+1].substring(17), true, counter);
 			unit += concat("buttontrial", "false", false, counter);
 			unit += concat("deliveryparams", timer, true, counter);
 			counter++;
-			//get learning session
+			//set learning session
+			var learningparam = "";
+			var allowpause = false;
+			var allowquit = false;
+			var unending = false;
+			for (var k = 0; k < tags.length; k++) {
+				if(tags[k].substring(0,tags[k].indexOf("="))== "allowpause"){
+					allowpause = true;
+				};
+				if (tags[k].substring(0,tags[k].indexOf("="))== "allowquit") {
+					allowquit = true;
+				};
+				if (tags[k].substring(0,tags[k].indexOf("="))== "unending") {
+					unending = true;
+				};
+			};
+
+			if (allowquit) {
+				learningparam += concat("allowquit", "true", false, counter);
+			} else{
+				learningparam += concat("allowquit", "false", false, counter);
+			};
+
+			if (allowpause) {
+				learningparam += concat("allowpause", "true", false, counter);
+			} else{
+				learningparam += concat("allowpause", "false", false, counter);
+			};
+
+			if (unending) {
+				learningparam += concat("unending", "true", false, counter);
+			} else{
+				learningparam += concat("unending", "false", false, counter);
+			};
 			counter--;
-			unit += concat("learningsessions", "", true, counter);
+			unit += concat("learningsessions", learningparam, true, counter);
 			counter--;
 			units+= concat("unit", unit, true, counter);
-		}
-		//concat other things as well
 		};
-		//error checking
-	}
+		//concat other things as well
+	};
+	//error checking
 	tutor += units;
 	var finS = concat("tutor", tutor, true, counter);
-	finS += concat("deliveryparams", timer, true, 0);
 	console.log(finS);
 };
 	
