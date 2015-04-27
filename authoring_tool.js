@@ -179,15 +179,18 @@ if (Meteor.isClient) {
 							}
 						}
 						if (unitType == "instructions") {
-							document.getElementById('instruction' + currentUnitNum).click();
+							//document.getElementById('instruction' + currentUnitNum).click();
+							addInstructions();
 							console.log("clicked instructions");
 							console.log(currentUnitNum);
 						} else if (unitType == "assessment") {
-							document.getElementById('assessment' + currentUnitNum).click();
+							//document.getElementById('assessment' + currentUnitNum).click();
+							addAssessment();
 							console.log("clicked assessment");
 							console.log(currentUnitNum);
 						} else if (unitType == "learning") {
-							document.getElementById('learningsession' + currentUnitNum).click();
+							//document.getElementById('learningsession' + currentUnitNum).click();
+							addLearning();
 							console.log("clicked learningsession");
 							console.log(currentUnitNum);
 						}
@@ -675,6 +678,32 @@ function concat(tag, source, vertical, numSpace){
 	s+="</"+tag+">\n";
 	return s;
 };
+
+function addInstructions(){
+	Session.set('numUnitsInt', Session.get('numUnitsInt') + 1);
+	unitList.insert({num:Session.get('numUnitsInt'),
+				instructions:true,
+				learningsessions:false,
+				assessments:false});
+};
+
+function addLearning(){
+	Session.set('numUnitsInt', Session.get('numUnitsInt') + 1);
+	unitList.insert({num:Session.get('numUnitsInt'),
+				instructions:false,
+				learningsessions:true,
+				assessments:false});
+};
+
+function addAssessment(){
+	Session.set('numUnitsInt', Session.get('numUnitsInt') + 1);
+	unitList.insert({num:Session.get('numUnitsInt'),
+				instructions:false,
+				learningsessions:false,
+				assessments:true});
+};
+
+
 
 //Server Side
 if (Meteor.isServer) {

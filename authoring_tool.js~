@@ -454,6 +454,7 @@ if (Meteor.isClient) {
 						learningsessions:false,
 						assessments:false});
 		},	//add second addUnit for use in code
+			//****************************************************************
 		'click .deleteUnit': function(event) {
 			if (Session.get('numUnitsInt') > 1) {
 				console.log("sub unit button clicked");
@@ -674,6 +675,32 @@ function concat(tag, source, vertical, numSpace){
 	s+="</"+tag+">\n";
 	return s;
 };
+
+function addInstructions(){
+	Session.set('numUnitsInt', Session.get('numUnitsInt') + 1);
+	unitList.insert({num:Session.get('numUnitsInt'),
+				instructions:true,
+				learningsessions:false,
+				assessments:false});
+};
+
+function addLearning(){
+	Session.set('numUnitsInt', Session.get('numUnitsInt') + 1);
+	unitList.insert({num:Session.get('numUnitsInt'),
+				instructions:false,
+				learningsessions:true,
+				assessments:false});
+};
+
+function addAssessment(){
+	Session.set('numUnitsInt', Session.get('numUnitsInt') + 1);
+	unitList.insert({num:Session.get('numUnitsInt'),
+				instructions:false,
+				learningsessions:false,
+				assessments:true});
+};
+
+
 
 //Server Side
 if (Meteor.isServer) {
