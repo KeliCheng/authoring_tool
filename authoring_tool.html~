@@ -14,16 +14,16 @@
   	<center>
   		<a href="#" class="btn btn-primary">   C R E A T E   </a>
   		{{> load}}
-  		<!--<a href="#" onclick="loadXML()" class="btn btn-primary load1">   L O A D   </a>-->
   		<a href="#" class="btn btn-primary">   T E S T   </a>
   		<a href="#" onclick="saveXML()" class="btn btn-primary">   S A V E   </a>
-  		<a href="#" class="btn btn-primary">   P U B L I S H   </a>
+  		<a href="#" class="publish btn btn-primary">   P U B L I S H   </a>
   	</center>
-	<form id="masterForm">
+
+
+	<form name="masterForm" id="masterForm">
+    <button type="submit" class="master btn btn-primary">Submit for validation test</button>
 		{{> hello}}
-		<!--<a href="#" class="btn btn-primary">G E N E R A T E   X M L</a>-->
 		<input type="submit" value="Submit">
-		<!-- <a type="submit" class="btn btn-primary btn-lg">  S U B M I T  </a> -->
 	</form>
 </body>
 <!--END BODY-->
@@ -31,14 +31,14 @@
 <!--BEGIN LOAD-->
 <template name="load">
 	<input type="file" accept=".xml" id="realLoad" style="display:none" class="load2" />
-	<a href="#" class="btn btn-primary load1">   L O A D   </a>
+	<input type="file" class="btn btn-primary load1" id="load1" >
 </template>
 <!--END LOAD-->
 
 <template name="hello">
 	<div class="card">
 		<center>
-	  		<label>Name your FaCT Module: <input type="text" id="moduleName" name="modulename"></label>
+	  		<label>Name your FaCT Module: <input style="height:30px;width:250px;font-size:14pt;" type="text" id="lessonName" name="lessonName" required></label>
 		</center>
 	</div>
 	<br>
@@ -46,63 +46,64 @@
 	<div class="form-horizontal form1">
 		<fieldset>
 			<legend>Cards</legend>
+      <div class="card">
+      <ul class="pager">
+        <li class="next"><a data-toggle="tooltip" data-placement="bottom" title="
+        *Levenshtien Proportion = ifparameter
+        *Shuffle Instruction example: 0-16 
+           shuffles among cards 0 to 16 
+        *Swap Instruction example: 0-5, 6-10
+            swap groups 0-5 and 6-10
+        "> ? </a></li>
+      </ul>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();   
+        });
+      </script>
+<!-- 
+        <div id="message">
+              <p>message content</p>
+        </div>
 
-			<div class="card">
-				<ul class="pager">
-  					<li class="demo next">
-						<a href="#"> ? </a>
-					</li>
-  					<div id="message">
-					</div>
-				</ul>
+        <ul class="pager">
+            <li class="demo next">
+            <a href="#"> ? </a>
+          </li>
+        </ul> -->
 
 				<div class="form-group">
-					<label>Name of Cards</label>
-					<input type="text" name="lessonname">
-      					<label>Name of Versions</label>
-      					<input type="text" name="nameofversion">
-    				</div>
+					<label>Name of Cards
+					 <input style="height:30px;width:250px;font-size:14pt;" type="text" name="lessonname" id="numberofcards" required>
+          </label>
+      		<label>Name of Versions
+      			<input style="height:30px;width:250px;font-size:14pt;" type="text" name="nameofversion" id="numberofversions">
+          </label>
+    		</div>
 
  				<div class="form-group">
- 					<label>Levenshtien Proportion:</label>
-      					<select class="form-control" name="ifparameter">
-          					<option value="0">0.1</option>
-          					<option>0.2</option>
-          					<option>0.3</option>
-          					<option>0.4</option>
-          					<option>0.5</option>
-          					<option>0.6</option>
-          					<option>0.7</option>
-          					<option>0.8</option>
-          					<option>0.9</option>
-          					<option>1.0</option>
-        				</select>
+ 					<label>Levenshtien Proportion:
+          <input id="lfParameter" name="lfparameter" style="height:30px;width:250px;font-size:14pt;" value="0" type="number" step="0.01" class="fbfh-number" min="0" required>
+            </label>
 				</div>
 
 				<div class="form-group">
-					<label>Shuffle Instruction</label>
-					<input type="text" name="shuffleclusters">
-					<label>Swap Instrcutions</label>
-					<input type="text" name="shuffleclusters">
+					<label>Shuffle Instruction
+					<input style="height:30px;width:250px;font-size:14pt;" type="text" id="shuffleClusters" name="shuffleclusters"></label>
+					<label>Swap Instrcutions
+					<input style="height:30px;width:250px;font-size:14pt;" type="text" id="swapInstructions" name="swapclusters"></label> 
 				</div>
-	
-				<!--<div class="form-group">
-      					<label>Shuffle instruction>
-        					<input type="text" name="shuffle1" class="form-control"> 
-      					</label>
-    				</div>-->
 
 				<div class="form-group">
-					<!-- <label class="col-lg-2 control-label">Radios</label> -->
       					<div class="col-lg-10">
         					<div class="radio" name="media">
-          						<label> <input type="radio" value="stemType" checked="">Multimedia</label>
+          						<label> <input type="radio" name="mm" value="stemType" checked="">Multimedia</label>
         					</div>
         					<div class="radio">
-          						<label> <input type="radio" value="stemType">Text</label>
+          						<label> <input type="radio" name="txt" value="stemType">Text</label>
 						</div>
       						<div class="radio">
-							<label> <input type="radio" value="mms">ButtonTrial (add button order here)</label>
+							<label> <input type="radio" id="buttonTrial" name="bt" value="mms">ButtonTrial (add button order here)</label>
 						</div>
 					</div>
 				</div>
@@ -139,47 +140,54 @@
 						</td>
       						<td><input type="text" name="cardResponse{{cardNum}}"></td>
 					{{/each}}-->
-	
-	
+
 					{{#each versionList}}	
-      						<td><input type="text" name="cardPrompt{{versionNum}}"></td>
-      						<td><input type="text" name="cardResponse{{versionNum}}"></td>
+      						<td><input type="text" id="cardPrompt{{../cardNum}}-{{versionNum}}" name="cardPrompt{{versionNum}}"></td>
+                  <td><input type="text" id="cardResponse{{../cardNum}}-{{versionNum}}" name="cardResponse{{versionNum}}"></td>
 					{{/each}}
 				</tr>
 			{{/each}}
 		</tbody>
 	</table>
-	<button type="button" class="addCard btn btn-primary btn -lg"> + C A R D </button>
-	<button type="button" class="addVersion btn btn-primary btn -lg"> + V E R S I O N </button>
-	<button type="button" class="subVersion btn btn-primary btn -lg"> - V E R S I O N </button>
-	<button type="button" class="subCard btn btn-primary btn -lg"> - C A R D </button>	
+	<button type="button" id="addCard" class="addCard btn btn-primary btn -lg"> + C A R D </button>
+  <button type="button" id="addCardVersion" class="addVersion btn btn-primary btn -lg"> + V E R S I O N </button>
+  <button type="button" id="subCard" class="subVersion btn btn-primary btn -lg"> - V E R S I O N </button>
+  <button type="button" id="subCardVersion" class="subCard btn btn-primary btn -lg"> - C A R D </button>	
 	<br>
 	<!--END CARDS-->
 
 	<div class="form-horizontal cardTimingForm card">
 		<fieldset>
     			<legend>Card Timing</legend>
-    			<!-- <div class="jumbotron"> -->
+    			<ul class="pager">
+            <li class="next"><a data-toggle="tooltip" data-placement="bottom" title="
+              Card timing intervals in second.
+              Stay Alone Interval = purestudy
+              Intercard Interval = reviewstudy? 
+              Correct Feedback Interval = correctprompt
+
+              "> ? </a></li>
+          </ul>
     			<div>
     				<div class="form-group">
-      					<label>Stay Alone Interval</label>
-        				<input name="purestudy" value="0" type="number" step="0.01" class="fbfh-number" min="0">
-         				<label>Drill Timeout</label>
-        				<input name="timeout" value="0" type="number" step="0.01" class="fbfh-number" min="0">
+      					<label>Stay Alone Interval
+        				<input id="purestudy" name="purestudy" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
+         				<label>Drill Timeout
+        				<input id="drill" name="drill" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
     				</div>
     				<div class="form-group">
-      					<label>Intercard Interval</label>
-        				<input name="" value="0" type="number" step="0.01" class="fbfh-number" min="0">
-        				<label>Correct Feedback Interval</label>
-        				<input name="correctfeedback" value="0" type="number" step="0.01" class="fbfh-number" min="0">
+      					<label>Intercard Interval
+        				<input id="readyprompt" name="readyprompt" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
     				</div>
     				<div class="form-group">
-      					<label>Incorrect Feedback</label>
-        				<input name="incorrectfeedback" value="0" type="number" step="0.01" class="fbfh-number" min="0">
+              <label>Correct Feedback Interval
+                <input id="correctprompt" name="correctprompt" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
+      					<label>Incorrect Feedback
+        				<input id="reviewstudy" name="reviewstudy" value="0" type="number" step="0.01" class="fbfh-number" min="0" style="height:30px;width:250px;font-size:14pt;"></label>
     				</div>
     				<div class="form-group">
       					<div class="checkbox">
-      						<label> <input type="checkbox" name="skip">Skip Study Interval Allowed</label>
+      						<label> <input type="checkbox" name="skipstudy">Skip Study Interval Allowed</label>
     					</div>
   				</div>
      				<div class="form-group" align="right">
@@ -203,30 +211,40 @@
 	{{#each unitList}}
     		<ul class="nav nav-tabs">
   			<li class="dropdown active">
-    				<a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown">
+    				<a aria-expanded="false" class="dropdown-toggle" id="unitDrop{{num}}" data-toggle="dropdown">
       					Select Unit Type <span class="caret"></span>
     				</a>
     				<ul class="dropdown-menu">
-      					<li class="active"><a class="unitType num{{num}}" id="instruction" aria-expanded="true" href="#dropdown1" data-toggle="tab">Instruction</a></li>
+      					<li class="active"><a class="unitType num{{num}} instruction" id="instruction{{num}}" name="instruction{{num}}" aria-expanded="true" href="#dropdown1" data-toggle="tab">Instruction</a></li>
       					<li class="divider"></li>
-      					<li class=""><a class="unitType num{{num}}" id="assessment" aria-expanded="false" href="#dropdown2" data-toggle="tab">Assessment</a></li>
+      					<li class=""><a class="unitType num{{num}} assessment" id="assessment{{num}}" name="assessment{{num}}" aria-expanded="false" href="#dropdown2" data-toggle="tab">Assessment</a></li>
       					<li class="divider"></li>
-      					<li class=""><a  class="unitType num{{num}}" id="learningsession" aria-expanded="false" href="#dropdown3" data-toggle="tab">Learning Session</a></li>
+      					<li class=""><a  class="unitType num{{num}} learningsession" id="learningsession{{num}}" name="learningsession{{num}}" aria-expanded="false" href="#dropdown3" data-toggle="tab">Learning Session</a></li>
     				</ul>
   			</li>
 		</ul>
-		{{#if instruction instructions }}
+		{{#if instructions }}
 		<div class="form-horizontal unitForm{{num}}">
 			<fieldset>
-    				<legend>Introduction</legend>
-    					<div class="jumbotron">
+    				<legend>Introduction {{num}}</legend>
+    					<div class="card">
+                <ul class="pager">
+                  	<li class="next">
+				<a data-toggle="tooltip" data-placement="bottom" title="Introduction shows at the beginning of each lesson."> ? </a>
+			</li>
+                </ul>
+                <script type="text/javascript">
+              		$(document).ready(function(){
+             			$('[data-toggle="tooltip"]').tooltip();   
+                  	});
+                </script>
     						<div class="form-group">
       							<label>Unit Name</label>
-        						<input type="text" name="unitname" value="Intro">
+        						<input style="height:30px;width:250px;font-size:14pt;" type="text" name="unitnameA" placeholder="Introduction" id="unitname{{num}}">
     						</div>
     						<div class="form-group">
 							<label>Introduction</label>
-							<textarea class="form-control" rows="4" name="unitinstructions" value="This is a lesson for..."></textarea>
+							<textarea style="width:80%;font-size:14pt;" rows="5" name="unitinstructions" placeholder="This is a lesson for..." id="unitinstructions{{num}}"></textarea>
 						</div>
      						<div class="form-group" align="right">
         						<button type="button" class="btn btn-primary -sm reset1 unitForm{{num}}" align="right">Reset</button>
@@ -236,23 +254,74 @@
 		</div>
 		{{/if}}
 
-		{{#if assessment assessments }}
+		{{#if assessments }}
 		<div id="unitForm{{num}}" class="form-horizontal">
     			<fieldset>
-      				<legend>Assessment</legend>
-     				<div class="jumbotron">
+      				<legend>Assessment {{num}}</legend>
+     				<div class="card">
+              <ul class="pager">
+              		<li class="next">
+				<a data-toggle="tooltip" data-placement="bottom" title="The assessment is created from N templates, where a card from the assign field list (e.g. 0-1 indicates the first 2 cards). Combined templates are then interleaved. Card sequence lays down the templates in order. Finally, the shuffle is applied in segments according to the shuffle input box."> ? </a>
+			</li>
+              </ul>
+              <script type="text/javascript">
+              		$(document).ready(function(){
+                  		$('[data-toggle="tooltip"]').tooltip();   
+                	});
+              </script>
+
       					<div class="form-group">
         					<label>Unit Name</label>
-        					<input type="text" name="unitname">
+        					<input style="height:30px;width:250px;font-size:14pt;" type="text" name="unitnameC" id="unitname{{num}}">
       					</div>
       					<div class="form-group">
         					<label>Unit Instruction</label>
-        					<textarea class="form-control" rows="2" value="..." name="unitinstructions"></textarea>
+        					<textarea style="width:80%;font-size:14pt;" rows="2" placeholder="....." name="unitinstructions" id="unitinstructions{{num}}"></textarea>
       					</div>
+              <div class="form-group">
+                  <label>Group Name</label>
+                  <input style="height:30px;width:250px;font-size:14pt;" type="text" name="groupnames" id="groupnames{{num}}">
+              </div>
+              <div class="form-group">
+                  <label>Clusters Repeated</label>
+                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="clustersrepeated" id="clustersrepeated{{num}}">
+                  <label>Templates Repeated</label>
+                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="templatesrepeated" id="templatesrepeated{{num}}">
+              </div>
+              <div class="form-group">
+                  <label>Group</label>
+                  <textarea style="width:80%;font-size:14pt;" rows="2" placeholder="<group> .... </group>" name="group" id="group{{num}}"></textarea>
+              </div>
+              <div class="form-group">
+                  <label>Initial Positions</label>
+                  <textarea style="width:80%;font-size:14pt;" rows="2" placeholder="<initialpositions> .... </initialpositions>" name="initialpositions" id="initialpositions{{num}}"></textarea>
+              </div>
      					<div class="form-group">
       						<label>Number of Templates</label>
-        					<input name="numbertemplates" type="number" step="1" class="fbfh-number" min="0">
+        					<input style="height:30px;width:250px;font-size:14pt;" name="numbertemplates" type="number" step="1" class="fbfh-number" min="0" id="numbertemplates{{num}}">
     					</div>
+              <div class="form-group">
+                  <label>Cluster List
+                  <input style="height:30px;width:65px;font-size:14pt;" type="textfield" step="1" min="0" name="clusterlist1" id="clusterlist{{num}}">
+                  <!-- 
+                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="clusterlist2">--></label>
+                </div>
+              <div class="form-group">
+                  <div class="checkbox">
+                      <label> <input type="checkbox" name="randomizegroups" id="randomizegroups{{num}}">Randomize Groups</label>
+                  </div>
+                  <div class="checkbox">
+                      <label> <input type="checkbox" name="assignrandomcluster" id="assignrandomclusters{{num}}">Assign Random Clusters</label>
+                  </div>
+                </div>
+              <div class="form-group">
+                  <label>Permute Final Result
+                  <input style="height:30px;width:65px;font-size:14pt;" type="textfield" step="1" min="0" name="permutefinalresult1" id="permutefinalresults{{num}}">
+                  <!--
+                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="permutefinalresult2">--></label>
+                </div>
+              
+                <br>
      					<div class="form-group" align="right">
         					<button type="button" class="btn btn-primary -sm reset1 unitForm{{num}}" align="right">Reset</button>
     					</div>
@@ -261,29 +330,40 @@
 		</div>
 		{{/if}}
 
-		{{#if learningsession learningsessions }}
+		{{#if learningsessions }}
 		<div class="form-horizontal unitForm{{num}}">
   			<fieldset>
-    				<legend>Learning Session</legend>
-    				<div class="jumbotron">
+    				<legend>Learning Session {{num}}</legend>
+    				<div class="form-group">
+              <ul class="pager">
+                	<li class="next">
+				<a data-toggle="tooltip" data-placement="bottom" title="Learning Session defines......"> ? </a>
+			</li>
+              </ul>
+              <script type="text/javascript">
+             		$(document).ready(function(){
+                  		$('[data-toggle="tooltip"]').tooltip();   
+                	});
+              </script>
     					<div class="form-group">
       						<label>Unit Name</label>
-      						<input type="text" name="unitname">
+      						<input style="height:30px;width:250px;font-size:14pt;" type="text" name="unitnameB" id="unitname{{num}}">
     					</div>
     					<div class="form-group">
       						<label>Unit Instruction</label>
-      						<textarea class="form-control" rows="4" value="..." name="unitinstructions"></textarea>
+      						<textarea style="width:80%;font-size:14pt;" rows="4" placeholder="..." name="unitinstructions" id="unitinstructions{{num}}"></textarea>
     					</div>
     					<div class="form-group">
         					<div class="checkbox">
-        	  					<label> <input type="checkbox" name="allowquit">Allow Quit</label>
-        	   					<label> <input type="checkbox" name="allowpause">Allow Pause</label>
-        	  					<label> <input type="checkbox" name="unending">Unending</label>
+        	  					<label> <input type="checkbox" name="allowquit" id="allowquit{{num}}">Allow Quit</label>
+        	   					<label> <input type="checkbox" name="allowpause" id="allowpause{{num}}">Allow Pause</label>
+        	  					<label> <input type="checkbox" name="unending" id="unending{{num}}">Unending</label>
         					</div>
         				</div>
+                <br>
         	 			<div class="form-group">
-      						<label>Min Durationtime</label>
-        					<input name="mindurationtime" type="number" step="0.01" class="fbfh-number" min="0">
+      						<label>Min Duration Time</label>
+        					<input style="height:30px;width:250px;font-size:14pt;" name="mindurationtime" type="number" step="0.01" class="fbfh-number" min="0" id="mindurationtime{{num}}">
     					</div>
     					<div class="form-group" align="right">
       						<button type="button" class="btn btn-primary -sm reset1 unitForm{{num}}" align="right">Reset</button>
@@ -294,9 +374,10 @@
 		{{/if}}
 
 	{{/each}}
+  <br> 
   			<div class="form-group">
-				<button type="button" class="addUnit btn btn-primary btn -lg"> + A D D </button>
-      				<button type="button" class="btn btn-primary -sm deleteUnit" align="right"> - R E M O V E </button>
+				<button type="button" id="addUnit" class="addUnit btn btn-primary btn -lg"> + A D D </button>
+      	<button type="button" id="subUnit" class="btn btn-primary -sm deleteUnit" align="right"> - R E M O V E </button>
 			</div>
 	   		</div>
 		</div>

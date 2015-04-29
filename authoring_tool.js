@@ -8,11 +8,11 @@ if (Meteor.isClient) {
 	Session.setDefault('numCards', 1);
 	Session.setDefault('numVersions', 1);
 
+	//BODY TEMPLATE EVENTS
 	Template.body.events({
   		'click .master': function (event) {
   			// event.preventDefault();
     			// This function is called when the master form is submitted
-			console.log("bibadi");
 
 			var x = document.forms["masterForm"]["lessonName"].value;
 			var numberofcards = document.getElementById("numberofcards").value;
@@ -62,23 +62,12 @@ if (Meteor.isClient) {
 		}
 	});
 
-
+	//LOAD TEMPLATE EVENTS
 	Template.load.events ({
 		'change .load1': function(event, template){
-			//event.defaultPrevented();
 			event.preventDefault();
-			//cardList.remove({});
-			//unitList.remove({});
-			// var loadedFile = document.getElementById('realLoad');
-			// document.getElementById('realLoad').addEventListener('click', readingFiles);
-			// loadedFile.click();
-			// document.getElementById('realLoad').removeEventListener('click', readingFiles); //need to end the Listener or else it adds 1 more each time load is clicked
-			//also, it runs the listen event before i can pick a file, making me click load twice, clicking it a 3rd time fixes the unit section? what?
-
-			//function readingFiles(evt) {
-			//var file = evt.target.files[0]; //do these 3 lines do the same thing?
 			var file = document.getElementById("load1").files[0];
-			//var file = template.find('input type=["file"]').files[0];
+
 			if (file) {
 				var reader = new FileReader();
 				reader.readAsText(file, "UTF-8");
@@ -134,8 +123,6 @@ if (Meteor.isClient) {
 						} else if (sections[i].indexOf("<cluster>") != -1) {
 							//the cards
 							if (document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) == null) {
-								//var addCardClick = document.getElementById('addCard');
-								//addCardClick.click();
 								addCard();
 							} // hopefully this adds cards when needed
 
@@ -146,8 +133,6 @@ if (Meteor.isClient) {
 									//document.getElementById('').value  =  temp;
 								} else if (sections[i].indexOf("<display>") != -1) {
 									if(document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) == null){
-										//var addCardVersion = document.getElementById('addCardVersion');
-										//addCardVersion.click();
 										addCardVersion();
 									} //does this add versions when needed?
 								
@@ -171,10 +156,6 @@ if (Meteor.isClient) {
 							//the different units
 							//click the add unit button at this point then have the following loop work with the added units
 							if (document.getElementById('unitDrop' + currentUnitNum) == null) {
-								// 	var addUnitClick = document.getElementById('addUnit');
-								// 	addUnitClick.click();
-						
-						
 								//to fix the triple click, go through it and add each unit needed then set them then go through each unit
 								//change the below indexOf to </tutor>, to signify end of doc, and have it click add unit for each one, then go through it again and set each unit, then finally set the contents of each units
 								var unitType = "instructions";
@@ -186,17 +167,14 @@ if (Meteor.isClient) {
 									}
 								}
 								if (unitType == "instructions") {
-									//document.getElementById('instruction' + currentUnitNum).click();
 									addInstructions();
 									console.log("clicked instructions");
 									console.log(currentUnitNum);
 								} else if (unitType == "assessment") {
-									//document.getElementById('assessment' + currentUnitNum).click();
 									addAssessment();
 									console.log("clicked assessment");
 									console.log(currentUnitNum);
 								} else if (unitType == "learning") {
-									//document.getElementById('learningsession' + currentUnitNum).click();
 									addLearning();
 									console.log("clicked learningsession");
 									console.log(currentUnitNum);
@@ -357,6 +335,7 @@ if (Meteor.isClient) {
 		}
 	});
 
+	//HELLO TEMPLATE HELPERS
 	Template.hello.helpers({
 		cardList: function () {
 			return cardList.find({});
@@ -366,54 +345,18 @@ if (Meteor.isClient) {
 		}
 	});
 
+	//UNITS TEMPLATE HELPERS
 	Template.Units.helpers({
 		unitList: function () {
 			return unitList.find({});
 		},
 		unitVal: function () {
 			return Session.get('unitVal');
-		},
-		instruction: function(toReturn) {
-			//var attrclass = $(event.target).attr("class").split('m')[1];
-		console.log("unit num... " + toReturn)
-		//var x = unitList.findOne({num: parseInt(unitNum)}).instructions;
-		return toReturn;
-
-		var v = Session.get('unitVal');	
-		if (v == 'instruction')
-			return true;
-		else
-			return false;
-		},
-		assessment: function(toReturn) {
-			console.log("unit num... " + toReturn)
-			return toReturn;
-			var v = Session.get('unitVal');	
-			if (v == 'assessment')
-				return true;
-			else
-				return false;
-		},
-		learningsession: function(toReturn) {
-			console.log("unit num... " + toReturn)
-			return toReturn;
-			var v = Session.get('unitVal');	
-			if (v == 'learningsession')
-				return true;
-			else
-				return false;
 		}
 	});
 
+	//HELLO TEMPLATE EVENTS
 	Template.hello.events({
-		// 'click .demo': function (event){
-		// 	// if (document.getElementById("message").style.visibility == "hidden"){
-		// 	// 	document.getElementById("message").style.visibility = "visible";
-		// 	// }else{
-		// 	// 	document.getElementById("message").style.visibility = "hidden";
-		// 	// }
-		// 	return false; //to avoid click on tooltips; 
-		// },
 		'click .unitType': function (event) {
 			//console.log("unitType changed");
 			var v = $(event.target).attr("class").split(" ")[2];
@@ -455,14 +398,10 @@ if (Meteor.isClient) {
 		},
 		'click .addCard': function(event) {
 	 		// console.log("add card button clicked, num cards: " + Session.get('numCards'));
-			// Session.set('numCards', Session.get('numCards') + 1);
-			// cardList.insert({cardNum:Session.get('numCards')});
 			addCard();
 		},
 		'click .addVersion': function(event) {
 			// console.log("add cardVersion button clicked, num versions: " + Session.get('numVersions'));
-			// Session.set('numVersions', Session.get('numVersions') + 1);
-			// versionList.insert({versionNum:Session.get('numVersions')});
 			addCardVersion();
 		},
 		'click .subCard': function(event) {
@@ -483,18 +422,10 @@ if (Meteor.isClient) {
 		}
 	});
 
+	//UNITS TEMPLATE EVENTS
 	Template.Units.events({
-		//'click .dropdown-toggle': function (e) {
-			//e.defaultPrevented();
-			//$(e.target).find('.dropdown-menu').toggle();
-		//},
 		'click .addUnit': function(event) {
 			// console.log("add unit button clicked");
-			// Session.set('numUnitsInt', Session.get('numUnitsInt') + 1);
-			// unitList.insert({num:Session.get('numUnitsInt'),
-			// 			instructions:true,
-			// 			learningsessions:false,
-			// 			assessments:false});
 			addInstructions();
 		},	
 		'click .deleteUnit': function(event) {
@@ -533,8 +464,23 @@ if (Meteor.isClient) {
 		}
 	});
 }
-//FUNCTIONS
 
+//Server Side
+if (Meteor.isServer) {
+	unitList = new Mongo.Collection('unitList');
+	cardList = new Mongo.Collection('cardList');
+	versionList = new Mongo.Collection('versionList');
+	Meteor.startup(function() {
+		// code to run on server at startup
+		unitList.remove({});
+		cardList.remove({});
+		cardList.insert({cardNum:1});
+		versionList.remove({});
+		versionList.insert({versionNum:1});
+	});
+}
+
+// BEGIN EXTERNAL FUNCTIONS
 function parserSTIM(string){
 	var counter = 2;
 	var spec = "";
@@ -721,25 +667,25 @@ function concat(tag, source, vertical, numSpace){
 function addInstructions(){
 	Session.set('numUnitsInt', Session.get('numUnitsInt') + 1);
 	unitList.insert({num:Session.get('numUnitsInt'),
-				instructions:true,
-				learningsessions:false,
-				assessments:false});
+		instructions:true,
+		learningsessions:false,
+		assessments:false});
 };
 
 function addLearning(){
 	Session.set('numUnitsInt', Session.get('numUnitsInt') + 1);
 	unitList.insert({num:Session.get('numUnitsInt'),
-				instructions:false,
-				learningsessions:true,
-				assessments:false});
+		instructions:false,
+		learningsessions:true,
+		assessments:false});
 };
 
 function addAssessment(){
 	Session.set('numUnitsInt', Session.get('numUnitsInt') + 1);
 	unitList.insert({num:Session.get('numUnitsInt'),
-				instructions:false,
-				learningsessions:false,
-				assessments:true});
+		instructions:false,
+		learningsessions:false,
+		assessments:true});
 };
 
 function addCard(){
@@ -752,21 +698,4 @@ function addCardVersion(){
 	versionList.insert({versionNum:Session.get('numVersions')});
 };
 
-//Server Side
-if (Meteor.isServer) {
-	unitList = new Mongo.Collection('unitList');
-	cardList = new Mongo.Collection('cardList');
-	versionList = new Mongo.Collection('versionList');
-	Meteor.startup(function() {
-		// code to run on server at startup
-		 unitList.remove({});
-		// unitList.insert({num:1,
-		// 		instructions:true,
-		// 		learningsessions:false,
-		// 		assessments:false});
-		cardList.remove({});
-		cardList.insert({cardNum:1});
-		versionList.remove({});
-		versionList.insert({versionNum:1});
-	});
-}
+//END EXTERNAL FUNCTIONS
