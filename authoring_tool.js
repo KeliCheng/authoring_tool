@@ -14,7 +14,7 @@ if (Meteor.isClient) {
     			// This function is called when the master form is submitted
 			console.log("bibadi");
 
-			var x = document.forms["masterForm"]["modulename"].value;
+			var x = document.forms["masterForm"]["lessonName"].value;
 			var y = document.getElementById("numberofcards").value;
 			var z = document.getElementsByName("nameofversion")[0].value
 
