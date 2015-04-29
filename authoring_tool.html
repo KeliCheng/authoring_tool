@@ -13,7 +13,7 @@
 	</ul>
   	<center>
   		<a href="#" class="btn btn-primary">   C R E A T E   </a>
-  		{{> load}}	<!--<a href="#" onclick="loadXML()" class="btn btn-primary load1">   L O A D   </a>-->
+  		{{> load}}
   		<a href="#" class="btn btn-primary">   T E S T   </a>
   		<a href="#" onclick="saveXML()" class="btn btn-primary">   S A V E   </a>
   		<a href="#" class="publish btn btn-primary">   P U B L I S H   </a>
@@ -38,7 +38,7 @@
 <template name="hello">
 	<div class="card">
 		<center>
-	  		<label>Name your FaCT Module: <input style="height:30px;width:250px;font-size:14pt;" type="text" id="lessonName" name="modulename" required></label>
+	  		<label>Name your FaCT Module: <input style="height:30px;width:250px;font-size:14pt;" type="text" id="lessonName" name="lessonName" required></label>
 		</center>
 	</div>
 	<br>
@@ -73,11 +73,11 @@
         </ul> -->
 
 				<div class="form-group">
-					<label>Number of Cards
+					<label>Name of Cards
 					 <input style="height:30px;width:250px;font-size:14pt;" type="text" name="lessonname" id="numberofcards" required>
           </label>
-      		<label>Number of Versions
-      			<input style="height:30px;width:250px;font-size:14pt;" type="text" name="nameofversion" id="numberofversions" required>
+      		<label>Name of Versions
+      			<input style="height:30px;width:250px;font-size:14pt;" type="text" name="nameofversion" id="numberofversions">
           </label>
     		</div>
 
@@ -282,19 +282,22 @@
         					<textarea style="width:80%;font-size:14pt;" rows="2" placeholder="....." name="unitinstructions" id="unitinstructions{{num}}"></textarea>
       					</div>
               <div class="form-group">
-                  <label>Todo: Group Name</label>
+                  <label>Group Name</label>
+                  <input style="height:30px;width:250px;font-size:14pt;" type="text" name="groupnames" id="groupnames">
               </div>
               <div class="form-group">
-                  <label>Todo: Cluster Repeated</label>
+                  <label>Clusters Repeated</label>
+                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="clustersrepeated" id="clustersrepeated">
+                  <label>Templates Repeated</label>
+                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="templatesrepeated" id="templatesrepeated">
               </div>
               <div class="form-group">
-                  <label>Todo: Template Repeated</label>
+                  <label>Group</label>
+                  <textarea style="width:80%;font-size:14pt;" rows="2" placeholder="<group> .... </group>" name="group" id="group"></textarea>
               </div>
               <div class="form-group">
-                  <label>Todo: Group</label>
-              </div>
-              <div class="form-group">
-                  <label>Todo: Initial Positions</label>
+                  <label>Initial Positions</label>
+                  <textarea style="width:80%;font-size:14pt;" rows="2" placeholder="<initialpositions> .... </initialpositions>" name="initialpositions" id="initialpositions"></textarea>
               </div>
      					<div class="form-group">
       						<label>Number of Templates</label>
