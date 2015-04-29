@@ -67,6 +67,8 @@ if (Meteor.isClient) {
 		'change .load1': function(event, template){
 			//event.defaultPrevented();
 			event.preventDefault();
+			//cardList.remove({});
+			//unitList.remove({});
 			// var loadedFile = document.getElementById('realLoad');
 			// document.getElementById('realLoad').addEventListener('click', readingFiles);
 			// loadedFile.click();
@@ -81,242 +83,274 @@ if (Meteor.isClient) {
 				var reader = new FileReader();
 				reader.readAsText(file, "UTF-8");
 				reader.onload = function (evt) {
-				//console.log(reader); // puts the file into the log
-				var contents = evt.target.results;
-				var ct = reader.result;
-				var sections = ct.split('\n');
-				//alert("got the file.\n" + "name: " + file.name + "\n" + "fileType: " + file.type); //gets the file
-				currentCardNum = 1;
-				currentCardVersion = 1;
-				currentUnitNum = 1;
-				for (i = 0; i < sections.length - 1; i++) {
-					sections[i] = sections[i].trim();
-					var temp = null;
-					//console.log(sections[i]); //puts the line into the log
-					if (sections[i].indexOf("<lessonname>") != -1) {
-						//Name of Cards
-						temp = sections[i].split("<")[1].split(">")[1]; //gets the value we want from between the brackets
-						document.getElementById('lessonName').value  =  temp; //has to be done by Id
-					} else if (sections[i].indexOf("<stimulusfile>") != -1) {
-						// the Stimulus file, useless to load right now
-						temp = sections[i].split("<")[1].split(">")[1]; 
-						document.getElementById('numberofcards').value  =  temp;
-					} else if (sections[i].indexOf("<clustermodel>") != -1) {
-						//
-						temp = sections[i].split("<")[1].split(">")[1]; 
-						//document.getElementById('').value  =  temp;
-					} else if (sections[i].indexOf("<clustersize>") != -1) {
-						//
-						temp = sections[i].split("<")[1].split(">")[1]; 
-						//document.getElementById('').value  =  temp;
-					} else if (sections[i].indexOf("<shuffleclusters>") != -1) {
-						//
-						temp = sections[i].split("<")[1].split(">")[1]; 
-						document.getElementById('shuffleClusters').value  =  temp;
-					} else if (sections[i].indexOf("<lfparameter>") != -1) {
-						// Levenshtien Proportion
-						temp = sections[i].split("<")[1].split(">")[1]; 
-						//document.getElementById('lfParameter').value  =  temp;
-					} else if (sections[i].indexOf("<isModeled>") != -1) {
-						//
-						temp = sections[i].split("<")[1].split(">")[1]; 
-						//document.getElementById('').value  =  temp;
-					} else if (sections[i].indexOf("<timeoutInSeconds>") != -1) {
-						//
-						temp = sections[i].split("<")[1].split(">")[1]; 
-						//document.getElementById('').value  =  temp;
-					} else if (sections[i].indexOf("<experimentTarget>") != -1) {
-						//
-						temp = sections[i].split("<")[1].split(">")[1]; 
-						//document.getElementById('').value  =  temp;
-					} else if (sections[i].indexOf("<cluster>") != -1) {
-						//the cards
-						if (document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) == null) {
-							var addCardClick = document.getElementById('addCard');
-							addCardClick.click();
-						} // hopefully this adds cards when needed
+					//console.log(reader); // puts the file into the log
+					var contents = evt.target.results;
+					var ct = reader.result;
+					var sections = ct.split('\n');
+					//alert("got the file.\n" + "name: " + file.name + "\n" + "fileType: " + file.type); //gets the file
+					currentCardNum = 1;
+					currentCardVersion = 1;
+					currentUnitNum = 2;
+					for (i = 0; i < sections.length - 1; i++) {
+						sections[i] = sections[i].trim();
+						var temp = null;
+						//console.log(sections[i]); //puts the line into the log
+						if (sections[i].indexOf("<lessonname>") != -1) {
+							//Name of Cards
+							temp = sections[i].split("<")[1].split(">")[1]; //gets the value we want from between the brackets
+							document.getElementById('lessonName').value  =  temp; //has to be done by Id
+						} else if (sections[i].indexOf("<stimulusfile>") != -1) {
+							// the Stimulus file, useless to load right now
+							temp = sections[i].split("<")[1].split(">")[1]; 
+							document.getElementById('numberofcards').value  =  temp;
+						} else if (sections[i].indexOf("<clustermodel>") != -1) {
+							//
+							temp = sections[i].split("<")[1].split(">")[1]; 
+							//document.getElementById('').value  =  temp;
+						} else if (sections[i].indexOf("<clustersize>") != -1) {
+							//
+							temp = sections[i].split("<")[1].split(">")[1]; 
+							//document.getElementById('').value  =  temp;
+						} else if (sections[i].indexOf("<shuffleclusters>") != -1) {
+							//
+							temp = sections[i].split("<")[1].split(">")[1]; 
+							document.getElementById('shuffleClusters').value  =  temp;
+						} else if (sections[i].indexOf("<lfparameter>") != -1) {
+							// Levenshtien Proportion
+							temp = sections[i].split("<")[1].split(">")[1]; 
+							//document.getElementById('lfParameter').value  =  temp;
+						} else if (sections[i].indexOf("<isModeled>") != -1) {
+							//
+							temp = sections[i].split("<")[1].split(">")[1]; 
+							//document.getElementById('').value  =  temp;
+						} else if (sections[i].indexOf("<timeoutInSeconds>") != -1) {
+							//
+							temp = sections[i].split("<")[1].split(">")[1]; 
+							//document.getElementById('').value  =  temp;
+						} else if (sections[i].indexOf("<experimentTarget>") != -1) {
+							//
+							temp = sections[i].split("<")[1].split(">")[1]; 
+							//document.getElementById('').value  =  temp;
+						} else if (sections[i].indexOf("<cluster>") != -1) {
+							//the cards
+							if (document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) == null) {
+								//var addCardClick = document.getElementById('addCard');
+								//addCardClick.click();
+								addCard();
+							} // hopefully this adds cards when needed
 
-						while(sections[i].indexOf("</cluster>") == -1) { //continues through the array doing things for this specific card
-							if (sections[i].indexOf("<displayType>") != -1) {
-								// seen Sound and Image in example files
-								temp = sections[i].split("<")[1].split(">")[1]; 
-								//document.getElementById('').value  =  temp;
-							} else if (sections[i].indexOf("<display>") != -1) {
-								if(document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) == null){
-									var addCardVersion = document.getElementById('addCardVersion');
-									addCardVersion.click();
-								} //does this add versions when needed?
-								
-								// card question
-								temp = sections[i].split("<")[1].split(">")[1]; 
-								document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion).value = temp;
-							} else if (sections[i].indexOf("<response>") != -1) {
-								// card response, first response is correctly
-								temp = sections[i].split("<")[1].split(">")[1]; 
-								document.getElementById('cardResponse' + currentCardNum + "-" + currentCardVersion).value  +=  temp;
-								//currentCardVersion++; //figure out a way to add versions better?
-							} else {
-								//in case of a unused line
-							}
-							i++;
-						}
-						
-						currentCardNum++;
-						currentCardVersion = 1;
-					} else if (sections[i].indexOf("<unit>") != -1) {
-						//the different units
-						//click the add unit button at this point then have the following loop work with the added units
-						if (document.getElementById('unitDrop' + currentUnitNum) == null) {
-							var addUnitClick = document.getElementById('addUnit');
-							addUnitClick.click();
-						}
-						
-						//to fix the triple click, go through it and add each unit needed then set them then go through each unit
-						//change the below indexOf to </tutor>, to signify end of doc, and have it click add unit for each one, then go through it again and set each unit, then finally set the contents of each units
-						var unitType = "instructions";
-						for (j = i; sections[j].indexOf("</unit>") == -1; j++) { //checks which unit section to add
-							if (sections[j].indexOf("<assessmentsession>") != -1) {
-								unitType = "assessment";
-							} else if (sections[j].indexOf("<learningsession>") != -1) {
-								unitType = "learning";
-							}
-						}
-						if (unitType == "instructions") {
-							//document.getElementById('instruction' + currentUnitNum).click();
-							addInstructions();
-							console.log("clicked instructions");
-							console.log(currentUnitNum);
-						} else if (unitType == "assessment") {
-							//document.getElementById('assessment' + currentUnitNum).click();
-							addAssessment();
-							console.log("clicked assessment");
-							console.log(currentUnitNum);
-						} else if (unitType == "learning") {
-							//document.getElementById('learningsession' + currentUnitNum).click();
-							addLearning();
-							console.log("clicked learningsession");
-							console.log(currentUnitNum);
-						}
-						while(sections[i].indexOf("</unit>") == -1) {
-							if (sections[i].indexOf("<unitname>") != -1) {
-								//the name of the unit
-								temp = sections[i].split("<")[1].split(">")[1];
-								document.getElementById('unitname' + currentUnitNum).value  =  temp;
-							} else if (sections[i].indexOf("<unitinstructions>") != -1) {
-								//the instructions of the unit
-								temp = "";
-								if (sections[i].indexOf("CDATA") != -1) {
-									temp = sections[i].split("![CDATA[")[1].split("]]>")[0];
-								} else {
+							while(sections[i].indexOf("</cluster>") == -1) { //continues through the array doing things for this specific card
+								if (sections[i].indexOf("<displayType>") != -1) {
+									// seen Sound and Image in example files
 									temp = sections[i].split("<")[1].split(">")[1]; 
-								}
-								console.log(temp);
-								document.getElementById('unitinstructions' + currentUnitNum).value  =  temp;
-							} else if (sections[i].indexOf("<purestudy>") != -1) {
-								//not in the unit itself but before it in the timing section, but its in all unit tags
-								// purestudy is study alone
-								temp = sections[i].split("<")[1].split(">")[1]; 
-								document.getElementById('purestudy').value  =  temp;
-							} else if (sections[i].indexOf("<readyprompt>") != -1) {
-								//not in the unit itself but before it in the timing section, but its in all unit tags
-								// readyprompt is intercard interval
-								temp = sections[i].split("<")[1].split(">")[1]; 
-								document.getElementById('readyprompt').value  =  temp;
-							} else if (sections[i].indexOf("<reviewstudy>") != -1) {
-								//not in the unit itself but before it in the timing section, but its in all unit tags
-								// reviewstudy is incorrect feedback
-								temp = sections[i].split("<")[1].split(">")[1]; 
-								document.getElementById('reviewstudy').value  =  temp;
-							} else if (sections[i].indexOf("<correctprompt>") != -1) {
-								//not in the unit itself but before it in the timing section, but its in all unit tags
-								// correctprompt is correct feedback
-								temp = sections[i].split("<")[1].split(">")[1]; 
-								document.getElementById('correctprompt').value  =  temp;
-							} else if (sections[i].indexOf("<drill>") != -1) {
-								//not in the unit itself but before it in the timing section, but its in all unit tags
-								// drill is drill
-								temp = sections[i].split("<")[1].split(">")[1]; 
-								document.getElementById('drill').value  =  temp;
-							} else if (sections[i].indexOf("<timebeforefeedback>") != -1) {
-								//not in the unit itself but before it in the timing section, but its in all unit tags
-								// we dont have but to be called Time Before Feedback when we make
-								temp = sections[i].split("<")[1].split(">")[1]; 
-								//document.getElementById('').value  =  temp;
-							} else if (sections[i].indexOf("<timeuntilstimulus>") != -1) {
-								//not in the unit itself but before it in the timing section, but its in all unit tags
-								// we dont have but to be called Time Until Stimulus when we make
-								temp = sections[i].split("<")[1].split(">")[1]; 
-								//document.getElementById('').value  =  temp;
-							} else if (sections[i].indexOf("<buttontrial>") != -1) {
-								//either true or false, buttontrial isnt in units but above cards
-								temp = sections[i].split("<")[1].split(">")[1]; 
-								//document.getElementById('').value  =  temp;
-							} else if (sections[i].indexOf("<assessmentsession>") != -1) {
-								//assessment unit related tag loop
-								while(sections[i].indexOf("</assessmentsession>") == -1){
-									if (sections[i].indexOf("<conditionaltemplatesbygroup>") != -1){
-										// another loop?
-										temp = sections[i].split("<")[1].split(">")[1]; 
-										//document.getElementById('').value  =  temp;
-									} else if (sections[i].indexOf("<initialpostions>") != -1) {
-										//
-										temp = sections[i].split("<")[1].split(">")[1]; 
-										//document.getElementById('').value  =  temp;
-									} else if (sections[i].indexOf("<randomchoices>") != -1) {
-										//
-										temp = sections[i].split("<")[1].split(">")[1]; 
-										//document.getElementById('').value  =  temp;
-									} else if (sections[i].indexOf("<randomizegrups>") != -1) {
-										// true or false
-										temp = sections[i].split("<")[1].split(">")[1]; 
-										//document.getElementById('').value  =  temp;
-									} else if (sections[i].indexOf("<clusterlist>") != -1) {
-										//
-										temp = sections[i].split("<")[1].split(">")[1]; 
-										//document.getElementById('').value  =  temp;
-									} else if (sections[i].indexOf("<assignrandomclusters>") != -1) {
-										// true or flase
-										temp = sections[i].split("<")[1].split(">")[1]; 
-										//document.getElementById('').value  =  temp;
-									} else if (sections[i].indexOf("<permutefinalresult>") != -1) {
-										//
-										temp = sections[i].split("<")[1].split(">")[1]; 
-										//document.getElementById('').value  =  temp;
-									}
-									i++;
-								}
-							} else if (sections[i].indexOf("<learningsession>") != -1) {
-								//learning unit related tag loop
-								while(sections[i].indexOf("</learningsession>") == -1){
-									if (sections[i].indexOf("<allowquit>") != -1){
-										//true or false
-										temp = sections[i].split("<")[1].split(">")[1]; 
-										//document.getElementById('').value  =  temp;
-									} else if (sections[i].indexOf("<allowpause>") != -1) {
-										//true or false
-										temp = sections[i].split("<")[1].split(">")[1]; 
-										//document.getElementById('').value  =  temp;
-									} else if (sections[i].indexOf("<unending>") != -1) {
-										//true or false
-										temp = sections[i].split("<")[1].split(">")[1]; 
-										//document.getElementById('').value  =  temp;
-									} else if (sections[i].indexOf("<mindurationtime>") != -1) {
-										// 
-										temp = sections[i].split("<")[1].split(">")[1]; 
-										//document.getElementById('').value  =  temp;
-									}
-									i++;
-								}
+									//document.getElementById('').value  =  temp;
+								} else if (sections[i].indexOf("<display>") != -1) {
+									if(document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion) == null){
+										//var addCardVersion = document.getElementById('addCardVersion');
+										//addCardVersion.click();
+										addCardVersion();
+									} //does this add versions when needed?
 								
+									// card question
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									document.getElementById('cardPrompt'+ currentCardNum + "-" + currentCardVersion).value = temp;
+								} else if (sections[i].indexOf("<response>") != -1) {
+									// card response, first response is correctly
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									document.getElementById('cardResponse' + currentCardNum + "-" + currentCardVersion).value  =  temp;
+									currentCardVersion++; //figure out a way to add versions better?
+								} else {
+									//in case of a unused line
+								}
+								i++;
 							}
-							i++;
+						
+							currentCardNum++;
+							currentCardVersion = 1;
+						} else if (sections[i].indexOf("<unit>") != -1) {
+							//the different units
+							//click the add unit button at this point then have the following loop work with the added units
+							if (document.getElementById('unitDrop' + currentUnitNum) == null) {
+								// 	var addUnitClick = document.getElementById('addUnit');
+								// 	addUnitClick.click();
+						
+						
+								//to fix the triple click, go through it and add each unit needed then set them then go through each unit
+								//change the below indexOf to </tutor>, to signify end of doc, and have it click add unit for each one, then go through it again and set each unit, then finally set the contents of each units
+								var unitType = "instructions";
+								for (j = i; sections[j].indexOf("</unit>") == -1; j++) { //checks which unit section to add
+									if (sections[j].indexOf("<assessmentsession>") != -1) {
+										unitType = "assessment";
+									} else if (sections[j].indexOf("<learningsession>") != -1) {
+										unitType = "learning";
+									}
+								}
+								if (unitType == "instructions") {
+									//document.getElementById('instruction' + currentUnitNum).click();
+									addInstructions();
+									console.log("clicked instructions");
+									console.log(currentUnitNum);
+								} else if (unitType == "assessment") {
+									//document.getElementById('assessment' + currentUnitNum).click();
+									addAssessment();
+									console.log("clicked assessment");
+									console.log(currentUnitNum);
+								} else if (unitType == "learning") {
+									//document.getElementById('learningsession' + currentUnitNum).click();
+									addLearning();
+									console.log("clicked learningsession");
+									console.log(currentUnitNum);
+								}
+							}
+							while(sections[i].indexOf("</unit>") == -1) {
+								if (sections[i].indexOf("<unitname>") != -1) {
+									//the name of the unit
+									temp = sections[i].split("<")[1].split(">")[1];
+									document.getElementById('unitname' + currentUnitNum).value  =  temp;
+								} else if (sections[i].indexOf("<unitinstructions>") != -1) {
+									//the instructions of the unit
+									temp = "";
+									if (sections[i].indexOf("CDATA") != -1) {
+										temp = sections[i].split("![CDATA[")[1].split("]]>")[0];
+									} else {
+										temp = sections[i].split("<")[1].split(">")[1]; 
+									}
+									console.log(temp);
+									document.getElementById('unitinstructions' + currentUnitNum).value  =  temp;
+								} else if (sections[i].indexOf("<purestudy>") != -1) {
+									//not in the unit itself but before it in the timing section, but its in all unit tags
+									// purestudy is study alone
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									temp = temp / 1000;
+									document.getElementById('purestudy').value  =  temp;
+								} else if (sections[i].indexOf("<readyprompt>") != -1) {
+									//not in the unit itself but before it in the timing section, but its in all unit tags
+									// readyprompt is intercard interval
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									temp = temp / 1000;
+									document.getElementById('readyprompt').value  =  temp;
+								} else if (sections[i].indexOf("<reviewstudy>") != -1) {
+									//not in the unit itself but before it in the timing section, but its in all unit tags
+									// reviewstudy is incorrect feedback
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									temp = temp / 1000;
+									document.getElementById('reviewstudy').value  =  temp;
+								} else if (sections[i].indexOf("<correctprompt>") != -1) {
+									//not in the unit itself but before it in the timing section, but its in all unit tags
+									// correctprompt is correct feedback
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									temp = temp / 1000;
+									document.getElementById('correctprompt').value  =  temp;
+								} else if (sections[i].indexOf("<drill>") != -1) {
+									//not in the unit itself but before it in the timing section, but its in all unit tags
+									// drill is drill
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									temp = temp / 1000;
+									document.getElementById('drill').value  =  temp;
+								} else if (sections[i].indexOf("<timebeforefeedback>") != -1) {
+									//not in the unit itself but before it in the timing section, but its in all unit tags
+									// we dont have but to be called Time Before Feedback when we make
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									//document.getElementById('').value  =  temp;
+								} else if (sections[i].indexOf("<timeuntilstimulus>") != -1) {
+									//not in the unit itself but before it in the timing section, but its in all unit tags
+									// we dont have but to be called Time Until Stimulus when we make
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									//document.getElementById('').value  =  temp;
+								} else if (sections[i].indexOf("<buttontrial>") != -1) {
+									//either true or false, buttontrial isnt in units but above cards
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									//document.getElementById('').value  =  temp;
+								} else if (sections[i].indexOf("<groupnames>") != -1) {
+									//
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									document.getElementById('groupnames' + currentUnitNum).value  =  temp;
+								} else if (sections[i].indexOf("<clustersrepeated>") != -1) {
+									//
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									document.getElementById('clustersrepeated' + currentUnitNum).value  =  temp;
+								} else if (sections[i].indexOf("<templatesrepeated>") != -1) {
+									//
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									document.getElementById('templatesrepeated' + currentUnitNum).value  =  temp;
+								} else if (sections[i].indexOf("<group>") != -1) {
+									//
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									document.getElementById('group' + currentUnitNum).value  =  temp;
+								} else if (sections[i].indexOf("<initialpostions>") != -1) {
+									//
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									document.getElementById('initialpositions' + currentUnitNum).value  =  temp;
+								} else if (sections[i].indexOf("<randomchoices>") != -1) {
+									// not in the html, but number of templates is
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									//document.getElementById('randomchoices' + currentUnitNum).value  =  temp;
+								} else if (sections[i].indexOf("<randomizegroups>") != -1) {
+									// true or false
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									if (temp === "true") {
+										temp = true;
+									} else {
+										temp = false;
+									}
+									document.getElementById('randomizegroups' + currentUnitNum).checked  =  temp;
+								} else if (sections[i].indexOf("<clusterlist>") != -1) {
+									//
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									document.getElementById('clusterlist' + currentUnitNum).value  =  temp;
+								} else if (sections[i].indexOf("<assignrandomclusters>") != -1) {
+									// true or flase
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									if (temp === "true") {
+										temp = true;
+									} else {
+										temp = false;
+									}
+									document.getElementById('assignrandomclusters' + currentUnitNum).checked  =  temp;
+								} else if (sections[i].indexOf("<permutefinalresult>") != -1) {
+									//
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									document.getElementById('permutefinalresults' + currentUnitNum).value  =  temp;
+								} else if (sections[i].indexOf("<allowquit>") != -1){
+									//true or false
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									if (temp === "true") {
+										temp = true;
+									} else {
+										temp = false;
+									}
+									document.getElementById('allowquit' + currentUnitNum).checked  =  temp;
+								} else if (sections[i].indexOf("<allowpause>") != -1) {
+									//true or false
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									if (temp === "true") {
+										temp = true;
+									} else {
+										temp = false;
+									}
+									document.getElementById('allowpause' + currentUnitNum).checked  =  temp;
+								} else if (sections[i].indexOf("<unending>") != -1) {
+									//true or false
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									if (temp === "true") {
+										temp = true;
+									} else {
+										temp = false;
+									}
+									document.getElementById('unending' + currentUnitNum).checked  =  temp;
+								} else if (sections[i].indexOf("<mindurationtime>") != -1) {
+									// 
+									temp = sections[i].split("<")[1].split(">")[1]; 
+									document.getElementById('mindurationtime' + currentUnitNum).value  =  temp;
+								}
+								i++;
+							}
+							currentUnitNum++;
+						} else if (sections[i].indexOf("placeholder") != -1) {
+							// placeholder for any other line to be added
 						}
-						currentUnitNum++;
-					} else if (sections[i].indexOf("hi6283") != -1) {
-						// placeholder for any other line to be added
 					}
 				}
-			}
 			} else {
 				alert("Failed to load file. Reclick it if you did/do pick a file.");
 			}
@@ -420,14 +454,16 @@ if (Meteor.isClient) {
 	 		return false;
 		},
 		'click .addCard': function(event) {
-	 		console.log("add card button clicked, num cards: " + Session.get('numCards'));
-			Session.set('numCards', Session.get('numCards') + 1);
-			cardList.insert({cardNum:Session.get('numCards')});
+	 		// console.log("add card button clicked, num cards: " + Session.get('numCards'));
+			// Session.set('numCards', Session.get('numCards') + 1);
+			// cardList.insert({cardNum:Session.get('numCards')});
+			addCard();
 		},
 		'click .addVersion': function(event) {
-			console.log("add cardVersion button clicked, num versions: " + Session.get('numVersions'));
-			Session.set('numVersions', Session.get('numVersions') + 1);
-			versionList.insert({versionNum:Session.get('numVersions')});
+			// console.log("add cardVersion button clicked, num versions: " + Session.get('numVersions'));
+			// Session.set('numVersions', Session.get('numVersions') + 1);
+			// versionList.insert({versionNum:Session.get('numVersions')});
+			addCardVersion();
 		},
 		'click .subCard': function(event) {
 			if (Session.get('numCards') > 1) {
@@ -453,14 +489,14 @@ if (Meteor.isClient) {
 			//$(e.target).find('.dropdown-menu').toggle();
 		//},
 		'click .addUnit': function(event) {
-			console.log("add unit button clicked");
-			Session.set('numUnitsInt', Session.get('numUnitsInt') + 1);
-			unitList.insert({num:Session.get('numUnitsInt'),
-						instructions:true,
-						learningsessions:false,
-						assessments:false});
-		},	//add second addUnit for use in code
-			//****************************************************************
+			// console.log("add unit button clicked");
+			// Session.set('numUnitsInt', Session.get('numUnitsInt') + 1);
+			// unitList.insert({num:Session.get('numUnitsInt'),
+			// 			instructions:true,
+			// 			learningsessions:false,
+			// 			assessments:false});
+			addInstructions();
+		},	
 		'click .deleteUnit': function(event) {
 			if (Session.get('numUnitsInt') > 1) {
 				console.log("sub unit button clicked");
@@ -706,7 +742,15 @@ function addAssessment(){
 				assessments:true});
 };
 
+function addCard(){
+	Session.set('numCards', Session.get('numCards') + 1);
+	cardList.insert({cardNum:Session.get('numCards')});
+};
 
+function addCardVersion(){
+	Session.set('numVersions', Session.get('numVersions') + 1);
+	versionList.insert({versionNum:Session.get('numVersions')});
+};
 
 //Server Side
 if (Meteor.isServer) {
@@ -715,11 +759,11 @@ if (Meteor.isServer) {
 	versionList = new Mongo.Collection('versionList');
 	Meteor.startup(function() {
 		// code to run on server at startup
-		unitList.remove({});
-		unitList.insert({num:1,
-				instructions:true,
-				learningsessions:false,
-				assessments:false});
+		 unitList.remove({});
+		// unitList.insert({num:1,
+		// 		instructions:true,
+		// 		learningsessions:false,
+		// 		assessments:false});
 		cardList.remove({});
 		cardList.insert({cardNum:1});
 		versionList.remove({});

@@ -226,7 +226,7 @@
 		{{#if instruction instructions }}
 		<div class="form-horizontal unitForm{{num}}">
 			<fieldset>
-    				<legend>Introduction</legend>
+    				<legend>Introduction {{num}}</legend>
     					<div class="card">
                 <ul class="pager">
                   <li class="next"><a data-toggle="tooltip" data-placement="bottom" title="
@@ -257,7 +257,7 @@
 		{{#if assessment assessments }}
 		<div id="unitForm{{num}}" class="form-horizontal">
     			<fieldset>
-      				<legend>Assessment</legend>
+      				<legend>Assessment {{num}}</legend>
      				<div class="card">
               <ul class="pager">
                 <li class="next"><a data-toggle="tooltip" data-placement="bottom" title="
@@ -283,45 +283,45 @@
       					</div>
               <div class="form-group">
                   <label>Group Name</label>
-                  <input style="height:30px;width:250px;font-size:14pt;" type="text" name="groupnames" id="groupnames">
+                  <input style="height:30px;width:250px;font-size:14pt;" type="text" name="groupnames" id="groupnames{{num}}">
               </div>
               <div class="form-group">
                   <label>Clusters Repeated</label>
-                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="clustersrepeated" id="clustersrepeated">
+                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="clustersrepeated" id="clustersrepeated{{num}}">
                   <label>Templates Repeated</label>
-                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="templatesrepeated" id="templatesrepeated">
+                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="templatesrepeated" id="templatesrepeated{{num}}">
               </div>
               <div class="form-group">
                   <label>Group</label>
-                  <textarea style="width:80%;font-size:14pt;" rows="2" placeholder="<group> .... </group>" name="group" id="group"></textarea>
+                  <textarea style="width:80%;font-size:14pt;" rows="2" placeholder="<group> .... </group>" name="group" id="group{{num}}"></textarea>
               </div>
               <div class="form-group">
                   <label>Initial Positions</label>
-                  <textarea style="width:80%;font-size:14pt;" rows="2" placeholder="<initialpositions> .... </initialpositions>" name="initialpositions" id="initialpositions"></textarea>
+                  <textarea style="width:80%;font-size:14pt;" rows="2" placeholder="<initialpositions> .... </initialpositions>" name="initialpositions" id="initialpositions{{num}}"></textarea>
               </div>
      					<div class="form-group">
       						<label>Number of Templates</label>
-        					<input style="height:30px;width:250px;font-size:14pt;" name="numbertemplates" type="number" step="1" class="fbfh-number" min="0">
+        					<input style="height:30px;width:250px;font-size:14pt;" name="numbertemplates" type="number" step="1" class="fbfh-number" min="0" id="numbertemplates{{num}}">
     					</div>
               <div class="form-group">
                   <label>Cluster List
-                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="clusterlist1">
-                  ---
-                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="clusterlist2"></label>
+                  <input style="height:30px;width:65px;font-size:14pt;" type="textfield" step="1" min="0" name="clusterlist1" id="clusterlist{{num}}">
+                  <!-- 
+                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="clusterlist2">--></label>
                 </div>
               <div class="form-group">
                   <div class="checkbox">
-                      <label> <input type="checkbox" name="randomizegroups">Randomize Groups</label>
+                      <label> <input type="checkbox" name="randomizegroups" id="randomizegroups{{num}}">Randomize Groups</label>
                   </div>
                   <div class="checkbox">
-                      <label> <input type="checkbox" name="assignrandomcluster">Assign Random Clusters</label>
+                      <label> <input type="checkbox" name="assignrandomcluster" id="assignrandomclusters{{num}}">Assign Random Clusters</label>
                   </div>
                 </div>
               <div class="form-group">
                   <label>Permute Final Result
-                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="permutefinalresult1">
-                  ---
-                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="permutefinalresult2"></label>
+                  <input style="height:30px;width:65px;font-size:14pt;" type="textfield" step="1" min="0" name="permutefinalresult1" id="permutefinalresults{{num}}">
+                  <!--
+                  <input style="height:30px;width:65px;font-size:14pt;" type="number" step="1" min="0" name="permutefinalresult2">--></label>
                 </div>
               
                 <br>
@@ -336,7 +336,7 @@
 		{{#if learningsession learningsessions }}
 		<div class="form-horizontal unitForm{{num}}">
   			<fieldset>
-    				<legend>Learning Session</legend>
+    				<legend>Learning Session {{num}}</legend>
     				<div class="form-group">
               <ul class="pager">
                 <li class="next"><a data-toggle="tooltip" data-placement="bottom" title="Learning Session defines......"> ? </a></li>
@@ -356,15 +356,15 @@
     					</div>
     					<div class="form-group">
         					<div class="checkbox">
-        	  					<label> <input type="checkbox" name="allowquit">Allow Quit</label>
-        	   					<label> <input type="checkbox" name="allowpause">Allow Pause</label>
-        	  					<label> <input type="checkbox" name="unending">Unending</label>
+        	  					<label> <input type="checkbox" name="allowquit" id="allowquit{{num}}">Allow Quit</label>
+        	   					<label> <input type="checkbox" name="allowpause" id="allowpause{{num}}">Allow Pause</label>
+        	  					<label> <input type="checkbox" name="unending" id="unending{{num}}">Unending</label>
         					</div>
         				</div>
                 <br>
         	 			<div class="form-group">
-      						<label>Min Durationtime</label>
-        					<input style="height:30px;width:250px;font-size:14pt;" name="mindurationtime" type="number" step="0.01" class="fbfh-number" min="0">
+      						<label>Min Duration Time</label>
+        					<input style="height:30px;width:250px;font-size:14pt;" name="mindurationtime" type="number" step="0.01" class="fbfh-number" min="0" id="mindurationtime{{num}}">
     					</div>
     					<div class="form-group" align="right">
       						<button type="button" class="btn btn-primary -sm reset1 unitForm{{num}}" align="right">Reset</button>
