@@ -563,9 +563,7 @@ function parserTDF(string){
 	if(ss){
 		timer += concat("skipstudy", "true", false, counter);
 	}
-	else{
-		timer += concat("readyprompt", tags[j+2].substring(tags[j+2].indexOf("=")+1)*1000, false, counter);
-	}
+	timer += concat("readyprompt", tags[j+2].substring(tags[j+2].indexOf("=")+1)*1000, false, counter);
 	timer += concat("reviewstudy", tags[j+4].substring(tags[j+4].indexOf("=")+1)*1000, false, counter);
 	timer += concat("correctprompt", tags[j+3].substring(tags[j+3].indexOf("=")+1)*1000, false, counter);
 	timer += concat("drill", tags[j+1].substring(tags[j+1].indexOf("=")+1)*1000, false, counter);
@@ -575,7 +573,7 @@ function parserTDF(string){
 	counter --;
 	//units section 
 	//unit content
-	var firstunit = true;
+	//var firstunit = true;
 	var units = "";
 	var unit = "";
 	//for instructions 
@@ -619,7 +617,7 @@ function parserTDF(string){
 			var allowpause = false;
 			var allowquit = false;
 			var unending = false;
-			for (var k = 0; k < tags.length; k++) {
+			for (var k = i; k < tags.length; k++) {
 				if(tags[k].substring(0,tags[k].indexOf("="))== "allowpause"){
 					allowpause = true;
 				};
