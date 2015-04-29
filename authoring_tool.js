@@ -15,15 +15,18 @@ if (Meteor.isClient) {
 			console.log("bibadi");
 
 			var x = document.forms["masterForm"]["lessonName"].value;
-			var y = document.getElementById("numberofcards").value;
-			var z = document.getElementsByName("nameofversion")[0].value
+			var numberofcards = document.getElementById("numberofcards").value;
+			var numberofversions = document.getElementById("numberofversions").value;
+
+
+			// var z = document.getElementsByName("nameofversion")[0].value
 
     			if (x == null || x == "") {
     				console.log("bobadi")
         			confirm("Elements are missing, are you sure to submit?");
-        			document.getElementById("moduleName").focus();
-        			document.getElementById("numberofcards").focus();
-        			console.log("boo");
+        			// document.getElementById("moduleName").focus();
+        			// document.getElementById("numberofcards").focus();
+        			document.getElementById("lessonName").style.borderColor = "red";
     			}
 
     			return false;
