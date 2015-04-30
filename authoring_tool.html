@@ -304,10 +304,24 @@
                   								<label>Initial Positions</label>
                   								<textarea style="width:80%;font-size:14pt;" rows="2" placeholder="<initialpositions> .... </initialpositions>" name="initialpositions" id="initialpositions{{num}}"></textarea>
               								</div>
-     									<div class="form-group">
-      										<label>Number of Templates</label>
-        									<input style="height:30px;width:250px;font-size:14pt;" name="numbertemplates" type="number" step="1" class="fbfh-number" min="0" id="numbertemplates{{num}}">
-    									</div>
+     										<div class="form-group">
+      											<label>Number of Templates</label>
+        										<input style="height:30px;width:250px;font-size:14pt;" name="numbertemplates" type="number" step="1" class="fbfh-number" min="0" max="26" onchange="numTemp(this.value)">
+                  									<div id="groupList"></div>
+
+							                  	<script>
+							                    function numTemp(val) {
+							                      var groups = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
+							                      if (val==1){
+							                        document.getElementById("groupList").innerHTML="A"; 
+							                      }else {
+							                        var groupList = groups.substring(0, 1+2*(val-1)); 
+							                        document.getElementById("groupList").innerHTML=groupList;
+							                      }
+							                      return false; 
+							                    }
+							                  </script>
+    										</div>              				
               								<div class="form-group">
                   								<label>Cluster List
                   									<input style="height:30px;width:65px;font-size:14pt;" type="textfield" step="1" min="0" name="clusterlist1" id="clusterlist{{num}}">
