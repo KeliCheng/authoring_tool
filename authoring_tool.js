@@ -36,13 +36,17 @@ if (Meteor.isClient) {
 			$.each($('#masterForm').serializeArray(), function() {
    				form[this.name] = this.value;
    			});
-
+			
 			var str = $('#masterForm').serialize();
     			console.log(form);
    			//legacy code
    			//document.getElementById("testing").value = str;//form[this.name];
-   			parserTDF(str);
-   			parserSTIM(str);
+   			var TDF = parserTDF(str);
+   			var STIM = parserSTIM(str);
+
+			console.log(TDF);
+			console.log(STIM);
+
    			//TODO check for correctness 
 	   		//may not need this
    			/*
@@ -520,8 +524,8 @@ function parserSTIM(string){
 	spec = concat("clusters", clusters, true, counter);
 	counter--;
 	s = concat("setspec", spec, true, counter);
-
-	console.log(s);	
+	return s;
+	//console.log(s);	
 };
 
 function parserTDF(string){
@@ -595,12 +599,29 @@ function parserTDF(string){
 			counter++;
 			unit = concat("unitname", tags[i].substring(tags[i].indexOf("=")+1), false, counter);			
 			unit += concat("unitinstructions", tags[i+1].substring(tags[i+1].indexOf("=")+1), false, counter);			
+			unit += concat("deliveryparams", timer, true, counter);			
 			unit += concat("buttontrial", "false", false, counter);
-			unit += concat("deliveryparams", timer, true, counter);
 			counter++;
 			//get assessment session
+			var assessmentParam = "";
+			var conditionTemplate = "";
+			var initPos = "";
+
+			for (var j = i+1; j < tags.length; j++) {
+				tags[j];
+			};
+
+			assessmentParam +=  concat("conditiontemplatebygroup",conditionTemplate, true, counter)
+			assessmentParam +=  concat("initialpositions", initPos, true, counter)
+			assessmentParam +=  concat("randomchoices","", false, counter)
+			assessmentParam +=  concat("randomizegroups","false", false, counter)
+			assessmentParam +=  concat("clusterlist","", false, counter)
+			assessmentParam +=  concat("assignrandomclusters","false", false, counter)
+			assessmentParam +=  concat("permutefinalresult","", false, counter)
+			
 			counter--;
-			unit += concat("assessmentsession", "", true, counter);
+
+			unit += concat("assessmentsession", assessmentParam, true, counter);
 			//assessment session will need to have something in it.
 			counter--;
 			units+= concat("unit", unit, true, counter);
@@ -610,8 +631,9 @@ function parserTDF(string){
 			counter++;
 			unit = concat("unitname", tags[i].substring(tags[i].indexOf("=")+1), false, counter);			
 			unit += concat("unitinstructions", tags[i+1].substring(17), true, counter);
-			unit += concat("buttontrial", "false", false, counter);
 			unit += concat("deliveryparams", timer, true, counter);
+			unit += concat("buttontrial", "false", false, counter);
+
 			counter++;
 			//set learning session
 			var learningparam = "";
@@ -657,7 +679,7 @@ function parserTDF(string){
 	//error checking
 	tutor += units;
 	var finS = concat("tutor", tutor, true, counter);
-	console.log(finS);
+	return finS;
 };
 	
 function concat(tag, source, vertical, numSpace){
