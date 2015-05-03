@@ -38,30 +38,15 @@ if (Meteor.isClient) {
    			});
 			
 			var str = $('#masterForm').serialize();
-    			console.log(form);
-   			//legacy code
-   			//document.getElementById("testing").value = str;//form[this.name];
+    		console.log(form);
+   			
+
    			var TDF = parserTDF(str);
    			var STIM = parserSTIM(str);
 
 			console.log(TDF);
 			console.log(STIM);
 
-   			//TODO check for correctness 
-	   		//may not need this
-   			/*
-   			MyCollection.insert(form, function(err) {
-    	   		if(!err) {
-    	       		alert("Submitted!");
-       	    		$('#masterform')[0].reset();
-       	    		//
-       			}
-       			else {
-        	   		alert("Something is wrong");
-           			console.log(err);
-       			}
-			})
-			*/
 			//get Parse 
 		}
 	});
@@ -587,20 +572,72 @@ function parserTDF(string){
 			//get assessment session
 			var assessmentParam = "";
 			var conditionTemplate = "";
-			var initPos = "";
+			var permuteFinal;
+			var initPos;
+			var group; // split the groups array into an array for input split on +
+			var groups; // split the group txt area on %0D%0A
 
-			for (var j = i+1; j < tags.length; j++) {
-				tags[j];
+			for (var j = i+1; j < endOfUnit(tags, j); j++) {
+				//should only find 1 group
+				if(tags[j].substring(0, tags[j].indexOf("=")) == "group"){
+					groups = tags[j].substring(tags[j].indexOf("=")+1).split("%0D%0A");
+					counter ++;
+					conditionTemplate = concat("groupnames",getGroupName(groups.length),false, counter);
+					conditionTemplate = concat("clustersrepeated", "1" , false, counter);
+					conditionTemplate = concat("templatesrepeated","1",false,counter);
+					console.log(groups);
+					for (var k = 0; k < groups.length; k++) {
+						group = groups[k].split("+");
+						var temp = "";
+						var ntemp = 0;
+						console.log(group);
+						for (var l = 0; l < group.length; l++) {
+							if(group[l].substring(0,1)=="a"){
+								temp += group[l].substring(1) +",f,a,"+ ntemp + " ";
+
+								ntemp++;
+							}else if(group[l].substring(0,1)=="d"){
+								temp += group[l].substring(1) +",f,d,"+ ntemp + " ";
+								ntemp++;
+							}else if(group[l].substring(0,1)=="s"){
+								if(group[l].substring(1,2)!="k"){
+									temp += group[l].substring(1) +",f,s,"+ ntemp +" ";
+									ntemp++;
+								};
+							};
+							if (group[l].substring(0,4) == "skip") {
+								var xtemp = parseInt(group[l].substring(4));
+								
+								ntemp = ntemp + xtemp;
+								console.log(ntemp);
+							};
+						};
+						conditionTemplate += concat("group", temp, false, counter)
+					};
+					counter --;
+					assessmentParam +=  concat("conditiontemplatebygroup",conditionTemplate, true, counter);
+				};
+				//do something
+				if(tags[j].substring(0, tags[j].indexOf("=")) == "initialpositions"){
+					initPos = tags[j].substring(tags[j].indexOf("=")+1).split("+")
+					var z = "";
+					for (var k = 0; k < initPos.length; k++) {
+						z += initPos[k]+"_1";
+					};
+					assessmentParam +=  concat("initialpositions", z, true, counter);
+					//add in random choices
+					assessmentParam +=  concat("randomchoices","", false, counter);
+					assessmentParam +=  concat("randomizegroups","false", false, counter);
+				}
+				if(tags[j].substring(0, tags[j].indexOf("=")) == "clusterlist"){
+					assessmentParam +=  concat("clusterlist",tags[j].substring(tags[j].indexOf("=")+1), false, counter);					
+					assessmentParam +=  concat("assignrandomclusters","false", false, counter);
+				}
+				if(tags[j].substring(0, tags[j].indexOf("=")) == "permutefinalresult"){
+					assessmentParam +=  concat("permutefinalresult",tags[j].substring(tags[j].indexOf("=")+1), false, counter);
+				}								
 			};
 
-			assessmentParam +=  concat("conditiontemplatebygroup",conditionTemplate, true, counter)
-			assessmentParam +=  concat("initialpositions", initPos, true, counter)
-			assessmentParam +=  concat("randomchoices","", false, counter)
-			assessmentParam +=  concat("randomizegroups","false", false, counter)
-			assessmentParam +=  concat("clusterlist","", false, counter)
-			assessmentParam +=  concat("assignrandomclusters","false", false, counter)
-			assessmentParam +=  concat("permutefinalresult","", false, counter)
-			
 			counter--;
 
 			unit += concat("assessmentsession", assessmentParam, true, counter);
@@ -622,7 +659,7 @@ function parserTDF(string){
 			var allowpause = false;
 			var allowquit = false;
 			var unending = false;
-			for (var k = i; k < tags.length; k++) {
+			for (var k = i; k < endOfUnit(tags, i); k++) {
 				if(tags[k].substring(0,tags[k].indexOf("="))== "allowpause"){
 					allowpause = true;
 				};
@@ -662,6 +699,103 @@ function parserTDF(string){
 	tutor += units;
 	var finS = concat("tutor", tutor, true, counter);
 	return finS;
+};
+
+function endOfUnit (tags, startPose){
+	for (var i = startPose+1; i < tags.length; i++) {
+		if (tags[i].substring(0, tags[i].indexOf("=")-1) == "unitname") {
+			return i;
+		} else{
+			return tags.length;
+		};
+	};
+};
+
+function getGroupName(number){
+	var groupName;
+	switch(number){
+		case 1:
+			groupName = "A";
+			break;
+		case 2:
+			groupName = "A B";
+			break;
+		case 3:
+			groupName = "A B C";
+			break;
+		case 4:
+			groupName = "A B C D";
+			break;
+		case 5:
+			groupName = "A B C D E";
+			break;
+		case 6:
+			groupName = "A B C D E F";
+			break;
+		case 7:
+			groupName = "A B C D E F G";
+			break;
+		case 8:
+			groupName = "A B C D E F G H";
+			break;
+		case 9:
+			groupName = "A B C D E F G H I";
+			break;
+		case 10:
+			groupName = "A B C D E F G H I J";
+			break;
+		case 11:
+			groupName = "A B C D E F G H I J K";
+			break;
+		case 12:
+			groupName = "A B C D E F G H I J K L";
+			break;
+		case 13:
+			groupName = "A B C D E F G H I J K L M";
+			break;
+		case 14:
+			groupName = "A B C D E F G H I J K L M N";
+			break;
+		case 15:
+			groupName = "A B C D E F G H I J K L M N O";
+			break;
+		case 16:
+			groupName = "A B C D E F G H I J K L M N O P";
+			break;
+		case 17:
+			groupName = "A B C D E F G H I J K L M N O P Q";
+			break;
+		case 18:
+			groupName = "A B C D E F G H I J K L M N O P Q R";
+			break;
+		case 19:
+			groupName = "A B C D E F G H I J K L M N O P Q R S";
+			break;
+		case 20:
+			groupName = "A B C D E F G H I J K L M N O P Q R S T";
+			break;
+		case 21:
+			groupName = "A B C D E F G H I J K L M N O P Q R S T U";
+			break;
+		case 22:
+			groupName = "A B C D E F G H I J K L M N O P Q R S T U V";
+			break;
+		case 23:
+			groupName = "A B C D E F G H I J K L M N O P Q R S T U V W";
+			break;
+		case 24:
+			groupName = "A B C D E F G H I J K L M N O P Q R S T U V W X";
+			break;
+		case 25:
+			groupName = "A B C D E F G H I J K L M N O P Q R S T U V W X Y";
+			break;
+		case 26:
+			groupName = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z";
+			break;
+		default :
+			groupName = "";
+	};
+	return groupName;
 };
 	
 function concat(tag, source, vertical, numSpace){
