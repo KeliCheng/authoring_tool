@@ -11,7 +11,7 @@ if (Meteor.isClient) {
 	//BODY TEMPLATE EVENTS
 	Template.body.events({
 		'click .create': function (event){
-			event.defaultPrevented();
+			// event.defaultPrevented();
 			var x = confirm("Are you sure to clear the form and create a new one? ");
 			if(x == true){
 				document.getElementById("masterForm").reset(); 

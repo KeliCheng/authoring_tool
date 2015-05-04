@@ -14,14 +14,14 @@
   	<center>
   		<a href="#" class="create btn btn-primary">   C R E A T E   </a>
   		{{> load}}
-  		<a href="#" class="btn btn-primary">   T E S T   </a>
-  		<a href="#" onclick="saveXML()" class="btn btn-primary">   S A V E   </a>
+  		<!-- <a href="#" class="btn btn-primary">   T E S T   </a> -->
+  		<!-- <a href="#" onclick="saveXML()" class="btn btn-primary">   S A V E   </a> -->
   		<a href="#" class="publish btn btn-primary">   P U B L I S H   </a>
   	</center>
 
 
 	<form name="masterForm" id="masterForm">
-    <button type="submit" class="master btn btn-primary">Submit for validation test</button>
+    <!-- <button type="submit" class="master btn btn-primary">Submit for validation test</button> -->
 		{{> hello}}
 		<input type="submit" value="Submit">
 	</form>
@@ -30,7 +30,7 @@
 
 <!--BEGIN LOAD-->
 <template name="load">
-	<input type="file" accept=".xml" id="realLoad" style="display:none" class="load2" />
+	<input type="file" accept=".xml" id="realLoad" style="display:none; visibility:hidden;" class="load2"/>
 	<input type="file" class="btn btn-primary load1" id="load1" >
 </template>
 <!--END LOAD-->
@@ -142,8 +142,8 @@
 					{{/each}}-->
 
 					{{#each versionList}}	
-      						<td><input type="text" id="cardPrompt{{../cardNum}}-{{versionNum}}" name="cardPrompt{{versionNum}}"></td>
-                  <td><input type="text" id="cardResponse{{../cardNum}}-{{versionNum}}" name="cardResponse{{versionNum}}"></td>
+      						<td><input style="height:30px;width:100%;font-size:12pt;" type="text" id="cardPrompt{{../cardNum}}-{{versionNum}}" name="cardPrompt{{versionNum}}"></td>
+                  <td><input style="height:30px;width:100%;font-size:12pt;" type="text" id="cardResponse{{../cardNum}}-{{versionNum}}" name="cardResponse{{versionNum}}"></td>
 					{{/each}}
 				</tr>
 			{{/each}}
