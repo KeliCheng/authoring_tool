@@ -42,49 +42,63 @@ if (Meteor.isClient) {
 	 		return false;
 
 		},
-  		'click .master': function (event) {
-  			// event.preventDefault();
-    			// This function is called when the master form is submitted
+  		// 'click .master': function (event) {
+  		// 	// event.preventDefault();
+    // 			// This function is called when the master form is submitted
+    // 		var inputs = document.getElementsByTagName('input');
+    // 		var isEmpty= false;
+				// for(var i = 0; i < inputs.length; i++) {
+				// 	if (inputs[i].value == null || inputs[i].value == "") {
+				// 		inputs[i].style.borderColor = "red";
+				// 		isEmpty = true; 
+    // 				}
 
-			var x = document.forms["masterForm"]["lessonName"].value;
-			var numberofcards = document.getElementById("numberofcards").value;
-			var numberofversions = document.getElementById("numberofversions").value;
+				// }
+				// if (isEmpty == true){
+				// 	var x =confirm("Elements are missing, are you sure to submit?");
+				// }
+    // 			return false;
 
-
-			// var z = document.getElementsByName("nameofversion")[0].value
-
-    			if (x == null || x == "") {
-    				console.log("bobadi")
-        			confirm("Elements are missing, are you sure to submit?");
-        			// document.getElementById("moduleName").focus();
-        			// document.getElementById("numberofcards").focus();
-        			document.getElementById("lessonName").style.borderColor = "red";
+  		// },
+  		'click .publish':function(event){
+  			// form validation before submitting 
+  			var inputs = document.getElementsByTagName('input');
+    		var isEmpty= false;
+			for(var i = 0; i < inputs.length; i++) {
+				if (inputs[i].value == null || inputs[i].value == "") {
+					inputs[i].style.borderColor = "red";
+					isEmpty = true; 
     			}
 
-    			return false;
-  		},
-  		'click .publish':function(event){
-			form = {};
-			$.each($('#masterForm').serializeArray(), function() {
-   				form[this.name] = this.value;
-   			});
-			
-			var str = $('#masterForm').serialize();
-    		console.log(form);
-   			
+			}
+			if (isEmpty == true){
+				var x =confirm("Elements are missing, are you sure to submit?");
+			}
+    			
+			if (x == true){
+				form = {};
+				$.each($('#masterForm').serializeArray(), function() {
+	   				form[this.name] = this.value;
+	   			});
+				
+				var str = $('#masterForm').serialize();
+	    		console.log(form);
+	   			
 
-   			var TDF = parserTDF(str);
-   			var STIM = parserSTIM(str);
+	   			var TDF = parserTDF(str);
+	   			var STIM = parserSTIM(str);
 
-			// console.log(TDF);
-			// console.log(STIM);
+				// console.log(TDF);
+				// console.log(STIM);
 
-			alert(TDF);
-			alert(STIM);
-			
+				alert(TDF);
+				alert(STIM);
+				//get Parse 
 
-
-			//get Parse 
+			}else{
+				return false; 
+			}
+			return false; 
 		}
 	});
 
