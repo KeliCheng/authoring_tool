@@ -10,6 +10,38 @@ if (Meteor.isClient) {
 
 	//BODY TEMPLATE EVENTS
 	Template.body.events({
+		'click .create': function (event){
+			event.defaultPrevented();
+			var x = confirm("Are you sure to clear the form and create a new one? ");
+			if(x == true){
+				document.getElementById("masterForm").reset(); 
+				// var inputs = document.getElementsByTagName('input');
+
+				// for(var i = 0; i < inputs.length; i++) {
+				//     if(inputs[i].type.toLowerCase() == 'text') {
+				//     	inputs[i].value='';
+				//     }
+				//     else if(inputs[i].type.toLowerCase() == 'textarea') {
+				//     	inputs[i].value='';
+				//     }
+				//     else if(inputs[i].type.toLowerCase() == 'checkbox') {
+				//     	inputs[i].removeAttr('checked');
+				//     }
+				//     else if(inputs[i].type.toLowerCase() == 'number') {
+				//     	inputs[i].value=0;
+				//     }
+				//     else if(inputs[i].type.toLowerCase() == 'radio') {
+				//     	inputs[i].value=false;
+				//     }
+
+				// }
+		
+	 		} else {
+	 			//do nothing
+	 		}
+	 		return false;
+
+		},
   		'click .master': function (event) {
   			// event.preventDefault();
     			// This function is called when the master form is submitted
@@ -44,8 +76,13 @@ if (Meteor.isClient) {
    			var TDF = parserTDF(str);
    			var STIM = parserSTIM(str);
 
-			console.log(TDF);
-			console.log(STIM);
+			// console.log(TDF);
+			// console.log(STIM);
+
+			alert(TDF);
+			alert(STIM);
+			
+
 
 			//get Parse 
 		}
@@ -55,6 +92,7 @@ if (Meteor.isClient) {
 	Template.load.events ({
 		'change .load1': function(event, template){
 			event.preventDefault();
+			document.getElementById("masterForm").reset(); //reset the form before loading
 			var file = document.getElementById("load1").files[0];
 
 			if (file) {
