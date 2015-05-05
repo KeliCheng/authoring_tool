@@ -12,26 +12,36 @@
 	  	<li class="active">Content Builder</li>
 	</ul>
   	<center>
-  		<a href="#" class="btn btn-primary">   C R E A T E   </a>
+  		<a class="create btn btn-primary">   C R E A T E   </a>
   		{{> load}}
+<<<<<<< HEAD
   		<a href="#" class="btn btn-primary">   T E S T   </a>
   		<a href="#" id="save" class="btn btn-primary save">   S A V E   </a>
   		<a href="#" id="publish" class="publish btn btn-primary">   P U B L I S H  TDF  </a>
   		<a href="#" id="publish2" class="publish2 btn btn-primary">   P U B L I S H  STIM  </a>
+=======
+  		<!-- <a href="#" class="btn btn-primary">   T E S T   </a> -->
+  		<!-- <a href="#" onclick="saveXML()" class="btn btn-primary">   S A V E   </a> -->
+  		<a type="submit" class="publish btn btn-primary">   P U B L I S H   </a>
+>>>>>>> b36fd01549c1a1216a2ce4b96018039218a527d0
   	</center>
 
 
 	<form name="masterForm" id="masterForm">
-    <button type="submit" class="master btn btn-primary">Submit for validation test</button>
+    <!-- <button type="submit" class="master btn btn-primary">Submit for validation test</button> -->
 		{{> hello}}
-		<input type="submit" value="Submit">
+		<!-- <input type="submit" value="Submit"> -->
+		<br>
+		<center>
+  			<a class="publish btn btn-primary">   P U B L I S H   </a>
+  		</center>
 	</form>
 </body>
 <!--END BODY-->
 
 <!--BEGIN LOAD-->
 <template name="load">
-	<input type="file" accept=".xml" id="realLoad" style="display:none" class="load2" />
+	<input type="file" accept=".xml" id="realLoad" style="display:none; visibility:hidden;" class="load2"/>
 	<input type="file" class="btn btn-primary load1" id="load1" >
 </template>
 <!--END LOAD-->
@@ -143,8 +153,8 @@
 					{{/each}}-->
 
 					{{#each versionList}}	
-      						<td><input type="text" id="cardPrompt{{../cardNum}}-{{versionNum}}" name="cardPrompt{{versionNum}}"></td>
-                  <td><input type="text" id="cardResponse{{../cardNum}}-{{versionNum}}" name="cardResponse{{versionNum}}"></td>
+      						<td><input style="height:30px;width:100%;font-size:12pt;" type="text" id="cardPrompt{{../cardNum}}-{{versionNum}}" name="cardPrompt{{versionNum}}"></td>
+                  <td><input style="height:30px;width:100%;font-size:12pt;" type="text" id="cardResponse{{../cardNum}}-{{versionNum}}" name="cardResponse{{versionNum}}"></td>
 					{{/each}}
 				</tr>
 			{{/each}}
