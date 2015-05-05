@@ -265,15 +265,25 @@ if (Meteor.isClient) {
 								} else if (sections[i].indexOf("<clustersrepeated>") != -1) {
 									//
 									temp = sections[i].split("<")[1].split(">")[1]; 
-									document.getElementById('clustersrepeated' + currentUnitNum).value  =  temp;
+									temp2 = temp.split(" ");
+									document.getElementById('clustersrepeated' + currentUnitNum).value  =  temp2;
 								} else if (sections[i].indexOf("<templatesrepeated>") != -1) {
 									//
-									temp = sections[i].split("<")[1].split(">")[1]; 
-									document.getElementById('templatesrepeated' + currentUnitNum).value  =  temp;
+									temp = sections[i].split("<")[1].split(">")[1];
+									temp2 = temp.split(" ");
+									document.getElementById('templatesrepeated' + currentUnitNum).value  =  temp2;
 								} else if (sections[i].indexOf("<group>") != -1) {
 									//
-									temp = sections[i].split("<")[1].split(">")[1]; 
-									document.getElementById('group' + currentUnitNum).value  =  temp;
+									temp = sections[i].split("<")[1].split(">")[1];
+									temp2 = temp.split(" ");
+									for (k=0; k < temp2.length; k++) {
+										temp3 = temp2[k].split(",");
+										if (temp3[2] === "t") {
+											temp3[2] = "a"; //forget which has changed
+										}
+										document.getElementById('group' + currentUnitNum).value += temp3[2] + temp3[0] + " ";
+									} 
+									//document.getElementById('group' + currentUnitNum).value  =  temp;
 								} else if (sections[i].indexOf("<initialpostions>") != -1) {
 									//
 									temp = sections[i].split("<")[1].split(">")[1]; 
