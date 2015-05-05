@@ -525,13 +525,13 @@ function parserSTIM(string){
 
 	var tags = string.split("&");
 	
-	fileNameSTIM = tags[0].substring(tags[0].indexOf("=")+1) + "STIM.xml"
+	fileNameSTIM = spaceing(tags[0].substring(tags[0].indexOf("=")+1)) + "STIM.xml"
 
 	for (var i = 6; i < tags.length; i++) {
 		if(tags[i].substring(0,10) == "cardPrompt"){
 			counter++;
-			cluster =  concat("display", tags[i].substring(tags[i].indexOf("=")+1), false, counter);
-			cluster += concat("response", tags[i+1].substring(tags[i+1].indexOf("=")+1), false, counter);
+			cluster =  concat("display", spaceing(tags[i].substring(tags[i].indexOf("=")+1)), false, counter);
+			cluster += concat("response", spaceing(tags[i+1].substring(tags[i+1].indexOf("=")+1)), false, counter);
 			counter--;
 			clusters += concat("cluster", cluster, true, counter);
 		}
@@ -552,28 +552,15 @@ function parserTDF(string){
 	console.log(tags);
 	var spec ="";
 	
-	fileNameTDF = tags[0].substring(tags[0].indexOf("=")+1) + "TDF.xml"
+	fileNameTDF = spaceing(tags[0].substring(tags[0].indexOf("=")+1))+ "TDF.xml"
 	
-	spec += concat("lessonname",tags[0].substring(tags[0].indexOf("=")+1),false, counter);
-	spec += concat("stimulusfile", tags[0].substring(11)+"stims.xml", false, counter);
+	spec += concat("lessonname",spaceing(tags[0].substring(tags[0].indexOf("=")+1)),false, counter);
+	spec += concat("stimulusfile", spaceing(tags[0].substring(tags[0].indexOf("=")+1))+"stims.xml", false, counter);
 	var cluster;
 	spec += concat("clustermodel", "", false, counter);
 	spec += concat("clustersize", "1", false, counter);
-	
-	var temp1 = tags[4].substring(tags[4].indexOf("=")+1).split("+");
-	var temp2 = "";
-	for (var i = 0; i < temp1.length; i++) {
-		temp2+= temp1[i] + " ";
-	};
-	spec += concat("shuffleclusters", temp2, false, counter);
-	
-	temp1 = tags[5].substring(tags[5].indexOf("=")+1).split("+");
-	temp2 = "";
-	for (var i = 0; i < temp1.length; i++) {
-		temp2+= temp1[i] + " ";
-	};
-	spec += concat("swapclusters", temp2, false, counter);
-	
+	spec += concat("shuffleclusters", spaceing(tags[4].substring(tags[4].indexOf("=")+1)), false, counter);
+	spec += concat("swapclusters", spaceing(tags[5].substring(tags[5].indexOf("=")+1)), false, counter);
 	spec += concat("lfparameter", tags[3].substring(tags[3].indexOf("=")+1), false, counter);
 	spec += concat("isModeled", "false", false, counter);
 	spec += concat("timeoutInSeconds", "15", false, counter);
@@ -587,13 +574,13 @@ function parserTDF(string){
 	var ss = false;
 	for (var i = 0; i < tags.length; i++) {
 		
-		if(tags[i].substring(0,9) == "purestudy"){
+		if(tags[i].substring(0, tags[i].indexOf("=")) == "purestudy"){
 			j =i;
-			console.log("ding");
+			//console.log("ding");
 		}
 		if(tags[i].substring(0, tags[i].indexOf("=")) == "skipstudy"){
 			ss = true;
-		}tags
+		}
 	}
 	counter ++;
 	var timer = concat("purestudy", tags[j].substring(tags[j].indexOf("=")+1)*1000, false, counter);
@@ -621,16 +608,16 @@ function parserTDF(string){
 			//
 			//put this in a unit
 			counter++;
-			unit = concat("unitname", tags[i].substring(tags[i].indexOf("=")+1), false, counter);			
-			unit += concat("unitinstructions", tags[i+1].substring(tags[i+1].indexOf("=")+1), false, counter);			
+			unit = concat("unitname", spaceing(tags[i].substring(tags[i].indexOf("=")+1)), false, counter);			
+			unit += concat("unitinstructions", spaceing(tags[i+1].substring(tags[i+1].indexOf("=")+1)), true, counter);			
 			counter--;
 			units += concat("unit", unit, true, counter);
 			//do things
 		};
 		if(tags[i].substring(0,tags[i].indexOf("=")) == "unitnameC"){
 			counter++;
-			unit = concat("unitname", tags[i].substring(tags[i].indexOf("=")+1), false, counter);			
-			unit += concat("unitinstructions", tags[i+1].substring(tags[i+1].indexOf("=")+1), false, counter);			
+			unit = concat("unitname", spaceing(tags[i].substring(tags[i].indexOf("=")+1)), false, counter);			
+			unit += concat("unitinstructions", spaceing(tags[i+1].substring(tags[i+1].indexOf("=")+1)), true, counter);			
 			unit += concat("deliveryparams", timer, true, counter);			
 			unit += concat("buttontrial", "false", false, counter);
 			counter++;
@@ -699,12 +686,8 @@ function parserTDF(string){
 					assessmentParam +=  concat("assignrandomclusters","false", false, counter);
 				}
 				if(tags[j].substring(0, tags[j].indexOf("=")) == "permutefinalresult"){
-					var temp1 = tags[j].substring(tags[j].indexOf("=")+1).split("+");
-					var temp2 = "";
-					for (var z = 0; z < temp1.length; z++) {
-						temp2+= temp1[z] + " ";
-					};
-					assessmentParam +=  concat("permutefinalresult", temp2, false, counter);
+					
+					assessmentParam +=  concat("permutefinalresult", spaceing(tags[j].substring(tags[j].indexOf("=")+1)), false, counter);
 				}								
 			};
 
@@ -718,8 +701,9 @@ function parserTDF(string){
 		};
 		if(tags[i].substring(0,tags[i].indexOf("=")) == "unitnameB"){
 			counter++;
-			unit = concat("unitname", tags[i].substring(tags[i].indexOf("=")+1), false, counter);			
-			unit += concat("unitinstructions", tags[i+1].substring(17), true, counter);
+
+			unit = concat("unitname", spaceing(tags[i].substring(tags[i].indexOf("=")+1)), false, counter);			
+			unit += concat("unitinstructions", spaceing(tags[i+1].substring(tags[i+1].indexOf("=")+1)), true, counter);	
 			unit += concat("deliveryparams", timer, true, counter);
 			unit += concat("buttontrial", "false", false, counter);
 
@@ -880,7 +864,18 @@ function getGroupName(number){
 	};
 	return groupName;
 };
-	
+function spaceing(s){
+	var temp1 = s.split("+");
+	var temp2 = "";
+	for (var i = 0; i < temp1.length; i++) {
+		if(i+1 == temp1.length){
+			temp2+= temp1[i]
+		}else{
+			temp2+= temp1[i] + " ";
+		}
+	};
+	return temp2;
+}
 function concat(tag, source, vertical, numSpace){
 	var s = "";
 	for(i = 0; i< numSpace; i++){
