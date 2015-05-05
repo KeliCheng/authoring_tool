@@ -13,7 +13,6 @@ if (Meteor.isClient) {
 
 	//BODY TEMPLATE EVENTS
 	Template.body.events({
-<<<<<<< HEAD
   		'click .master': function (event) {
   			// event.preventDefault();
     			// This function is called when the master form is submitted
@@ -63,97 +62,6 @@ if (Meteor.isClient) {
    			var save = TDF +"\n"+ STIM;
 
    			download("save.xml", save);
-=======
-		'click .create': function (event){
-			// event.defaultPrevented();
-			var x = confirm("Are you sure to clear the form and create a new one? ");
-			if(x == true){
-				document.getElementById("masterForm").reset(); 
-				// var inputs = document.getElementsByTagName('input');
-
-				// for(var i = 0; i < inputs.length; i++) {
-				//     if(inputs[i].type.toLowerCase() == 'text') {
-				//     	inputs[i].value='';
-				//     }
-				//     else if(inputs[i].type.toLowerCase() == 'textarea') {
-				//     	inputs[i].value='';
-				//     }
-				//     else if(inputs[i].type.toLowerCase() == 'checkbox') {
-				//     	inputs[i].removeAttr('checked');
-				//     }
-				//     else if(inputs[i].type.toLowerCase() == 'number') {
-				//     	inputs[i].value=0;
-				//     }
-				//     else if(inputs[i].type.toLowerCase() == 'radio') {
-				//     	inputs[i].value=false;
-				//     }
-
-				// }
-		
-	 		} else {
-	 			//do nothing
-	 		}
-	 		return false;
-
-		},
-  		// 'click .master': function (event) {
-  		// 	// event.preventDefault();
-    // 			// This function is called when the master form is submitted
-    // 		var inputs = document.getElementsByTagName('input');
-    // 		var isEmpty= false;
-				// for(var i = 0; i < inputs.length; i++) {
-				// 	if (inputs[i].value == null || inputs[i].value == "") {
-				// 		inputs[i].style.borderColor = "red";
-				// 		isEmpty = true; 
-    // 				}
-
-				// }
-				// if (isEmpty == true){
-				// 	var x =confirm("Elements are missing, are you sure to submit?");
-				// }
-    // 			return false;
-
-  		// },
-  		'click .publish':function(event){
-  			// form validation before submitting 
-  			var inputs = document.getElementsByTagName('input');
-    		var isEmpty= false;
-			for(var i = 0; i < inputs.length; i++) {
-				if (inputs[i].value == null || inputs[i].value == "") {
-					inputs[i].style.borderColor = "red";
-					isEmpty = true; 
-    			}
-
-			}
-			if (isEmpty == true){
-				var x =confirm("Elements are missing, are you sure to submit?");
-			}
-    			
-			if (x == true){
-				form = {};
-				$.each($('#masterForm').serializeArray(), function() {
-	   				form[this.name] = this.value;
-	   			});
-				
-				var str = $('#masterForm').serialize();
-	    		console.log(form);
-	   			
-
-	   			var TDF = parserTDF(str);
-	   			var STIM = parserSTIM(str);
-
-				// console.log(TDF);
-				// console.log(STIM);
-
-				alert(TDF);
-				alert(STIM);
-				//get Parse 
-
-			}else{
-				return false; 
-			}
-			return false; 
->>>>>>> b36fd01549c1a1216a2ce4b96018039218a527d0
 		}
 	});
 
