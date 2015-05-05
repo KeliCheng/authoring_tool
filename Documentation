@@ -1,18 +1,26 @@
-John Doe is a researcher of Institution for Intelligent System. He has to create the TDF and stimulus file for their MoFACT system. It’s not an easy job. 
-Now there is an authoring tool for him to create the TDF and stimulus file easily. 
-1. open the page, there is a brand new file. 
-2. John remembered that he has an unfinished file, he wants to upload and finish it up. (LOAD)
-	(filled out fields and explain each section) 
+John Doe is a researcher of Institution for Intelligent System
+They have a flshcard learning system called MoFACTs:
+	allows testing of user knowledge based on predetermined questions and question format
+	instructors have to create XML files by hand to input into the MoFACTs system
+John has to create the TDF and stimulus file for their MoFACT system
+It’s not an easy job to do by hand
+This is where we come in!
+Now there is an authoring tool for him to create the TDF and stimulus file with ease!
+
+1. open the page, there is a brand new file -(Form by Keli)
+2. Make a comment on CSS styling -(by Keli)
+3. John remembered that he has an unfinished file, he wants to upload and finish it up. -(LOAD by Josh)
+	(fill out fields and explain each section) 
 	card information section 
 	time interval section 
-	John forgot what the filed for, he turns to tooltip..
-	table 
+	John forgot what the filed for, he turns to tooltip... -(by Keli)
+	table - (Dynamic addition by Sean)
 	introduction 
 	assessment 
-	mess it up, reset 
-	learning section 
-	add more, delete one 
-	publish file 
-3. John wants a new one, click create button and refresh. 
-4. start over. 
+	mess it up, reset -(By Lan)
+	Add and Delete Units -(Dynamic addition by Sean)
+	learning session  
+	validate form -(by Keli) and publish file -(by Lan) 
+4. John wants a new one, click create button and refresh. -(create functionality by Keli)
+5. start over. 
 

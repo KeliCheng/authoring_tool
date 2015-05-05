@@ -16,7 +16,6 @@ if (Meteor.isClient) {
   		'click .master': function (event) {
   			// event.preventDefault();
     			// This function is called when the master form is submitted
-
 			var x = document.forms["masterForm"]["lessonName"].value;
 			var numberofcards = document.getElementById("numberofcards").value;
 			var numberofversions = document.getElementById("numberofversions").value;
@@ -35,33 +34,49 @@ if (Meteor.isClient) {
     			return false;
   		},
   		'click .publish':function(event){		
-			var str = $('#masterForm').serialize();
-   			var TDF = parserTDF(str);
-			download(fileNameTDF, TDF);
-			console.log(TDF);			
+  			if (formValidation() == true){
+				var str = $('#masterForm').serialize();
+   				var TDF = parserTDF(str);
+				download(fileNameTDF, TDF);
+				console.log(TDF);			
+			}else{
+				return false; 
+			}
+			return false; 
 		},
 		'click .publish2':function(event){
-			var str = $('#masterForm').serialize();
-			var STIM = parserSTIM(str);
-			download(fileNameSTIM, STIM);
-			console.log(STIM);
+			if (formValidation() == true){
+				var str = $('#masterForm').serialize();
+				var STIM = parserSTIM(str);
+				download(fileNameSTIM, STIM);
+				console.log(STIM);
+			}else{
+				return false; 
+			}
+			return false; 
 		},
 		'click .save':function(event){
+			if (formValidation() == true){
 			/*form = {};
 			$.each($('#masterForm').serializeArray(), function() {
    				form[this.name] = this.value;
    			});
 			*/
-			var str = $('#masterForm').serialize();
+				var str = $('#masterForm').serialize();
     		//console.log(form);
    			
 
-   			var TDF = parserTDF(str);
-   			var STIM = parserSTIM(str);
+   				var TDF = parserTDF(str);
+	   			var STIM = parserSTIM(str);
 
-   			var save = TDF +"\n"+ STIM;
+   				var save = TDF +"\n"+ STIM;
 
-   			download("save.xml", save);
+	   			download("save.xml", save);
+	   						}else{
+				return false; 
+			}
+			return false; 
+
 		}
 	});
 
@@ -484,6 +499,24 @@ if (Meteor.isServer) {
 }
 
 // BEGIN EXTERNAL FUNCTIONS
+function formValidation(){
+	// form validation before submitting 
+			var x = false; 
+  			var inputs = document.getElementsByTagName('input');
+    		var isEmpty= false;
+			for(var i = 0; i < inputs.length; i++) {
+				if (inputs[i].value == null || inputs[i].value == "") {
+					inputs[i].style.borderColor = "red";
+					isEmpty = true; 
+    			}
+
+			}
+			if (isEmpty == true){
+				x =confirm("Elements are missing, are you sure to submit?");
+			}
+			return x;
+
+}
 function parserSTIM(string){
 	var counter = 2;
 	var spec = "";
