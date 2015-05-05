@@ -8,6 +8,9 @@ if (Meteor.isClient) {
 	Session.setDefault('numCards', 1);
 	Session.setDefault('numVersions', 1);
 
+	var fileNameTDF = "";
+	var fileNameSTIM = "";
+
 	//BODY TEMPLATE EVENTS
 	Template.body.events({
   		'click .master': function (event) {
@@ -22,7 +25,7 @@ if (Meteor.isClient) {
 			// var z = document.getElementsByName("nameofversion")[0].value
 
     			if (x == null || x == "") {
-    				console.log("bobadi")
+    				//console.log("bobadi")
         			confirm("Elements are missing, are you sure to submit?");
         			// document.getElementById("moduleName").focus();
         			// document.getElementById("numberofcards").focus();
@@ -31,23 +34,34 @@ if (Meteor.isClient) {
 
     			return false;
   		},
-  		'click .publish':function(event){
-			form = {};
+  		'click .publish':function(event){		
+			var str = $('#masterForm').serialize();
+   			var TDF = parserTDF(str);
+			download(fileNameTDF, TDF);
+			console.log(TDF);			
+		},
+		'click .publish2':function(event){
+			var str = $('#masterForm').serialize();
+			var STIM = parserSTIM(str);
+			download(fileNameSTIM, STIM);
+			console.log(STIM);
+		},
+		'click .save':function(event){
+			/*form = {};
 			$.each($('#masterForm').serializeArray(), function() {
    				form[this.name] = this.value;
    			});
-			
+			*/
 			var str = $('#masterForm').serialize();
-    		console.log(form);
+    		//console.log(form);
    			
 
    			var TDF = parserTDF(str);
    			var STIM = parserSTIM(str);
 
-			console.log(TDF);
-			console.log(STIM);
+   			var save = TDF +"\n"+ STIM;
 
-			//get Parse 
+   			download("save.xml", save);
 		}
 	});
 
@@ -441,8 +455,7 @@ if (Meteor.isClient) {
 				$(classString).find('input[type="textarea"]').val('');
 				$(classString).find('input[type="checkbox"]').prop('checked',false);
 				$(classString).find('input[type="number"]').val('0');
-				$(classString).find('input[type="radio"]').prop('checked',false);
-		
+				$(classString).find('input[type="radio"]').prop('checked',false);		
 	 		} else {
 	 			//do nothing
 	 		}
@@ -478,6 +491,8 @@ function parserSTIM(string){
 
 	var tags = string.split("&");
 	
+	fileNameSTIM = tags[0].substring(tags[0].indexOf("=")+1) + "STIM.xml"
+
 	for (var i = 6; i < tags.length; i++) {
 		if(tags[i].substring(0,10) == "cardPrompt"){
 			counter++;
@@ -502,7 +517,10 @@ function parserTDF(string){
 	var tags = string.split("&");
 	console.log(tags);
 	var spec ="";
-	spec += concat("lessonname",tags[0].substring(11),false, counter);
+	
+	fileNameTDF = tags[0].substring(tags[0].indexOf("=")+1) + "TDF.xml"
+
+	spec += concat("lessonname",tags[0].substring(tags[0].indexOf("=")+1),false, counter);
 	spec += concat("stimulusfile", tags[0].substring(11)+"stims.xml", false, counter);
 	var cluster;
 	spec += concat("clustermodel", "", false, counter);
@@ -699,6 +717,19 @@ function parserTDF(string){
 	tutor += units;
 	var finS = concat("tutor", tutor, true, counter);
 	return finS;
+};
+
+function download(filename, text) {
+  	var pom = document.createElement('a');
+  	pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  	pom.setAttribute('download', filename);
+
+  	pom.style.display = 'none';
+  	document.body.appendChild(pom);
+
+  	pom.click();
+
+  	document.body.removeChild(pom);
 };
 
 function endOfUnit (tags, startPose){
