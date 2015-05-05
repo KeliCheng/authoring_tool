@@ -61,21 +61,8 @@ if (Meteor.isClient) {
 
   		// },
   		'click .publish':function(event){
-  			// form validation before submitting 
-  			var inputs = document.getElementsByTagName('input');
-    		var isEmpty= false;
-			for(var i = 0; i < inputs.length; i++) {
-				if (inputs[i].value == null || inputs[i].value == "") {
-					inputs[i].style.borderColor = "red";
-					isEmpty = true; 
-    			}
-
-			}
-			if (isEmpty == true){
-				var x =confirm("Elements are missing, are you sure to submit?");
-			}
     			
-			if (x == true){
+			if (formValidation() == true){
 				form = {};
 				$.each($('#masterForm').serializeArray(), function() {
 	   				form[this.name] = this.value;
@@ -522,6 +509,24 @@ if (Meteor.isServer) {
 }
 
 // BEGIN EXTERNAL FUNCTIONS
+function formValidation(){
+	// form validation before submitting 
+			var x = false; 
+  			var inputs = document.getElementsByTagName('input');
+    		var isEmpty= false;
+			for(var i = 0; i < inputs.length; i++) {
+				if (inputs[i].value == null || inputs[i].value == "") {
+					inputs[i].style.borderColor = "red";
+					isEmpty = true; 
+    			}
+
+			}
+			if (isEmpty == true){
+				x =confirm("Elements are missing, are you sure to submit?");
+			}
+			return x;
+
+}
 function parserSTIM(string){
 	var counter = 2;
 	var spec = "";
