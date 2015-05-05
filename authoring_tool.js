@@ -520,15 +520,28 @@ function parserTDF(string){
 	var spec ="";
 	
 	fileNameTDF = tags[0].substring(tags[0].indexOf("=")+1) + "TDF.xml"
-
+	
 	spec += concat("lessonname",tags[0].substring(tags[0].indexOf("=")+1),false, counter);
 	spec += concat("stimulusfile", tags[0].substring(11)+"stims.xml", false, counter);
 	var cluster;
 	spec += concat("clustermodel", "", false, counter);
 	spec += concat("clustersize", "1", false, counter);
-	spec += concat("shuffleclusters", tags[4].substring(16), false, counter);
-	spec += concat("swapclusters", tags[5].substring(13), false, counter);
-	spec += concat("lfparameter", tags[3].substring(12), false, counter);
+	
+	var temp1 = tags[4].substring(tags[4].indexOf("=")+1).split("+");
+	var temp2 = "";
+	for (var i = 0; i < temp1.length; i++) {
+		temp2+= temp1[i] + " ";
+	};
+	spec += concat("shuffleclusters", temp2, false, counter);
+	
+	temp1 = tags[5].substring(tags[5].indexOf("=")+1).split("+");
+	temp2 = "";
+	for (var i = 0; i < temp1.length; i++) {
+		temp2+= temp1[i] + " ";
+	};
+	spec += concat("swapclusters", temp2, false, counter);
+	
+	spec += concat("lfparameter", tags[3].substring(tags[3].indexOf("=")+1), false, counter);
 	spec += concat("isModeled", "false", false, counter);
 	spec += concat("timeoutInSeconds", "15", false, counter);
 	spec += concat("experimentTarget", "swa", false, counter);
@@ -653,7 +666,12 @@ function parserTDF(string){
 					assessmentParam +=  concat("assignrandomclusters","false", false, counter);
 				}
 				if(tags[j].substring(0, tags[j].indexOf("=")) == "permutefinalresult"){
-					assessmentParam +=  concat("permutefinalresult",tags[j].substring(tags[j].indexOf("=")+1), false, counter);
+					var temp1 = tags[j].substring(tags[j].indexOf("=")+1).split("+");
+					var temp2 = "";
+					for (var z = 0; z < temp1.length; z++) {
+						temp2+= temp1[z] + " ";
+					};
+					assessmentParam +=  concat("permutefinalresult", temp2, false, counter);
 				}								
 			};
 
